@@ -505,10 +505,14 @@ export default function Landing({ locale, dict }: { locale: Locale; dict: Dict }
             </a>
           </div>
           <p className="mt-3 px-2">
-            Alibaba Kebab — Leistraat 84, 2460 Lichtaart — 014 / 41 40 47
+            <span className="font-bold">Alibaba Kebab</span>
+            <br />
+            Leistraat 84, 2460 Lichtaart
+            <br />
+            <span className="whitespace-nowrap tabular-nums">014 / 41 40 47</span>
           </p>
           {/* TODO: ondernemingsnummer opvragen bij de klant */}
-          <p className="px-2 text-xs">Ondernemingsnummer: —</p>
+          <p className="mt-2 px-2 text-xs">Ondernemingsnummer: —</p>
         </footer>
       </main>
 
