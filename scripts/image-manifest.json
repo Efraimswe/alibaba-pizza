@@ -1,9 +1,9 @@
 [
   {
     "file": "public/img/hero.png",
-    "w": 1280,
-    "h": 720,
-    "prompt": "one large mixed turkish grill platter: kofta, lamb chops, doner kebab, grilled chicken, belgian fries, fresh vegetables, garlic sauce, top view, professional food photography, appetizing, studio lighting, centered, isolated on pure white background, no props, no text, no watermark"
+    "w": 1024,
+    "h": 1024,
+    "prompt": "one large mixed turkish grill platter: kofta, lamb chops, doner kebab, grilled chicken, belgian fries, fresh vegetables, garlic sauce, top view, filling the frame, professional food photography, appetizing, studio lighting, centered, isolated on pure white background, no props, no text, no watermark"
   },
   {
     "file": "public/img/cats/pizzas.png",

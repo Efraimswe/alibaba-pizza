@@ -197,7 +197,7 @@ export default function Home() {
             </h1>
 
             {/* Hero-foto: signatuurgerecht */}
-            <div className="photo-slot relative mt-4 aspect-[16/9]">
+            <div className="photo-slot relative mt-4 aspect-square">
               {imgSrc("img/hero.png") ? (
                 <Image
                   src="/img/hero.png"

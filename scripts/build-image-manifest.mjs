@@ -11,8 +11,8 @@ const entries = [];
 // Hero — signatuur schotel (Ali Baba Speciaal van het huis)
 entries.push({
   file: "public/img/hero.png",
-  w: 1280, h: 720,
-  prompt: `one large mixed turkish grill platter: kofta, lamb chops, doner kebab, grilled chicken, belgian fries, fresh vegetables, garlic sauce, top view, ${STYLE}`,
+  w: 1024, h: 1024,
+  prompt: `one large mixed turkish grill platter: kofta, lamb chops, doner kebab, grilled chicken, belgian fries, fresh vegetables, garlic sauce, top view, filling the frame, ${STYLE}`,
 });
 
 // Категории
