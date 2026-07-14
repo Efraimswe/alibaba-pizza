@@ -419,10 +419,10 @@ export default function Landing({ locale, dict }: { locale: Locale; dict: Dict }
                 {/* iframe крупнее контейнера: обрезаем встроенную плашку атрибуции OSM,
                     собственная подпись © — чипом ниже */}
                 <iframe
-                  src={`https://www.openstreetmap.org/export/embed.html?bbox=${(RESTAURANT.lon - 0.004).toFixed(6)},${(RESTAURANT.lat - 0.0025).toFixed(6)},${(RESTAURANT.lon + 0.004).toFixed(6)},${(RESTAURANT.lat + 0.0025).toFixed(6)}&layer=mapnik&marker=${RESTAURANT.lat},${RESTAURANT.lon}`}
+                  src={`https://www.openstreetmap.org/export/embed.html?bbox=${(RESTAURANT.lon - 0.008).toFixed(6)},${(RESTAURANT.lat - 0.005).toFixed(6)},${(RESTAURANT.lon + 0.008).toFixed(6)},${(RESTAURANT.lat + 0.005).toFixed(6)}&layer=mapnik&marker=${RESTAURANT.lat},${RESTAURANT.lon}`}
                   loading="lazy"
                   title={dict.mapLabel}
-                  className="absolute -top-[25%] -left-[25%] h-[150%] w-[150%]"
+                  className="absolute -top-[50%] -left-[50%] h-[200%] w-[200%]"
                 />
                 <a
                   href="https://www.openstreetmap.org/copyright"
