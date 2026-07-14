@@ -79,7 +79,7 @@ export default function Landing({ locale, dict }: { locale: Locale; dict: Dict }
       )}
       {/* ── Sticky header: wordmark + taaltoggle ─────────────────── */}
       <header className="sticky top-0 z-40 bg-bg/90 backdrop-blur-sm">
-        <div className="mx-auto flex max-w-lg items-center justify-between px-4 py-3">
+        <div className="mx-auto flex max-w-lg items-center justify-between px-4 py-3 md:max-w-2xl lg:max-w-5xl">
           <a href="#top" className="font-logo text-3xl text-primary">
             Alibaba
           </a>
@@ -169,10 +169,10 @@ export default function Landing({ locale, dict }: { locale: Locale; dict: Dict }
         </div>
       </div>
 
-      <main id="top" className="mx-auto max-w-lg px-4 pb-[calc(7rem+env(safe-area-inset-bottom))]">
+      <main id="top" className="mx-auto max-w-lg px-4 pb-[calc(7rem+env(safe-area-inset-bottom))] md:max-w-2xl lg:grid lg:max-w-5xl lg:grid-cols-3 lg:items-start lg:gap-x-6">
         {/* ── Hero-bento ───────────────────────────────────────────── */}
-        <section className="pt-4">
-          <div className="card p-6">
+        <section className="pt-4 lg:col-span-3">
+          <div className="card p-6 md:grid md:grid-cols-2 md:items-center md:gap-x-8 lg:p-8">
             <div className="flex items-start justify-between gap-3">
               <p className="min-w-0 pt-1.5 font-display text-xs font-bold tracking-[0.3em] text-ink-soft">
                 {dict.heroTag}
@@ -207,12 +207,12 @@ export default function Landing({ locale, dict }: { locale: Locale; dict: Dict }
                 </p>
               </div>
             </div>
-            <h1 className="mt-1 font-logo text-6xl leading-tight text-primary">
+            <h1 className="mt-1 font-logo text-6xl leading-tight text-primary md:col-start-1 md:row-start-2 lg:text-8xl">
               Alibaba
             </h1>
 
             {/* Hero-foto: schotels van het huis, volledig kader */}
-            <div className="relative mt-4 aspect-square overflow-hidden rounded-2xl">
+            <div className="relative mt-4 aspect-square overflow-hidden rounded-2xl md:col-start-2 md:row-start-1 md:row-span-3 md:mt-0">
               <Image
                 src="/img/hero.jpg"
                 alt={dict.heroPhotoAlt}
@@ -223,12 +223,12 @@ export default function Landing({ locale, dict }: { locale: Locale; dict: Dict }
               />
             </div>
 
-            <p className="mt-4 max-w-xs text-lg text-ink-soft">
+            <p className="mt-4 max-w-xs text-lg text-ink-soft md:col-start-1 md:row-start-3 md:self-start">
               {dict.heroDescription}
             </p>
           </div>
 
-          <div className="mt-3 grid grid-cols-2 gap-3">
+          <div className="mt-3 grid grid-cols-2 gap-3 md:max-w-md">
             <a
               href="tel:+3214414047"
               className="card press flex min-h-14 items-center justify-center gap-2 bg-primary font-display text-lg font-bold text-on-primary"
@@ -256,7 +256,7 @@ export default function Landing({ locale, dict }: { locale: Locale; dict: Dict }
         </section>
 
         {/* ── Menu: categorieën als bento-kaarten ─────────────────── */}
-        <section id="menu" className="scroll-mt-20 pt-10">
+        <section id="menu" className="scroll-mt-20 pt-10 lg:col-span-2 lg:row-span-3 lg:pt-8">
           <h2 className="px-2 font-display text-3xl font-bold">{dict.menuHeading}</h2>
           <p className="mt-1 px-2 text-ink-soft">
             {dict.menuSummary(
@@ -314,7 +314,7 @@ export default function Landing({ locale, dict }: { locale: Locale; dict: Dict }
                         {dict.categoryNotes[cat.id] ?? cat.note}
                       </p>
                     )}
-                    <ul className="space-y-3">
+                    <ul className="space-y-3 md:grid md:grid-cols-2 md:gap-x-10 md:gap-y-3 md:space-y-0">
                       {cat.items.map((item) => (
                         <li key={item.name}>
                           <div className="flex items-end gap-2">
@@ -350,31 +350,31 @@ export default function Landing({ locale, dict }: { locale: Locale; dict: Dict }
         </section>
 
         {/* ── Weekacties: bento-rij ───────────────────────────────── */}
-        <section className="pt-10">
-          <h2 className="px-2 font-display text-3xl font-bold">{dict.weeklyHeading}</h2>
-          <div className="mt-4 grid grid-cols-3 gap-3">
+        <section className="pt-10 lg:col-start-3 lg:pt-8">
+          <h2 className="px-2 font-display text-3xl font-bold lg:text-2xl">{dict.weeklyHeading}</h2>
+          <div className="mt-4 grid grid-cols-3 gap-3 lg:grid-cols-1">
             {(menu.weeklyDeals as { day: string; name: string; price: number; note?: string }[]).map(
               (deal, i) => (
                 <div
                   key={deal.day}
-                  className={`card view-reveal px-2 py-4 text-center ${
+                  className={`card view-reveal px-2 py-4 text-center lg:flex lg:items-center lg:gap-3 lg:px-4 lg:py-3 lg:text-left ${
                     i === 1 ? "bg-primary text-on-primary" : ""
                   }`}
                 >
-                  <p className="font-display text-2xl font-bold">
+                  <p className="font-display text-2xl font-bold lg:w-9 lg:shrink-0 lg:text-xl">
                     {dict.dayAbbrev[deal.day as DayKey]}
                   </p>
                   <Photo
                     rel={`img/deals/${deal.day}.png`}
                     alt=""
                     sizes="(max-width: 32rem) 33vw, 10rem"
-                    className="mt-2 aspect-square w-full"
+                    className="mt-2 aspect-square w-full lg:mt-0 lg:w-14 lg:shrink-0"
                   />
-                  <p className="mt-2 text-xs font-bold tracking-wide uppercase">
+                  <p className="mt-2 min-w-0 text-xs font-bold tracking-wide uppercase lg:mt-0 lg:flex-1">
                     {dict.dealNameByDay[deal.day] ?? deal.name}
                   </p>
                   <p
-                    className={`mt-1 font-display text-lg font-bold tabular-nums ${
+                    className={`mt-1 font-display text-lg font-bold tabular-nums lg:mt-0 lg:shrink-0 ${
                       i === 1 ? "" : "text-primary"
                     }`}
                   >
@@ -391,8 +391,8 @@ export default function Landing({ locale, dict }: { locale: Locale; dict: Dict }
         </section>
 
         {/* ── Openingsuren + adres + kaart ─────────────────────────── */}
-        <section className="pt-10">
-          <h2 className="px-2 font-display text-3xl font-bold">{dict.hereNowHeading}</h2>
+        <section className="pt-10 lg:col-start-3 lg:pt-6">
+          <h2 className="px-2 font-display text-3xl font-bold lg:text-2xl">{dict.hereNowHeading}</h2>
 
           <div className="card view-reveal mt-4 overflow-hidden">
             <p className="bg-secondary px-5 py-3 font-display text-sm font-bold tracking-widest text-on-secondary">
@@ -472,7 +472,7 @@ export default function Landing({ locale, dict }: { locale: Locale; dict: Dict }
         </section>
 
         {/* ── Allergenen ──────────────────────────────────────────── */}
-        <section className="pt-8">
+        <section className="pt-8 lg:col-start-3 lg:pt-6">
           <div className="card p-6">
             <h2 className="font-display text-lg font-bold">
               {dict.allergensHeading}
@@ -502,7 +502,7 @@ export default function Landing({ locale, dict }: { locale: Locale; dict: Dict }
         </section>
 
         {/* ── Footer ──────────────────────────────────────────────── */}
-        <footer className="mt-12 pb-4 text-sm text-ink-soft">
+        <footer className="mt-12 pb-4 text-sm text-ink-soft lg:col-span-3">
           <div className="flex gap-4 px-2">
             <a href="/privacy" className="underline decoration-dotted">
               {dict.footer.privacy}
