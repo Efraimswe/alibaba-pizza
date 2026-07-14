@@ -143,26 +143,29 @@ export default function Home() {
       <main id="top" className="mx-auto max-w-lg px-4 pb-[calc(7rem+env(safe-area-inset-bottom))]">
         {/* ── Hero-bento ───────────────────────────────────────────── */}
         <section className="pt-4">
-          <div className="card relative p-6">
-            <p className="font-display text-xs font-bold tracking-[0.3em] text-ink-soft">
-              PIZZA · PITA · GRILL — LICHTAART
-            </p>
+          <div className="card p-6">
+            <div className="flex items-start justify-between gap-3">
+              <p className="min-w-0 pt-1.5 font-display text-[0.65rem] font-bold tracking-[0.22em] text-ink-soft">
+                PIZZA · PITA · GRILL
+                <br />
+                LICHTAART
+              </p>
+              {/* Sticker van de dag (dagslogica volgt in een latere fase) */}
+              <div className="shrink-0 rounded-2xl bg-primary px-3 py-2 text-center text-on-primary">
+                <p className="font-display text-[0.65rem] font-bold tracking-widest">
+                  WOENSDAG
+                </p>
+                <p className="font-display text-base font-bold leading-tight">
+                  PIZZADAG
+                </p>
+                <p className="font-display text-base font-bold tabular-nums">
+                  € 12,00
+                </p>
+              </div>
+            </div>
             <h1 className="mt-1 font-logo text-6xl leading-tight text-primary">
               Alibaba
             </h1>
-
-            {/* Sticker van de dag (dagslogica volgt in een latere fase) */}
-            <div className="absolute top-6 right-6 rounded-2xl bg-primary px-3 py-2 text-center text-on-primary">
-              <p className="font-display text-[0.65rem] font-bold tracking-widest">
-                WOENSDAG
-              </p>
-              <p className="font-display text-base font-bold leading-tight">
-                PIZZADAG
-              </p>
-              <p className="font-display text-base font-bold tabular-nums">
-                € 12,00
-              </p>
-            </div>
 
             {/* Hero-foto: signatuurgerecht */}
             <div className="photo-slot relative mt-4 aspect-[16/9]">
@@ -389,7 +392,7 @@ export default function Home() {
               </p>
               <a
                 href="tel:+3214414047"
-                className="rounded-full bg-surface-alt px-3 py-2.5 text-center font-display font-bold tabular-nums"
+                className="rounded-full bg-surface-alt px-2 py-3 text-center font-display text-sm font-bold whitespace-nowrap tabular-nums"
               >
                 014 / 41 40 47
               </a>
