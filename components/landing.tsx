@@ -443,7 +443,6 @@ export default function Landing({ locale, dict }: { locale: Locale; dict: Dict }
                 error={dict.distanceError}
                 suffixKm={dict.distanceSuffixKm}
                 suffixM={dict.distanceSuffixM}
-                approxNote={dict.distanceApproxNote}
               />
               <a
                 href="tel:+3214414047"

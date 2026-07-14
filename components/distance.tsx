@@ -1,9 +1,9 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { RESTAURANT, haversineKm } from "@/lib/geo";
 
-type Status = "idle" | "approx" | "loading" | "error" | "precise";
+type Status = "idle" | "loading" | "error" | "success";
 
 export function Distance({
   labelShow,
@@ -11,43 +11,16 @@ export function Distance({
   error,
   suffixKm,
   suffixM,
-  approxNote,
 }: {
   labelShow: string;
   loading: string;
   error: string;
   suffixKm: string;
   suffixM: string;
-  approxNote: string;
 }) {
   const [status, setStatus] = useState<Status>("idle");
   const [result, setResult] = useState("");
 
-  const format = (km: number) =>
-    km < 1
-      ? `≈ ${Math.round(km * 1000)} ${suffixM}`
-      : `≈ ${km.toFixed(1).replace(".", ",")} ${suffixKm}`;
-
-  // Гибрид, шаг 1: грубая оценка по IP (GeoIP-заголовки Vercel), без разрешений.
-  // На localhost /api/geo отдаёт null — остаётся только кнопка.
-  useEffect(() => {
-    let ignore = false;
-    fetch("/api/geo")
-      .then((r) => r.json())
-      .then((geo: { lat: number | null; lon: number | null }) => {
-        if (ignore || geo.lat === null || geo.lon === null) return;
-        const km = haversineKm(geo.lat, geo.lon, RESTAURANT.lat, RESTAURANT.lon);
-        setStatus((s) => (s === "idle" ? "approx" : s));
-        setResult((r) => r || `${format(km)} ${approxNote}`);
-      })
-      .catch(() => {});
-    return () => {
-      ignore = true;
-    };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  // Гибрид, шаг 2: точная дистанция по клику (Geolocation API, с разрешением).
   const handleClick = () => {
     setStatus("loading");
     navigator.geolocation.getCurrentPosition(
@@ -58,8 +31,12 @@ export function Distance({
           RESTAURANT.lat,
           RESTAURANT.lon,
         );
-        setResult(format(km));
-        setStatus("precise");
+        setResult(
+          km < 1
+            ? `≈ ${Math.round(km * 1000)} ${suffixM}`
+            : `≈ ${km.toFixed(1).replace(".", ",")} ${suffixKm}`,
+        );
+        setStatus("success");
       },
       () => setStatus("error"),
       { enableHighAccuracy: false, timeout: 8000 },
@@ -71,7 +48,6 @@ export function Distance({
       type="button"
       onClick={handleClick}
       disabled={status === "loading"}
-      title={labelShow}
       className="press flex min-h-11 w-fit items-center gap-2 rounded-full bg-surface-alt px-4 py-2 text-left font-display text-sm font-bold"
     >
       <svg
@@ -84,10 +60,9 @@ export function Distance({
       </svg>
       <span>
         {status === "idle" && labelShow}
-        {status === "approx" && result}
         {status === "loading" && loading}
         {status === "error" && error}
-        {status === "precise" && result}
+        {status === "success" && result}
       </span>
     </button>
   );
