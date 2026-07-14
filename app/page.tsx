@@ -148,7 +148,9 @@ export default function Home() {
               <p className="min-w-0 pt-1.5 font-display text-xs font-bold tracking-[0.3em] text-ink-soft">
                 PIZZA · PITA · GRILL
                 <br />
-                LICHTAART
+                <span className="mt-1.5 inline-block rounded-full bg-secondary px-2.5 py-1 text-on-secondary">
+                  LICHTAART
+                </span>
               </p>
               {/* Sticker van de dag (dagslogica volgt in een latere fase) */}
               <div className="shrink-0 rounded-2xl bg-primary px-3 py-2 text-center text-on-primary">
