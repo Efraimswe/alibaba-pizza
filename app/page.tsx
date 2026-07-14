@@ -205,7 +205,7 @@ export default function Home() {
           <div className="mt-3 grid grid-cols-2 gap-3">
             <a
               href="tel:+3214414047"
-              className="card flex min-h-14 items-center justify-center gap-2 rounded-full bg-primary font-display text-lg font-bold text-on-primary"
+              className="card flex min-h-14 items-center justify-center gap-2 bg-primary font-display text-lg font-bold text-on-primary"
             >
               <svg
                 aria-hidden="true"
@@ -222,7 +222,7 @@ export default function Home() {
             </a>
             <a
               href="#menu"
-              className="card flex min-h-14 items-center justify-center rounded-full font-display text-lg font-bold"
+              className="card flex min-h-14 items-center justify-center font-display text-lg font-bold"
             >
               MENU ↓
             </a>
