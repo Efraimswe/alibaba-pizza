@@ -196,24 +196,6 @@ export default function Home() {
               Alibaba
             </h1>
 
-            {/* Hero-foto: signatuurgerecht */}
-            <div className="photo-slot relative mt-4 aspect-square">
-              {imgSrc("img/hero.png") ? (
-                <Image
-                  src="/img/hero.png"
-                  alt="Ali Baba Speciaal — grill schotel van het huis"
-                  fill
-                  priority
-                  sizes="(max-width: 32rem) 100vw, 32rem"
-                  className="object-contain p-2"
-                />
-              ) : (
-                <span className="absolute bottom-3 left-3 rounded-full bg-surface px-3 py-1 font-display text-xs font-bold tracking-widest">
-                  FOTO — SIGNATUUR SCHOTEL
-                </span>
-              )}
-            </div>
-
             <p className="mt-4 max-w-xs text-lg text-ink-soft">
               Verse pizza&apos;s, pitta, durum en schotels — om af te halen in
               Lichtaart.
