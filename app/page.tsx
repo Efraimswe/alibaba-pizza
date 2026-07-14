@@ -145,7 +145,7 @@ export default function Home() {
         <section className="pt-4">
           <div className="card p-6">
             <div className="flex items-start justify-between gap-3">
-              <p className="min-w-0 pt-1.5 font-display text-[0.65rem] font-bold tracking-[0.22em] text-ink-soft">
+              <p className="min-w-0 pt-1.5 font-display text-xs font-bold tracking-[0.3em] text-ink-soft">
                 PIZZA · PITA · GRILL
                 <br />
                 LICHTAART
