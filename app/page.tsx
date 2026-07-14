@@ -1,4 +1,47 @@
+import { existsSync } from "node:fs";
+import { join } from "node:path";
+import Image from "next/image";
 import menu from "@/data/menu.json";
+
+// должен совпадать со slugify в scripts/build-image-manifest.mjs
+const slugify = (s: string) =>
+  s
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[̀-ͯ]/g, "")
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+
+// фото может ещё не быть сгенерировано — тогда остаётся штриховка
+const imgSrc = (rel: string) =>
+  existsSync(join(process.cwd(), "public", rel)) ? `/${rel}` : null;
+
+function Photo({
+  rel,
+  alt,
+  sizes,
+  className,
+}: {
+  rel: string;
+  alt: string;
+  sizes: string;
+  className: string;
+}) {
+  const src = imgSrc(rel);
+  return (
+    <span className={`wire-photo relative block shrink-0 overflow-hidden ${className}`}>
+      {src && (
+        <Image
+          src={src}
+          alt={alt}
+          fill
+          sizes={sizes}
+          className="object-contain p-0.5"
+        />
+      )}
+    </span>
+  );
+}
 
 type Item = {
   name: string;
@@ -115,11 +158,22 @@ export default function Home() {
             Lichtaart.
           </p>
 
-          {/* Hero-foto: signatuurgerecht (echte foto van de klant volgt) */}
+          {/* Hero-foto: signatuurgerecht */}
           <div className="wire-photo relative mt-6 aspect-[16/9]">
-            <span className="wire-block-flat absolute bottom-3 left-3 bg-wire-surface px-2 py-1 font-display text-xs font-bold tracking-widest">
-              FOTO — SIGNATUUR SCHOTEL
-            </span>
+            {imgSrc("img/hero.png") ? (
+              <Image
+                src="/img/hero.png"
+                alt="Ali Baba Speciaal — grill schotel van het huis"
+                fill
+                priority
+                sizes="(max-width: 32rem) 100vw, 32rem"
+                className="object-contain p-2"
+              />
+            ) : (
+              <span className="wire-block-flat absolute bottom-3 left-3 bg-wire-surface px-2 py-1 font-display text-xs font-bold tracking-widest">
+                FOTO — SIGNATUUR SCHOTEL
+              </span>
+            )}
           </div>
 
           <div className="mt-6 flex gap-4">
@@ -177,8 +231,12 @@ export default function Home() {
                   <span className="font-display text-3xl font-bold tabular-nums text-wire-ink-soft">
                     {String(i + 1).padStart(2, "0")}
                   </span>
-                  {/* Categoriefoto (echte foto volgt) */}
-                  <span className="wire-photo size-12 shrink-0" aria-hidden="true" />
+                  <Photo
+                    rel={`img/cats/${cat.id}.png`}
+                    alt=""
+                    sizes="48px"
+                    className="size-12"
+                  />
                   <span className="min-w-0 flex-1">
                     <span className="block font-display text-xl font-bold uppercase">
                       {cat.name}
@@ -211,8 +269,12 @@ export default function Home() {
                   <ul className="space-y-3">
                     {cat.items.map((item) => (
                       <li key={item.name} className="flex items-start gap-3">
-                        {/* Foto van het gerecht (echte foto's van de klant volgen) */}
-                        <div className="wire-photo size-14 shrink-0" aria-hidden="true" />
+                        <Photo
+                          rel={`img/items/${cat.id}--${slugify(item.name)}.png`}
+                          alt=""
+                          sizes="56px"
+                          className="size-14"
+                        />
                         <div className="min-w-0 flex-1">
                           <div className="flex items-end gap-2">
                             <span className="font-bold">{item.name}</span>
@@ -261,8 +323,12 @@ export default function Home() {
                   <p className="font-display text-3xl font-bold">
                     {DAY_LABELS[deal.day]}
                   </p>
-                  {/* Actiefoto (echte foto volgt) */}
-                  <div className="wire-photo mx-auto mt-2 aspect-square w-full" aria-hidden="true" />
+                  <Photo
+                    rel={`img/deals/${deal.day}.png`}
+                    alt=""
+                    sizes="(max-width: 32rem) 33vw, 10rem"
+                    className="mt-2 aspect-square w-full"
+                  />
                   <p className="mt-2 text-xs font-bold tracking-wide uppercase">
                     {deal.name}
                   </p>
