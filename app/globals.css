@@ -83,6 +83,18 @@ body {
     );
   }
 
+  /* фото-плейсхолдер: диагональная штриховка + рамка (заменится на next/image) */
+  .wire-photo {
+    border: 3px solid var(--wire-line);
+    background: repeating-linear-gradient(
+      45deg,
+      var(--wire-surface),
+      var(--wire-surface) 8px,
+      var(--wire-surface-alt) 8px,
+      var(--wire-surface-alt) 10px
+    );
+  }
+
   /* dotted leader между названием и ценой */
   .wire-leader {
     flex: 1 1 auto;

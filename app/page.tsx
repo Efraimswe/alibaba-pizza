@@ -115,6 +115,13 @@ export default function Home() {
             Lichtaart.
           </p>
 
+          {/* Hero-foto: signatuurgerecht (echte foto van de klant volgt) */}
+          <div className="wire-photo relative mt-6 aspect-[16/9]">
+            <span className="wire-block-flat absolute bottom-3 left-3 bg-wire-surface px-2 py-1 font-display text-xs font-bold tracking-widest">
+              FOTO — SIGNATUUR SCHOTEL
+            </span>
+          </div>
+
           <div className="mt-6 flex gap-4">
             <a
               href="tel:+3214414047"
@@ -170,7 +177,9 @@ export default function Home() {
                   <span className="font-display text-3xl font-bold tabular-nums text-wire-ink-soft">
                     {String(i + 1).padStart(2, "0")}
                   </span>
-                  <span className="flex-1">
+                  {/* Categoriefoto (echte foto volgt) */}
+                  <span className="wire-photo size-12 shrink-0" aria-hidden="true" />
+                  <span className="min-w-0 flex-1">
                     <span className="block font-display text-xl font-bold uppercase">
                       {cat.name}
                     </span>
@@ -201,21 +210,25 @@ export default function Home() {
                   )}
                   <ul className="space-y-3">
                     {cat.items.map((item) => (
-                      <li key={item.name}>
-                        <div className="flex items-end gap-2">
-                          <span className="font-bold">{item.name}</span>
-                          <span aria-hidden="true" className="wire-leader" />
-                          <span className="font-display font-bold whitespace-nowrap tabular-nums">
-                            {item.price !== undefined
-                              ? eur(item.price)
-                              : `${eur(item.prices!.klein)} / ${eur(item.prices!.groot)}`}
-                          </span>
+                      <li key={item.name} className="flex items-start gap-3">
+                        {/* Foto van het gerecht (echte foto's van de klant volgen) */}
+                        <div className="wire-photo size-14 shrink-0" aria-hidden="true" />
+                        <div className="min-w-0 flex-1">
+                          <div className="flex items-end gap-2">
+                            <span className="font-bold">{item.name}</span>
+                            <span aria-hidden="true" className="wire-leader" />
+                            <span className="font-display font-bold whitespace-nowrap tabular-nums">
+                              {item.price !== undefined
+                                ? eur(item.price)
+                                : `${eur(item.prices!.klein)} / ${eur(item.prices!.groot)}`}
+                            </span>
+                          </div>
+                          {item.ingredients.length > 0 && (
+                            <p className="text-sm text-wire-ink-soft">
+                              {item.ingredients.join(", ")}
+                            </p>
+                          )}
                         </div>
-                        {item.ingredients.length > 0 && (
-                          <p className="text-sm text-wire-ink-soft">
-                            {item.ingredients.join(", ")}
-                          </p>
-                        )}
                       </li>
                     ))}
                   </ul>
@@ -248,7 +261,9 @@ export default function Home() {
                   <p className="font-display text-3xl font-bold">
                     {DAY_LABELS[deal.day]}
                   </p>
-                  <p className="mt-1 text-xs font-bold tracking-wide uppercase">
+                  {/* Actiefoto (echte foto volgt) */}
+                  <div className="wire-photo mx-auto mt-2 aspect-square w-full" aria-hidden="true" />
+                  <p className="mt-2 text-xs font-bold tracking-wide uppercase">
                     {deal.name}
                   </p>
                   <p className="mt-2 font-display text-xl font-bold tabular-nums">
