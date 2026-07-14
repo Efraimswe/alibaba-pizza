@@ -8,9 +8,11 @@ import json
 import pathlib
 import subprocess
 import sys
+import threading
 import time
 import urllib.parse
 import urllib.request
+from concurrent.futures import ThreadPoolExecutor
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 MANIFEST = ROOT / "scripts" / "image-manifest.json"
@@ -23,7 +25,11 @@ todo = [e for e in entries if not (ROOT / e["file"]).exists()]
 print(f"total {len(entries)}, todo {len(todo)}", flush=True)
 
 fails = []
-for n, e in enumerate(todo, 1):
+done_count = [0]
+lock = threading.Lock()
+
+
+def gen(e):
     out = ROOT / e["file"]
     out.parent.mkdir(parents=True, exist_ok=True)
     seed = abs(hash(e["file"])) % 100000
@@ -34,7 +40,7 @@ for n, e in enumerate(todo, 1):
     )
     jpg = TMP / (out.stem + ".jpg")
     ok = False
-    for attempt in range(4):
+    for attempt in range(5):
         try:
             req = urllib.request.Request(url, headers={"User-Agent": "curl/8"})
             with urllib.request.urlopen(req, timeout=180) as r:
@@ -45,23 +51,28 @@ for n, e in enumerate(todo, 1):
             ok = True
             break
         except Exception as ex:
-            wait = 8 * (attempt + 1)
-            print(f"[{n}/{len(todo)}] retry {attempt+1} {out.name}: {ex} (sleep {wait}s)", flush=True)
+            wait = 10 * (attempt + 1)
+            print(f"retry {attempt+1} {out.name}: {ex} (sleep {wait}s)", flush=True)
             time.sleep(wait)
     if not ok:
-        fails.append(e["file"])
-        continue
-    r = subprocess.run(
-        [str(REMBG), "i", str(jpg), str(out)],
-        capture_output=True, text=True,
-    )
+        with lock:
+            fails.append(e["file"])
+        return
+    r = subprocess.run([str(REMBG), "i", str(jpg), str(out)], capture_output=True, text=True)
     if r.returncode != 0 or not out.exists():
-        print(f"[{n}/{len(todo)}] rembg FAIL {out.name}: {r.stderr[-200:]}", flush=True)
-        fails.append(e["file"])
-        continue
+        print(f"rembg FAIL {out.name}: {r.stderr[-200:]}", flush=True)
+        with lock:
+            fails.append(e["file"])
+        return
     jpg.unlink(missing_ok=True)
-    print(f"[{n}/{len(todo)}] done {e['file']}", flush=True)
-    time.sleep(3)
+    with lock:
+        done_count[0] += 1
+        print(f"[{done_count[0]}/{len(todo)}] done {e['file']}", flush=True)
+    time.sleep(2)
+
+
+with ThreadPoolExecutor(max_workers=3) as pool:
+    list(pool.map(gen, todo))
 
 print(f"finished, fails: {len(fails)}", flush=True)
 for f in fails:

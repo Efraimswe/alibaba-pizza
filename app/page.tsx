@@ -3,15 +3,6 @@ import { join } from "node:path";
 import Image from "next/image";
 import menu from "@/data/menu.json";
 
-// должен совпадать со slugify в scripts/build-image-manifest.mjs
-const slugify = (s: string) =>
-  s
-    .toLowerCase()
-    .normalize("NFD")
-    .replace(/[̀-ͯ]/g, "")
-    .replace(/[^a-z0-9]+/g, "-")
-    .replace(/^-+|-+$/g, "");
-
 // фото может ещё не быть сгенерировано — тогда остаётся штриховка
 const imgSrc = (rel: string) =>
   existsSync(join(process.cwd(), "public", rel)) ? `/${rel}` : null;
@@ -234,8 +225,8 @@ export default function Home() {
                   <Photo
                     rel={`img/cats/${cat.id}.png`}
                     alt=""
-                    sizes="48px"
-                    className="size-12"
+                    sizes="80px"
+                    className="size-20"
                   />
                   <span className="min-w-0 flex-1">
                     <span className="block font-display text-xl font-bold uppercase">
@@ -268,29 +259,21 @@ export default function Home() {
                   )}
                   <ul className="space-y-3">
                     {cat.items.map((item) => (
-                      <li key={item.name} className="flex items-start gap-3">
-                        <Photo
-                          rel={`img/items/${cat.id}--${slugify(item.name)}.png`}
-                          alt=""
-                          sizes="56px"
-                          className="size-14"
-                        />
-                        <div className="min-w-0 flex-1">
-                          <div className="flex items-end gap-2">
-                            <span className="font-bold">{item.name}</span>
-                            <span aria-hidden="true" className="wire-leader" />
-                            <span className="font-display font-bold whitespace-nowrap tabular-nums">
-                              {item.price !== undefined
-                                ? eur(item.price)
-                                : `${eur(item.prices!.klein)} / ${eur(item.prices!.groot)}`}
-                            </span>
-                          </div>
-                          {item.ingredients.length > 0 && (
-                            <p className="text-sm text-wire-ink-soft">
-                              {item.ingredients.join(", ")}
-                            </p>
-                          )}
+                      <li key={item.name}>
+                        <div className="flex items-end gap-2">
+                          <span className="font-bold">{item.name}</span>
+                          <span aria-hidden="true" className="wire-leader" />
+                          <span className="font-display font-bold whitespace-nowrap tabular-nums">
+                            {item.price !== undefined
+                              ? eur(item.price)
+                              : `${eur(item.prices!.klein)} / ${eur(item.prices!.groot)}`}
+                          </span>
                         </div>
+                        {item.ingredients.length > 0 && (
+                          <p className="text-sm text-wire-ink-soft">
+                            {item.ingredients.join(", ")}
+                          </p>
+                        )}
                       </li>
                     ))}
                   </ul>
