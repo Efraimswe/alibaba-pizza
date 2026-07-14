@@ -148,7 +148,20 @@ export default function Home() {
               <p className="min-w-0 pt-1.5 font-display text-xs font-bold tracking-[0.3em] text-ink-soft">
                 PIZZA · PITA · GRILL
                 <br />
-                <span className="mt-1.5 inline-block rounded-full bg-secondary px-2.5 py-1 text-on-secondary">
+                <span className="mt-1.5 inline-flex items-center gap-1 rounded-full bg-secondary px-2.5 py-1 text-on-secondary">
+                  <svg
+                    aria-hidden="true"
+                    width="12"
+                    height="12"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2.5"
+                    className="shrink-0"
+                  >
+                    <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z" />
+                    <circle cx="12" cy="10" r="3" />
+                  </svg>
                   LICHTAART
                 </span>
               </p>
