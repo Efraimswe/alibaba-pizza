@@ -8,13 +8,6 @@ const STYLE =
 
 const entries = [];
 
-// Hero — signatuur schotel (Ali Baba Speciaal van het huis)
-entries.push({
-  file: "public/img/hero.png",
-  w: 1024, h: 1024,
-  prompt: `one large mixed turkish grill platter: kofta, lamb chops, doner kebab, grilled chicken, belgian fries, fresh vegetables, garlic sauce, top view, filling the frame, ${STYLE}`,
-});
-
 // Категории
 const CAT_PROMPT = {
   pizzas: "one whole rustic wood-fired margherita pizza with melted cheese, top view",
