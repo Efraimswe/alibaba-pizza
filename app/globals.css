@@ -1,27 +1,25 @@
 @import "tailwindcss";
 
 /*
-  Wireframe stage: серая шкала. Брендовые токены объявлены заранее
-  (design-foundation.md) и подключаются в Design-фазе — surfaces ниже
-  ссылаются на wire-* токены, их перекраска = редресс без правки разметки.
+  Design-фаза: дизайн-система «Street Poster» (design-foundation.md) наложена
+  редрессом — разметка wireframe не менялась, wire-* токены перемаплены на
+  брендовые значения, акценты (primary/yellow) добавлены точечно в page.tsx.
 */
 :root {
-  /* wire scale */
-  --wire-bg: #f5f5f4;
+  /* surfaces & ink — бывшая серая wire-шкала, теперь бренд */
+  --wire-bg: #fff7ed; /* тёплый крем */
   --wire-surface: #ffffff;
-  --wire-surface-alt: #e7e5e4;
-  --wire-ink: #171717;
-  --wire-ink-soft: #57534e;
-  --wire-line: #171717;
+  --wire-surface-alt: #ffedd5; /* светлый оранжевый тинт */
+  --wire-ink: #0f172a;
+  --wire-ink-soft: #57534e; /* ≥4.5:1 на креме и белом */
+  --wire-line: #0f172a;
 
-  /* brand palette — Design-фаза, в wireframe НЕ используется */
-  --brand-primary: #ea580c;
+  /* брендовые акценты */
+  --brand-primary: #ea580c; /* аппетитный оранжевый — крупные CTA, не мелкий текст */
   --brand-on-primary: #ffffff;
   --brand-secondary: #f97316;
   --brand-accent: #2563eb;
-  --brand-bg: #fff7ed;
-  --brand-fg: #0f172a;
-  --brand-yellow: #ffd93d;
+  --brand-yellow: #ffd93d; /* стикеры, акции */
 }
 
 @theme inline {
@@ -31,6 +29,11 @@
   --color-wire-ink: var(--wire-ink);
   --color-wire-ink-soft: var(--wire-ink-soft);
   --color-wire-line: var(--wire-line);
+  --color-brand-primary: var(--brand-primary);
+  --color-brand-on-primary: var(--brand-on-primary);
+  --color-brand-secondary: var(--brand-secondary);
+  --color-brand-accent: var(--brand-accent);
+  --color-brand-yellow: var(--brand-yellow);
   --font-display: var(--font-space-grotesk);
   --font-sans: var(--font-karla);
 }
@@ -83,7 +86,7 @@ body {
     );
   }
 
-  /* фото-плейсхолдер: диагональная штриховка + рамка (заменится на next/image) */
+  /* фото-плейсхолдер: тёплая штриховка (заменится на next/image) */
   .wire-photo {
     border: 3px solid var(--wire-line);
     background: repeating-linear-gradient(

@@ -89,17 +89,17 @@ export default function Home() {
             <span className="wire-block inline-block px-4 py-2 text-6xl">
               PIZZA
             </span>
-            <span className="wire-block mt-3 ml-8 inline-block bg-wire-surface-alt px-4 py-2 text-6xl">
+            <span className="wire-block mt-3 ml-8 inline-block bg-brand-yellow px-4 py-2 text-6xl">
               PITA
             </span>
-            <span className="wire-block mt-3 ml-2 inline-block bg-wire-ink px-4 py-2 text-6xl text-wire-surface">
+            <span className="wire-block mt-3 ml-2 inline-block bg-brand-primary px-4 py-2 text-6xl text-brand-on-primary">
               GRILL
             </span>
           </h1>
 
           {/* Sticker van de dag (dagslogica volgt in een latere fase) */}
           <div className="absolute top-26 right-0 max-w-[45%] rotate-3">
-            <div className="wire-block-flat bg-wire-surface-alt px-3 py-2 text-center">
+            <div className="wire-block-flat bg-brand-yellow px-3 py-2 text-center">
               <p className="font-display text-xs font-bold tracking-widest">WOENSDAG</p>
               <p className="font-display text-lg font-bold leading-tight">
                 PIZZADAG
@@ -125,7 +125,7 @@ export default function Home() {
           <div className="mt-6 flex gap-4">
             <a
               href="tel:+3214414047"
-              className="wire-block flex min-h-13 flex-1 items-center justify-center gap-2 px-4 font-display text-lg font-bold"
+              className="wire-block flex min-h-13 flex-1 items-center justify-center gap-2 bg-brand-primary px-4 font-display text-lg font-bold text-brand-on-primary"
             >
               <svg
                 aria-hidden="true"
@@ -142,7 +142,7 @@ export default function Home() {
             </a>
             <a
               href="#menu"
-              className="wire-block flex min-h-13 flex-1 items-center justify-center bg-wire-surface-alt px-4 font-display text-lg font-bold"
+              className="wire-block flex min-h-13 flex-1 items-center justify-center bg-wire-surface px-4 font-display text-lg font-bold"
             >
               MENU ↓
             </a>
@@ -255,7 +255,7 @@ export default function Home() {
                 <div
                   key={deal.day}
                   className={`wire-block px-2 py-4 text-center ${
-                    i === 1 ? "rotate-1 bg-wire-surface-alt" : "-rotate-1"
+                    i === 1 ? "rotate-1 bg-brand-yellow" : "-rotate-1"
                   }`}
                 >
                   <p className="font-display text-3xl font-bold">
@@ -367,7 +367,7 @@ export default function Home() {
         <div className="mx-auto max-w-lg px-4 py-3">
           <a
             href="tel:+3214414047"
-            className="wire-block-flat flex min-h-13 items-center justify-center gap-2 bg-wire-ink font-display text-lg font-bold text-wire-surface"
+            className="wire-block-flat flex min-h-13 items-center justify-center gap-2 bg-brand-primary font-display text-lg font-bold text-brand-on-primary"
           >
             BEL &amp; BESTEL — 014 / 41 40 47
           </a>
