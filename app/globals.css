@@ -33,9 +33,26 @@
   --font-logo: var(--font-lobster);
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   background: var(--bg);
   color: var(--ink);
+}
+
+/* Глобальный выключатель движения */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+  }
 }
 
 @layer components {
@@ -64,5 +81,87 @@ body {
     min-width: 1.5rem;
     border-bottom: 2px dotted color-mix(in srgb, var(--ink-soft) 45%, transparent);
     transform: translateY(-0.4em);
+  }
+
+  /*
+    Микроинтеракции — только transform/opacity (compositor-friendly,
+    тянет и слабые телефоны). Все выключаются prefers-reduced-motion выше.
+  */
+
+  /* press-фидбек: лёгкое сжатие ≤120ms */
+  .press {
+    transition: transform 120ms cubic-bezier(0.2, 0, 0, 1);
+  }
+  .press:active {
+    transform: scale(0.97);
+  }
+
+  /* тикер: бесконечная бегущая строка (два одинаковых спана в треке) */
+  .marquee-track {
+    display: flex;
+    width: max-content;
+    animation: marquee 30s linear infinite;
+  }
+  @keyframes marquee {
+    to {
+      transform: translateX(-50%);
+    }
+  }
+
+  /* вход выпадающего меню: pop из триггера */
+  .anim-pop {
+    transform-origin: top right;
+    animation: pop-in 180ms cubic-bezier(0.2, 0, 0, 1) both;
+  }
+  @keyframes pop-in {
+    from {
+      opacity: 0;
+      transform: scale(0.95) translateY(-4px);
+    }
+  }
+
+  /* контент тикета: fade-up при раскрытии (играет на появлении в DOM) */
+  .anim-reveal {
+    animation: fade-up 220ms cubic-bezier(0.2, 0, 0, 1) both;
+  }
+  @keyframes fade-up {
+    from {
+      opacity: 0;
+      transform: translateY(8px);
+    }
+  }
+
+  /* scroll-reveal карточек: прогрессивно, только где есть view-timeline */
+  @supports (animation-timeline: view()) {
+    .view-reveal {
+      animation: fade-up linear both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 35%;
+    }
+  }
+
+  /* сигнатурный момент: трубка изредка «звонит» */
+  .ring-wiggle {
+    animation: ring 5s ease-in-out infinite;
+    transform-origin: 50% 50%;
+  }
+  @keyframes ring {
+    0%,
+    88%,
+    100% {
+      transform: rotate(0);
+    }
+    90% {
+      transform: rotate(-12deg);
+    }
+    93% {
+      transform: rotate(10deg);
+    }
+    96% {
+      transform: rotate(-6deg);
+    }
+    98% {
+      transform: rotate(3deg);
+    }
   }
 }

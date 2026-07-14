@@ -79,7 +79,7 @@ export default function Home() {
           </a>
           {/* Taalkeuze: dropdown (werkende i18n volgt) */}
           <details className="group relative" aria-label="Taal">
-            <summary className="flex min-h-11 cursor-pointer list-none items-center gap-1.5 rounded-full bg-secondary px-4 font-display font-bold text-on-secondary [&::-webkit-details-marker]:hidden">
+            <summary className="press flex min-h-11 cursor-pointer list-none items-center gap-1.5 rounded-full bg-secondary px-4 font-display font-bold text-on-secondary [&::-webkit-details-marker]:hidden">
               <svg
                 aria-hidden="true"
                 width="16"
@@ -103,15 +103,15 @@ export default function Home() {
                 fill="none"
                 stroke="currentColor"
                 strokeWidth="3"
-                className="group-open:rotate-180"
+                className="transition-transform duration-200 group-open:rotate-180"
               >
                 <path d="m6 9 6 6 6-6" />
               </svg>
             </summary>
-            <div className="card absolute top-[calc(100%+0.5rem)] right-0 z-50 w-44 p-1.5">
+            <div className="card anim-pop absolute top-[calc(100%+0.5rem)] right-0 z-50 w-44 p-1.5">
               <button
                 aria-pressed="true"
-                className="flex min-h-11 w-full cursor-pointer items-center justify-between rounded-xl bg-surface-alt px-3 font-display font-bold"
+                className="press flex min-h-11 w-full cursor-pointer items-center justify-between rounded-xl bg-surface-alt px-3 font-display font-bold"
               >
                 Nederlands
                 <svg
@@ -145,13 +145,22 @@ export default function Home() {
         </div>
       </header>
 
-      {/* ── Statusbanner: volle breedte ────────────────────────────── */}
+      {/* ── Statusbanner: volle breedte, marquee ───────────────────── */}
       <div className="overflow-hidden bg-secondary py-2.5">
-        <p className="whitespace-nowrap font-display text-sm font-bold tracking-widest text-on-secondary">
-          {Array.from({ length: 4 })
-            .map(() => "OPEN VANDAAG 16:00–23:30 • BEL 014 / 41 40 47 • LEISTRAAT 84 LICHTAART")
-            .join(" • ")}
-        </p>
+        <div className="marquee-track">
+          {[false, true].map((hidden) => (
+            <p
+              key={String(hidden)}
+              aria-hidden={hidden}
+              className="whitespace-nowrap pr-8 font-display text-sm font-bold tracking-widest text-on-secondary"
+            >
+              {Array.from({ length: 3 })
+                .map(() => "OPEN VANDAAG 16:00–23:30 • BEL 014 / 41 40 47 • LEISTRAAT 84 LICHTAART")
+                .join(" • ")}{" "}
+              •
+            </p>
+          ))}
+        </div>
       </div>
 
       <main id="top" className="mx-auto max-w-lg px-4 pb-[calc(7rem+env(safe-area-inset-bottom))]">
@@ -217,7 +226,7 @@ export default function Home() {
           <div className="mt-3 grid grid-cols-2 gap-3">
             <a
               href="tel:+3214414047"
-              className="card flex min-h-14 items-center justify-center gap-2 bg-primary font-display text-lg font-bold text-on-primary"
+              className="card press flex min-h-14 items-center justify-center gap-2 bg-primary font-display text-lg font-bold text-on-primary"
             >
               <svg
                 aria-hidden="true"
@@ -234,7 +243,7 @@ export default function Home() {
             </a>
             <a
               href="#menu"
-              className="card flex min-h-14 items-center justify-center font-display text-lg font-bold"
+              className="card press flex min-h-14 items-center justify-center font-display text-lg font-bold"
             >
               MENU ↓
             </a>
@@ -251,8 +260,8 @@ export default function Home() {
 
           <div className="mt-4 space-y-3">
             {categories.map((cat, i) => (
-              <details key={cat.id} open={i === 0} className="group card">
-                <summary className="flex min-h-16 cursor-pointer list-none items-center gap-4 p-4 [&::-webkit-details-marker]:hidden">
+              <details key={cat.id} open={i === 0} className="group card view-reveal">
+                <summary className="flex min-h-16 cursor-pointer list-none items-center gap-4 rounded-3xl p-4 transition-colors duration-150 active:bg-surface-alt/60 [&::-webkit-details-marker]:hidden">
                   <Photo
                     rel={`img/cats/${cat.id}.png`}
                     alt=""
@@ -270,14 +279,23 @@ export default function Home() {
                   </span>
                   <span
                     aria-hidden="true"
-                    className="flex size-11 items-center justify-center rounded-full bg-surface-alt font-display text-2xl font-bold text-ink"
+                    className="flex size-11 items-center justify-center rounded-full bg-surface-alt text-ink"
                   >
-                    <span className="group-open:hidden">+</span>
-                    <span className="hidden group-open:inline">−</span>
+                    <svg
+                      width="18"
+                      height="18"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="3"
+                      className="transition-transform duration-200 group-open:rotate-45"
+                    >
+                      <path d="M12 5v14M5 12h14" />
+                    </svg>
                   </span>
                 </summary>
 
-                <div className="px-5 pb-5">
+                <div className="anim-reveal px-5 pb-5">
                   <div className="border-t border-ink/10 pt-4">
                     {cat.priceModel === "klein/groot" && (
                       <p className="mb-2 text-right font-display text-xs font-bold tracking-widest text-ink-soft">
@@ -332,7 +350,7 @@ export default function Home() {
               (deal, i) => (
                 <div
                   key={deal.day}
-                  className={`card px-2 py-4 text-center ${
+                  className={`card view-reveal px-2 py-4 text-center ${
                     i === 1 ? "bg-primary text-on-primary" : ""
                   }`}
                 >
@@ -369,7 +387,7 @@ export default function Home() {
         <section className="pt-10">
           <h2 className="px-2 font-display text-3xl font-bold">Hier &amp; nu</h2>
 
-          <div className="card mt-4 overflow-hidden">
+          <div className="card view-reveal mt-4 overflow-hidden">
             <p className="bg-secondary px-5 py-3 font-display text-sm font-bold tracking-widest text-on-secondary">
               OPENINGSUREN
             </p>
@@ -415,7 +433,7 @@ export default function Home() {
               </p>
               <a
                 href="tel:+3214414047"
-                className="rounded-full bg-surface-alt px-2 py-3 text-center font-display text-sm font-bold whitespace-nowrap tabular-nums"
+                className="press rounded-full bg-surface-alt px-2 py-3 text-center font-display text-sm font-bold whitespace-nowrap tabular-nums"
               >
                 014 / 41 40 47
               </a>
@@ -452,8 +470,20 @@ export default function Home() {
       <div className="fixed inset-x-4 bottom-[calc(1rem+env(safe-area-inset-bottom))] z-40">
         <a
           href="tel:+3214414047"
-          className="mx-auto flex min-h-14 max-w-lg items-center justify-center gap-2 rounded-full bg-primary font-display text-lg font-bold text-on-primary shadow-[0_16px_40px_-12px_rgb(226_61_40_/_0.55)]"
+          className="press mx-auto flex min-h-14 max-w-lg items-center justify-center gap-2 rounded-full bg-primary font-display text-lg font-bold text-on-primary shadow-[0_16px_40px_-12px_rgb(226_61_40_/_0.55)]"
         >
+          <svg
+            aria-hidden="true"
+            width="18"
+            height="18"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2.5"
+            className="ring-wiggle shrink-0"
+          >
+            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z" />
+          </svg>
           BEL &amp; BESTEL — 014 / 41 40 47
         </a>
       </div>

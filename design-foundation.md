@@ -51,11 +51,18 @@
 - Карточки акций: квадрат на всю ширину карточки.
 - Источник: генерация pollinations + rembg (scripts/); клиентские фото заменят при наличии.
 
-## Motion-таргеты (СЛЕДУЮЩАЯ фаза, сейчас НЕ делать)
-- Тикер — бесконечный marquee (transform, pausable).
-- `<details>` — плавное раскрытие тикета; «отрыв чека» при открытии.
-- Стикеры — mechanical press (translate = offset тени) на тап.
-- Стаггер входа позиций меню 30–50ms; всё transform/opacity, ≤300ms, reduced-motion.
+## Микроинтеракции (реализованы 2026-07-15, CSS-only)
+Правила: только transform/opacity (compositor), ноль JS, ≤300ms, ease-out,
+глобальный выключатель prefers-reduced-motion.
+- Тикер — marquee 30s linear infinite (`.marquee-track`, два спана).
+- Дропдаун языка — pop-in из триггера 180ms, стрелка rotate 200ms.
+- Тикеты меню — «+» морф в «×» (rotate 45°), контент fade-up 220ms,
+  active-подсветка summary.
+- Кнопки/пилюли — `.press`: scale 0.97 за 120ms.
+- Scroll-reveal карточек — fade-up через animation-timeline: view()
+  (@supports-прогрессивно, фолбэк = просто видимы).
+- Сигнатурный момент — трубка на «BEL & BESTEL» «звонит» раз в 5s (wiggle).
+- MENU ↓ — smooth scroll (выключается reduced-motion).
 
 ## Wireframe-инварианты
 - Только серая шкала (#fff → #171717), никаких брендовых цветов.
