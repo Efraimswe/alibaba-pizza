@@ -196,6 +196,18 @@ export default function Home() {
               Alibaba
             </h1>
 
+            {/* Hero-foto: schotels van het huis, volledig kader */}
+            <div className="relative mt-4 aspect-square overflow-hidden rounded-2xl">
+              <Image
+                src="/img/hero.jpg"
+                alt="Schotels van het huis: kebab, kip, kofte, friet en verse salades met saus"
+                fill
+                priority
+                sizes="(max-width: 32rem) 100vw, 32rem"
+                className="object-cover"
+              />
+            </div>
+
             <p className="mt-4 max-w-xs text-lg text-ink-soft">
               Verse pizza&apos;s, pitta, durum en schotels — om af te halen in
               Lichtaart.
