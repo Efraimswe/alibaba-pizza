@@ -77,7 +77,7 @@ const nl: Dict = {
   menuCta: "MENU ↓",
   menuHeading: "Menu",
   menuSummary: (categories, dishes) => `${categories} categorieën, ${dishes} gerechten`,
-  itemsFromPrefix: "items · vanaf €",
+  itemsFromPrefix: "keuzes · vanaf €",
   sizeLabel: "KLEIN / GROOT",
   extrasLabel: "Extra's",
   weeklyHeading: "Elke week",
