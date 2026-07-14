@@ -1,26 +1,93 @@
 @import "tailwindcss";
 
+/*
+  Wireframe stage: серая шкала. Брендовые токены объявлены заранее
+  (design-foundation.md) и подключаются в Design-фазе — surfaces ниже
+  ссылаются на wire-* токены, их перекраска = редресс без правки разметки.
+*/
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* wire scale */
+  --wire-bg: #f5f5f4;
+  --wire-surface: #ffffff;
+  --wire-surface-alt: #e7e5e4;
+  --wire-ink: #171717;
+  --wire-ink-soft: #57534e;
+  --wire-line: #171717;
+
+  /* brand palette — Design-фаза, в wireframe НЕ используется */
+  --brand-primary: #ea580c;
+  --brand-on-primary: #ffffff;
+  --brand-secondary: #f97316;
+  --brand-accent: #2563eb;
+  --brand-bg: #fff7ed;
+  --brand-fg: #0f172a;
+  --brand-yellow: #ffd93d;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --color-wire-bg: var(--wire-bg);
+  --color-wire-surface: var(--wire-surface);
+  --color-wire-surface-alt: var(--wire-surface-alt);
+  --color-wire-ink: var(--wire-ink);
+  --color-wire-ink-soft: var(--wire-ink-soft);
+  --color-wire-line: var(--wire-line);
+  --font-display: var(--font-space-grotesk);
+  --font-sans: var(--font-karla);
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--wire-bg);
+  color: var(--wire-ink);
+}
+
+@layer components {
+  /* толстая рамка + hard offset shadow (без blur — дёшево) */
+  .wire-block {
+    border: 3px solid var(--wire-line);
+    background: var(--wire-surface);
+    box-shadow: 5px 5px 0 0 var(--wire-line);
+  }
+
+  .wire-block-flat {
+    border: 3px solid var(--wire-line);
+    background: var(--wire-surface);
+  }
+
+  /* зубчатый «рваный» низ чека-тикета */
+  .wire-ticket-edge {
+    --zz: 10px;
+    clip-path: polygon(
+      0 0,
+      100% 0,
+      100% calc(100% - var(--zz)),
+      95% 100%,
+      90% calc(100% - var(--zz)),
+      85% 100%,
+      80% calc(100% - var(--zz)),
+      75% 100%,
+      70% calc(100% - var(--zz)),
+      65% 100%,
+      60% calc(100% - var(--zz)),
+      55% 100%,
+      50% calc(100% - var(--zz)),
+      45% 100%,
+      40% calc(100% - var(--zz)),
+      35% 100%,
+      30% calc(100% - var(--zz)),
+      25% 100%,
+      20% calc(100% - var(--zz)),
+      15% 100%,
+      10% calc(100% - var(--zz)),
+      5% 100%,
+      0 calc(100% - var(--zz))
+    );
+  }
+
+  /* dotted leader между названием и ценой */
+  .wire-leader {
+    flex: 1 1 auto;
+    min-width: 1.5rem;
+    border-bottom: 2px dotted var(--wire-ink-soft);
+    transform: translateY(-0.4em);
+  }
 }
