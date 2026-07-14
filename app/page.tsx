@@ -77,41 +77,70 @@ export default function Home() {
           <a href="#top" className="font-logo text-3xl text-primary">
             Alibaba
           </a>
-          <div className="flex items-center gap-1.5" aria-label="Taal">
-            <button
-              aria-pressed="true"
-              className="min-h-11 min-w-11 cursor-pointer rounded-full bg-secondary px-3 font-display font-bold text-on-secondary"
-            >
+          {/* Taalkeuze: dropdown (werkende i18n volgt) */}
+          <details className="group relative" aria-label="Taal">
+            <summary className="flex min-h-11 cursor-pointer list-none items-center gap-1.5 rounded-full bg-secondary px-4 font-display font-bold text-on-secondary [&::-webkit-details-marker]:hidden">
               NL
-            </button>
-            <button
-              disabled
-              title="Binnenkort"
-              className="min-h-11 min-w-11 rounded-full bg-surface-alt px-3 font-display font-bold text-ink-soft opacity-60"
-            >
-              EN
-            </button>
-            <button
-              disabled
-              title="Binnenkort"
-              className="min-h-11 min-w-11 rounded-full bg-surface-alt px-3 font-display font-bold text-ink-soft opacity-60"
-            >
-              FR
-            </button>
-          </div>
+              <svg
+                aria-hidden="true"
+                width="14"
+                height="14"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="3"
+                className="group-open:rotate-180"
+              >
+                <path d="m6 9 6 6 6-6" />
+              </svg>
+            </summary>
+            <div className="card absolute top-[calc(100%+0.5rem)] right-0 z-50 w-44 p-1.5">
+              <button
+                aria-pressed="true"
+                className="flex min-h-11 w-full cursor-pointer items-center justify-between rounded-xl bg-surface-alt px-3 font-display font-bold"
+              >
+                Nederlands
+                <svg
+                  aria-hidden="true"
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="3"
+                >
+                  <path d="M20 6 9 17l-5-5" />
+                </svg>
+              </button>
+              <button
+                disabled
+                className="flex min-h-11 w-full items-center justify-between rounded-xl px-3 font-display font-bold text-ink-soft opacity-60"
+              >
+                English
+                <span className="text-[0.65rem] font-normal">binnenkort</span>
+              </button>
+              <button
+                disabled
+                className="flex min-h-11 w-full items-center justify-between rounded-xl px-3 font-display font-bold text-ink-soft opacity-60"
+              >
+                Français
+                <span className="text-[0.65rem] font-normal">binnenkort</span>
+              </button>
+            </div>
+          </details>
         </div>
       </header>
 
-      <main id="top" className="mx-auto max-w-lg px-4 pb-[calc(7rem+env(safe-area-inset-bottom))]">
-        {/* ── Statusstrook ─────────────────────────────────────────── */}
-        <div className="overflow-hidden rounded-full bg-secondary px-5 py-2.5">
-          <p className="whitespace-nowrap font-display text-sm font-bold tracking-widest text-on-secondary">
-            {Array.from({ length: 4 })
-              .map(() => "OPEN VANDAAG 16:00–23:30 • BEL 014 / 41 40 47 • LEISTRAAT 84 LICHTAART")
-              .join(" • ")}
-          </p>
-        </div>
+      {/* ── Statusbanner: volle breedte ────────────────────────────── */}
+      <div className="overflow-hidden bg-secondary py-2.5">
+        <p className="whitespace-nowrap font-display text-sm font-bold tracking-widest text-on-secondary">
+          {Array.from({ length: 4 })
+            .map(() => "OPEN VANDAAG 16:00–23:30 • BEL 014 / 41 40 47 • LEISTRAAT 84 LICHTAART")
+            .join(" • ")}
+        </p>
+      </div>
 
+      <main id="top" className="mx-auto max-w-lg px-4 pb-[calc(7rem+env(safe-area-inset-bottom))]">
         {/* ── Hero-bento ───────────────────────────────────────────── */}
         <section className="pt-4">
           <div className="card relative p-6">
