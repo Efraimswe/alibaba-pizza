@@ -1,0 +1,230 @@
+{
+  "restaurant": {
+    "name": "Alibaba Kebab",
+    "tagline": "Pizza Pita Grill",
+    "city": "Lichtaart",
+    "address": "Leistraat 84, 2460 Lichtaart",
+    "phone": "014 / 41 40 47",
+    "allergenInfo": "Voor allergenen kunt u zich steeds wenden tot onze medewerkers."
+  },
+  "openingHours": {
+    "maandag": "16:00–22:30",
+    "dinsdag": "16:00–23:30",
+    "woensdag": "16:00–23:30",
+    "donderdag": "16:00–23:00",
+    "vrijdag": "16:00–01:00",
+    "zaterdag": "16:00–01:00",
+    "zondag": "16:00–23:30",
+    "note": "We zijn open op feestdagen"
+  },
+  "weeklyDeals": [
+    { "day": "dinsdag", "name": "Kapsalondag", "price": 11.0 },
+    { "day": "woensdag", "name": "Pizzadag", "price": 12.0 },
+    { "day": "donderdag", "name": "Schoteldag", "price": 14.0, "note": "m.u.v. Schotel Lamskotelet en Lichtaartse Zondag Speciaal" }
+  ],
+  "categories": [
+    {
+      "id": "pizzas",
+      "name": "Pizza's",
+      "items": [
+        { "name": "Margherita", "ingredients": ["tomatensaus", "kaas"], "price": 10.0 },
+        { "name": "Funghi", "ingredients": ["champignons"], "price": 12.0 },
+        { "name": "Salami", "ingredients": ["salami"], "price": 12.0 },
+        { "name": "Prosciutto", "ingredients": ["hesp"], "price": 12.0 },
+        { "name": "Cipolla", "ingredients": ["hesp", "ui"], "price": 12.0 },
+        { "name": "Ananas", "ingredients": ["ananas"], "price": 12.0 },
+        { "name": "Sirena", "ingredients": ["salami", "champignons"], "price": 12.0 },
+        { "name": "Napolitana", "ingredients": ["ansjovis", "kappertjes"], "price": 14.0 },
+        { "name": "Paradisio", "ingredients": ["hesp", "ananas"], "price": 12.0 },
+        { "name": "Americano", "ingredients": ["ei", "champignons", "peterselie", "pikante saus"], "price": 13.0 },
+        { "name": "Pizza Kip", "ingredients": ["kip"], "price": 13.0 },
+        { "name": "Pizza Kebap", "ingredients": ["kebab vlees"], "price": 13.0 },
+        { "name": "Tonno", "ingredients": ["tonijn", "olijven", "ui"], "price": 13.0 },
+        { "name": "Pollo", "ingredients": ["kip", "paprika", "champignons", "ui"], "price": 14.0 },
+        { "name": "Palermo", "ingredients": ["pitta", "champignons", "ui"], "price": 14.0 },
+        { "name": "Erdo", "ingredients": ["kip", "ananas", "champignons"], "price": 14.0 },
+        { "name": "Taco", "ingredients": ["kip", "tonijn", "champignons"], "price": 14.0 },
+        { "name": "Rustica", "ingredients": ["hesp", "salami"], "price": 13.0 },
+        { "name": "Exotica", "ingredients": ["kip", "ananas"], "price": 14.0 },
+        { "name": "Pizza Yara", "ingredients": ["kip", "kebab", "ananas", "maïs"], "price": 14.0 },
+        { "name": "Quattro Stagioni", "ingredients": ["salami", "hesp", "paprika", "artisjok"], "price": 14.0 },
+        { "name": "Hawaï", "ingredients": ["pitta", "ananas"], "price": 14.0 },
+        { "name": "Capri", "ingredients": ["hesp", "salami", "champignons"], "price": 14.0 },
+        { "name": "Capriciosa", "ingredients": ["pitta", "kip", "champignons"], "price": 14.0 },
+        { "name": "Vier Seizoenen", "ingredients": ["salami", "champignons", "artisjok", "ui"], "price": 14.0 },
+        { "name": "Bolognese", "ingredients": ["gehakt", "ei", "bolognesesaus"], "price": 14.0 },
+        { "name": "Quattro Fromaggi", "ingredients": ["4 soorten kaas"], "price": 14.0 },
+        { "name": "Pescatore", "ingredients": ["zeevruchten", "tonijn", "paprika", "look", "peterselie"], "price": 15.0 },
+        { "name": "Vegetariana", "ingredients": ["champignons", "artisjok", "ui", "olijven", "paprika", "kappertjes"], "price": 14.0 },
+        { "name": "Lichtaart", "ingredients": ["ei", "hesp", "paprika", "champignons"], "price": 14.0 },
+        { "name": "Cocktail", "ingredients": ["kip", "kebab", "paprika", "ui"], "price": 14.0 },
+        { "name": "BBQ Chicken", "ingredients": ["barbecue saus", "paprika", "ui", "kip", "mozzarella"], "price": 15.0 },
+        { "name": "Pizza Full Option", "ingredients": ["kebab", "kip", "ham", "salami", "paprika", "champignons"], "price": 15.0 },
+        { "name": "Pizza Ozan", "ingredients": ["kip", "pitta", "ui", "paprika"], "price": 14.0 },
+        { "name": "Pizza Creamy Chicken", "ingredients": ["roomsaus", "kip", "paprika", "champignons"], "price": 14.0 },
+        { "name": "Curry Delight", "ingredients": ["kip", "ananas", "tomaten", "currysaus"], "price": 15.0 },
+        { "name": "Scampi", "ingredients": ["ui", "paprika", "scampi"], "price": 15.0 },
+        { "name": "Ali Baba Special", "ingredients": ["pitta", "kip", "salami", "paprika", "champignons", "ui"], "price": 15.0 },
+        { "name": "Ali Baba Extra", "ingredients": ["scampi", "tonijn", "ui", "paprika", "olijven", "tomaten", "2 kaas"], "price": 16.0 }
+      ],
+      "extras": {
+        "price": 1.5,
+        "options": ["pepers", "ananas", "kaas (jonge of feta)", "champignons", "gebakken uien", "paprika", "saus", "vlees"]
+      }
+    },
+    {
+      "id": "calzone",
+      "name": "Calzone",
+      "note": "Alle calzone € 15,00",
+      "items": [
+        { "name": "Calzone 1", "ingredients": ["kip", "ui", "paprika", "champignons"], "price": 15.0 },
+        { "name": "Calzone 2", "ingredients": ["champignons", "paprika", "ui", "olijven", "kappertjes", "look"], "price": 15.0 },
+        { "name": "Calzone 3", "ingredients": ["kebab", "champignons", "paprika", "olijven"], "price": 15.0 },
+        { "name": "Calzone 4", "ingredients": ["champignons", "paprika", "ui", "ham salami"], "price": 15.0 }
+      ]
+    },
+    {
+      "id": "lookbrood",
+      "name": "Lookbrood",
+      "items": [
+        { "name": "Lookbrood Natur", "ingredients": [], "price": 4.0 },
+        { "name": "Lookbrood Kaas", "ingredients": ["kaas"], "price": 5.0 },
+        { "name": "Lookbrood Kaas - Ham", "ingredients": ["kaas", "ham"], "price": 5.0 },
+        { "name": "Lookbrood Kaas - Salami", "ingredients": ["kaas", "salami"], "price": 5.0 },
+        { "name": "Cheesy Bread", "ingredients": ["looksaus", "kaas"], "price": 9.0 }
+      ]
+    },
+    {
+      "id": "snacks",
+      "name": "Snacks",
+      "items": [
+        { "name": "Broodje Mexicano", "ingredients": [], "price": 8.0 },
+        { "name": "Hamburger", "ingredients": [], "price": 8.0 },
+        { "name": "Cheeseburger", "ingredients": [], "price": 8.0 },
+        { "name": "Fish Burger", "ingredients": [], "price": 8.0 },
+        { "name": "Frikandel", "ingredients": ["met saus"], "price": 3.0 },
+        { "name": "Frikandel met friet", "ingredients": ["met friet en saus"], "price": 8.0 }
+      ]
+    },
+    {
+      "id": "broodjes",
+      "name": "Broodjes",
+      "priceModel": "klein/groot",
+      "items": [
+        { "name": "Doner Kebab", "ingredients": [], "prices": { "klein": 9.0, "groot": 12.0 } },
+        { "name": "Kip", "ingredients": [], "prices": { "klein": 9.5, "groot": 13.0 } },
+        { "name": "Pitta", "ingredients": [], "prices": { "klein": 9.5, "groot": 13.0 } },
+        { "name": "Mix, Kip en Kebab", "ingredients": [], "prices": { "klein": 10.0, "groot": 14.0 } },
+        { "name": "Pitta en Kip", "ingredients": [], "prices": { "klein": 10.0, "groot": 13.0 } },
+        { "name": "Doner Kebab Speciaal", "ingredients": ["kebab", "paprika", "champignons", "ui"], "prices": { "klein": 10.0, "groot": 14.0 } },
+        { "name": "Kip Speciaal", "ingredients": ["kip", "paprika", "champignons", "ui"], "prices": { "klein": 10.5, "groot": 14.0 } },
+        { "name": "Pitta Speciaal", "ingredients": ["pitta", "paprika", "champignons", "ui"], "prices": { "klein": 10.5, "groot": 14.0 } },
+        { "name": "Kofte Boulet", "ingredients": [], "prices": { "klein": 9.5, "groot": 14.0 } },
+        { "name": "Vegetarisch", "ingredients": [], "prices": { "klein": 6.5, "groot": 8.0 } }
+      ],
+      "extras": {
+        "price": 1.0,
+        "options": ["kaas", "feta", "ananas"]
+      }
+    },
+    {
+      "id": "durum",
+      "name": "Durum",
+      "priceModel": "klein/groot",
+      "items": [
+        { "name": "Doner Kebab", "ingredients": [], "prices": { "klein": 9.5, "groot": 13.0 } },
+        { "name": "Kip", "ingredients": [], "prices": { "klein": 10.0, "groot": 14.0 } },
+        { "name": "Pitta", "ingredients": [], "prices": { "klein": 10.0, "groot": 14.0 } },
+        { "name": "Mix, Kip en Kebab", "ingredients": [], "prices": { "klein": 10.5, "groot": 14.0 } },
+        { "name": "Pitta en Kip", "ingredients": [], "prices": { "klein": 10.5, "groot": 14.0 } },
+        { "name": "Kofte Boulet", "ingredients": [], "prices": { "klein": 10.5, "groot": 14.0 } },
+        { "name": "Vegetarisch", "ingredients": [], "prices": { "klein": 6.5, "groot": 8.5 } }
+      ]
+    },
+    {
+      "id": "kapsalon",
+      "name": "Kapsalon",
+      "items": [
+        { "name": "Kapsalon Vegi", "ingredients": [], "price": 10.0 },
+        { "name": "Kapsalon Kebab", "ingredients": [], "price": 12.0 },
+        { "name": "Kapsalon Kip", "ingredients": [], "price": 13.0 },
+        { "name": "Kapsalon Pitta", "ingredients": [], "price": 13.0 },
+        { "name": "Kapsalon Mix", "ingredients": [], "price": 14.0 }
+      ]
+    },
+    {
+      "id": "lasagna",
+      "name": "Lasagna",
+      "items": [
+        { "name": "Lasagna", "ingredients": [], "price": 15.0 }
+      ]
+    },
+    {
+      "id": "salades",
+      "name": "Salades",
+      "items": [
+        { "name": "Groentensalade", "ingredients": ["sla", "tomaat", "komkommer", "maïs", "wortel", "kool"], "price": 7.0 },
+        { "name": "Fetasalade", "ingredients": ["groenten salade", "feta kaas"], "price": 8.0 },
+        { "name": "Tonijnsalade", "ingredients": ["groenten salade", "tonijn"], "price": 9.0 },
+        { "name": "Kip Salade", "ingredients": ["groenten salade", "kip"], "price": 10.0 },
+        { "name": "Mix Salade", "ingredients": ["groenten salade", "ananas", "kip", "feta kaas"], "price": 12.0 }
+      ]
+    },
+    {
+      "id": "schotels",
+      "name": "Schotels",
+      "note": "Alle schotels worden geserveerd met groenten, friet of brood en saus naar keuze",
+      "items": [
+        { "name": "Schotel Doner Kebab", "ingredients": [], "price": 15.0 },
+        { "name": "Schotel Kip", "ingredients": [], "price": 16.0 },
+        { "name": "Schotel Pitta", "ingredients": [], "price": 17.0 },
+        { "name": "Schotel Mix, Kip en Kebab", "ingredients": [], "price": 17.0 },
+        { "name": "Schotel Pitta en Kebab", "ingredients": [], "price": 17.5 },
+        { "name": "Schotel Kofte Boulet", "ingredients": [], "price": 18.0 },
+        { "name": "Schotel Lamskotelet", "ingredients": [], "price": 19.0 },
+        { "name": "Schotel Doner Kebap Hawai", "ingredients": ["met ananas"], "price": 17.0 },
+        { "name": "Schotel Kip Hawaï", "ingredients": ["met ananas"], "price": 18.0 },
+        { "name": "Schotel Pitta Hawaï", "ingredients": ["met ananas"], "price": 18.0 },
+        { "name": "Schotel Doner Kebab Speciaal", "ingredients": ["kebab", "paprika", "champignons", "ui"], "price": 16.0 },
+        { "name": "Schotel Kip Speciaal", "ingredients": ["kip", "paprika", "champignons", "ui"], "price": 18.0 },
+        { "name": "Schotel Pitta Speciaal", "ingredients": ["pitta", "paprika", "champignons", "ui"], "price": 18.0 },
+        { "name": "Ali Baba Speciaal (van het huis)", "ingredients": ["kofte", "lamskotelet", "kebab", "kip", "groenten en friet"], "price": 20.0 },
+        { "name": "Lichtaartse Zondag Speciaal", "ingredients": ["kipfilet", "pitta", "kebab", "lamskotelet", "paprika", "gebakken ui", "champignons"], "price": 22.0 }
+      ]
+    },
+    {
+      "id": "bakjes",
+      "name": "Bakjes",
+      "items": [
+        { "name": "Friet met saus", "ingredients": [], "price": 5.5 },
+        { "name": "Friet met kebab", "ingredients": [], "price": 10.0 },
+        { "name": "Friet met kip", "ingredients": [], "price": 11.0 },
+        { "name": "Friet met pitta", "ingredients": [], "price": 11.0 },
+        { "name": "Friet met pitta en kip", "ingredients": [], "price": 12.0 },
+        { "name": "Friet met kebab en kip", "ingredients": [], "price": 12.0 }
+      ]
+    },
+    {
+      "id": "dranken",
+      "name": "Dranken",
+      "items": [
+        { "name": "Frisdranken", "ingredients": [], "price": 2.5 },
+        { "name": "Redbull", "ingredients": [], "price": 3.0 },
+        { "name": "Thee of koffie", "ingredients": [], "price": 2.5 },
+        { "name": "Water", "ingredients": [], "price": 2.0 },
+        { "name": "Ayran", "ingredients": [], "price": 2.0 },
+        { "name": "Coca Cola 1,5 l", "ingredients": [], "price": 4.0 }
+      ]
+    },
+    {
+      "id": "dessert",
+      "name": "Dessert",
+      "items": [
+        { "name": "Tiramisu", "ingredients": [], "price": 4.5 },
+        { "name": "Tiramisu Speculoos", "ingredients": [], "price": 4.5 },
+        { "name": "Chocomouse", "ingredients": [], "price": 4.5 }
+      ]
+    }
+  ],
+  "sauzen": ["cocktail", "look", "sambal", "half pikant", "mayonaise", "tomaten ketchup", "curry ketchup", "gele curry", "andalouse"]
+}
