@@ -51,7 +51,7 @@ def gen(e):
             ok = True
             break
         except Exception as ex:
-            wait = 10 * (attempt + 1)
+            wait = 30 * (attempt + 1)
             print(f"retry {attempt+1} {out.name}: {ex} (sleep {wait}s)", flush=True)
             time.sleep(wait)
     if not ok:
@@ -68,10 +68,10 @@ def gen(e):
     with lock:
         done_count[0] += 1
         print(f"[{done_count[0]}/{len(todo)}] done {e['file']}", flush=True)
-    time.sleep(2)
+    time.sleep(8)
 
 
-with ThreadPoolExecutor(max_workers=3) as pool:
+with ThreadPoolExecutor(max_workers=1) as pool:
     list(pool.map(gen, todo))
 
 print(f"finished, fails: {len(fails)}", flush=True)
