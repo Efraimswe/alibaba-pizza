@@ -80,6 +80,20 @@ export default function Home() {
           {/* Taalkeuze: dropdown (werkende i18n volgt) */}
           <details className="group relative" aria-label="Taal">
             <summary className="flex min-h-11 cursor-pointer list-none items-center gap-1.5 rounded-full bg-secondary px-4 font-display font-bold text-on-secondary [&::-webkit-details-marker]:hidden">
+              <svg
+                aria-hidden="true"
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                className="shrink-0"
+              >
+                <circle cx="12" cy="12" r="10" />
+                <path d="M2 12h20" />
+                <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
+              </svg>
               NL
               <svg
                 aria-hidden="true"
