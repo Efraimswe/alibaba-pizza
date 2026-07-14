@@ -415,13 +415,23 @@ export default function Landing({ locale, dict }: { locale: Locale; dict: Dict }
 
           <div className="mt-3 grid grid-cols-2 gap-3">
             <div className="flex flex-col gap-2">
-              <div className="card-inset relative aspect-square overflow-hidden">
+              <div className="card-inset relative aspect-square overflow-hidden rounded-[1.25rem]">
+                {/* iframe крупнее контейнера: обрезаем встроенную плашку атрибуции OSM,
+                    собственная подпись © — чипом ниже */}
                 <iframe
                   src={`https://www.openstreetmap.org/export/embed.html?bbox=${(RESTAURANT.lon - 0.004).toFixed(6)},${(RESTAURANT.lat - 0.0025).toFixed(6)},${(RESTAURANT.lon + 0.004).toFixed(6)},${(RESTAURANT.lat + 0.0025).toFixed(6)}&layer=mapnik&marker=${RESTAURANT.lat},${RESTAURANT.lon}`}
                   loading="lazy"
                   title={dict.mapLabel}
-                  className="absolute inset-0 h-full w-full"
+                  className="absolute -top-[25%] -left-[25%] h-[150%] w-[150%]"
                 />
+                <a
+                  href="https://www.openstreetmap.org/copyright"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="absolute right-1.5 bottom-1.5 rounded-full bg-surface/85 px-2 py-0.5 text-[0.6rem] text-ink-soft"
+                >
+                  © OpenStreetMap
+                </a>
               </div>
               <a
                 href="https://maps.google.com/?q=Leistraat+84,+2460+Lichtaart"
