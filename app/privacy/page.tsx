@@ -25,6 +25,14 @@ export default function PrivacyPage() {
             wordt nooit naar onze server of naar derden verstuurd en nergens
             opgeslagen.
           </p>
+          <p className="mt-2 text-ink-soft">
+            Daarnaast tonen we bij het laden van de pagina een geschatte
+            afstand op basis van uw IP-adres (nauwkeurigheid: stad/gemeente).
+            Dit gebeurt via de technische infrastructuur van onze host
+            (Vercel); uw IP-adres wordt hiervoor niet opgeslagen en niet met
+            derden gedeeld. Grondslag: gerechtvaardigd belang (art. 6.1.f
+            AVG).
+          </p>
         </div>
 
         <div>

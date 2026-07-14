@@ -54,6 +54,7 @@ export type Dict = {
   distanceError: string;
   distanceSuffixKm: string;
   distanceSuffixM: string;
+  distanceApproxNote: string;
   phoneCtaPrefix: string;
   allergensLabel: string;
   allergensIntro: string;
@@ -115,6 +116,7 @@ const nl: Dict = {
   distanceError: "Locatie niet beschikbaar",
   distanceSuffixKm: "km van jou",
   distanceSuffixM: "m van jou",
+  distanceApproxNote: "(bij benadering)",
   phoneCtaPrefix: "BEL & BESTEL",
   allergensLabel: "Allergenen:",
   allergensIntro: "Voor allergenen kunt u zich steeds wenden tot onze medewerkers.",
@@ -192,6 +194,7 @@ const en: Dict = {
   distanceError: "Location unavailable",
   distanceSuffixKm: "km from you",
   distanceSuffixM: "m from you",
+  distanceApproxNote: "(approximate)",
   phoneCtaPrefix: "CALL & ORDER",
   allergensLabel: "Allergens:",
   allergensIntro: "For allergens, please ask our staff.",
@@ -269,6 +272,7 @@ const fr: Dict = {
   distanceError: "Position indisponible",
   distanceSuffixKm: "km de vous",
   distanceSuffixM: "m de vous",
+  distanceApproxNote: "(approximatif)",
   phoneCtaPrefix: "APPELEZ & COMMANDEZ",
   allergensLabel: "Allergènes :",
   allergensIntro: "Pour les allergènes, adressez-vous toujours à notre personnel.",
