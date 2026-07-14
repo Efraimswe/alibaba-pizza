@@ -1,108 +1,68 @@
 @import "tailwindcss";
 
 /*
-  Design-фаза: дизайн-система «Street Poster» (design-foundation.md) наложена
-  редрессом — разметка wireframe не менялась, wire-* токены перемаплены на
-  брендовые значения, акценты (primary/yellow) добавлены точечно в page.tsx.
+  Дизайн v2 «Minimal Bento» (design-foundation.md):
+  скругления 20–28px, БЕЗ бордеров — разделение заливкой и отступами,
+  мягкая тень только на интерактивных карточках.
+  Палитра: красный лого + тёмно-зелёный фирменной доски + тёплый белёсый.
 */
 :root {
-  /* surfaces & ink — бывшая серая wire-шкала, теперь бренд */
-  --wire-bg: #fff7ed; /* тёплый крем */
-  --wire-surface: #ffffff;
-  --wire-surface-alt: #ffedd5; /* светлый оранжевый тинт */
-  --wire-ink: #0f172a;
-  --wire-ink-soft: #57534e; /* ≥4.5:1 на креме и белом */
-  --wire-line: #0f172a;
-
-  /* брендовые акценты */
-  --brand-primary: #ea580c; /* аппетитный оранжевый — крупные CTA, не мелкий текст */
-  --brand-on-primary: #ffffff;
-  --brand-secondary: #f97316;
-  --brand-accent: #2563eb;
-  --brand-yellow: #ffd93d; /* стикеры, акции */
+  --bg: #faf6ef; /* тёплый белёсый */
+  --surface: #ffffff;
+  --surface-alt: #f1eadd; /* песочная заливка-разделитель */
+  --ink: #1c1917;
+  --ink-soft: #6b6259;
+  --primary: #e23d28; /* красный с вывески Alibaba */
+  --on-primary: #ffffff;
+  --secondary: #1e3b31; /* тёмно-зелёный доски меню */
+  --on-secondary: #f4efe6;
 }
 
 @theme inline {
-  --color-wire-bg: var(--wire-bg);
-  --color-wire-surface: var(--wire-surface);
-  --color-wire-surface-alt: var(--wire-surface-alt);
-  --color-wire-ink: var(--wire-ink);
-  --color-wire-ink-soft: var(--wire-ink-soft);
-  --color-wire-line: var(--wire-line);
-  --color-brand-primary: var(--brand-primary);
-  --color-brand-on-primary: var(--brand-on-primary);
-  --color-brand-secondary: var(--brand-secondary);
-  --color-brand-accent: var(--brand-accent);
-  --color-brand-yellow: var(--brand-yellow);
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-surface-alt: var(--surface-alt);
+  --color-ink: var(--ink);
+  --color-ink-soft: var(--ink-soft);
+  --color-primary: var(--primary);
+  --color-on-primary: var(--on-primary);
+  --color-secondary: var(--secondary);
+  --color-on-secondary: var(--on-secondary);
   --font-display: var(--font-space-grotesk);
   --font-sans: var(--font-karla);
+  --font-logo: var(--font-lobster);
 }
 
 body {
-  background: var(--wire-bg);
-  color: var(--wire-ink);
+  background: var(--bg);
+  color: var(--ink);
 }
 
 @layer components {
-  /* толстая рамка + hard offset shadow (без blur — дёшево) */
-  .wire-block {
-    border: 3px solid var(--wire-line);
-    background: var(--wire-surface);
-    box-shadow: 5px 5px 0 0 var(--wire-line);
+  /* бенто-карточка: скругление + мягкая тень, без бордера */
+  .card {
+    border-radius: 1.5rem;
+    background: var(--surface);
+    box-shadow: 0 1px 2px rgb(28 25 23 / 0.04), 0 12px 32px -16px rgb(28 25 23 / 0.12);
   }
 
-  .wire-block-flat {
-    border: 3px solid var(--wire-line);
-    background: var(--wire-surface);
+  /* тихая карточка-заливка (второй уровень бенто) */
+  .card-inset {
+    border-radius: 1.25rem;
+    background: var(--surface-alt);
   }
 
-  /* зубчатый «рваный» низ чека-тикета */
-  .wire-ticket-edge {
-    --zz: 10px;
-    clip-path: polygon(
-      0 0,
-      100% 0,
-      100% calc(100% - var(--zz)),
-      95% 100%,
-      90% calc(100% - var(--zz)),
-      85% 100%,
-      80% calc(100% - var(--zz)),
-      75% 100%,
-      70% calc(100% - var(--zz)),
-      65% 100%,
-      60% calc(100% - var(--zz)),
-      55% 100%,
-      50% calc(100% - var(--zz)),
-      45% 100%,
-      40% calc(100% - var(--zz)),
-      35% 100%,
-      30% calc(100% - var(--zz)),
-      25% 100%,
-      20% calc(100% - var(--zz)),
-      15% 100%,
-      10% calc(100% - var(--zz)),
-      5% 100%,
-      0 calc(100% - var(--zz))
-    );
-  }
-
-  /* фото-плейсхолдер: тёплая штриховка (заменится на next/image) */
-  .wire-photo {
-    border: 3px solid var(--wire-line);
-    background: repeating-linear-gradient(
-      45deg,
-      var(--wire-surface),
-      var(--wire-surface) 8px,
-      var(--wire-surface-alt) 8px,
-      var(--wire-surface-alt) 10px
-    );
+  /* фото-слот: мягкая заливка, картинка object-contain поверх */
+  .photo-slot {
+    border-radius: 1.25rem;
+    background: var(--surface-alt);
   }
 
   /* dotted leader между названием и ценой */
-  .wire-leader {
+  .leader {
     flex: 1 1 auto;
     min-width: 1.5rem;
-    border-bottom: 2px dotted var(--wire-ink-soft);
+    border-bottom: 2px dotted color-mix(in srgb, var(--ink-soft) 45%, transparent);
     transform: translateY(-0.4em);
   }
 }

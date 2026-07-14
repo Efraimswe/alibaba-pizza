@@ -3,7 +3,7 @@ import { join } from "node:path";
 import Image from "next/image";
 import menu from "@/data/menu.json";
 
-// фото может ещё не быть сгенерировано — тогда остаётся штриховка
+// фото может ещё не быть сгенерировано — тогда остаётся тихая заливка
 const imgSrc = (rel: string) =>
   existsSync(join(process.cwd(), "public", rel)) ? `/${rel}` : null;
 
@@ -20,14 +20,14 @@ function Photo({
 }) {
   const src = imgSrc(rel);
   return (
-    <span className={`wire-photo relative block shrink-0 overflow-hidden ${className}`}>
+    <span className={`photo-slot relative block shrink-0 overflow-hidden ${className}`}>
       {src && (
         <Image
           src={src}
           alt={alt}
           fill
           sizes={sizes}
-          className="object-contain p-0.5"
+          className="object-contain p-1"
         />
       )}
     </span>
@@ -72,31 +72,29 @@ export default function Home() {
   return (
     <div className="overflow-x-clip">
       {/* ── Sticky header: wordmark + taaltoggle ─────────────────── */}
-      <header className="sticky top-0 z-40 border-b-3 border-wire-line bg-wire-surface">
-        <div className="mx-auto flex max-w-lg items-stretch justify-between px-4 py-3">
-          <a href="#top" className="wire-block-flat px-3 py-2">
-            <span className="font-display text-xl font-bold tracking-tight">
-              ALIBABA
-            </span>
+      <header className="sticky top-0 z-40 bg-bg/90 backdrop-blur-sm">
+        <div className="mx-auto flex max-w-lg items-center justify-between px-4 py-3">
+          <a href="#top" className="font-logo text-3xl text-primary">
+            Alibaba
           </a>
-          <div className="flex items-center gap-2" aria-label="Taal">
+          <div className="flex items-center gap-1.5" aria-label="Taal">
             <button
               aria-pressed="true"
-              className="wire-block-flat min-h-11 min-w-11 cursor-pointer bg-wire-ink px-2 font-display font-bold text-wire-surface"
+              className="min-h-11 min-w-11 cursor-pointer rounded-full bg-secondary px-3 font-display font-bold text-on-secondary"
             >
               NL
             </button>
             <button
               disabled
               title="Binnenkort"
-              className="wire-block-flat min-h-11 min-w-11 px-2 font-display font-bold opacity-40"
+              className="min-h-11 min-w-11 rounded-full bg-surface-alt px-3 font-display font-bold text-ink-soft opacity-60"
             >
               EN
             </button>
             <button
               disabled
               title="Binnenkort"
-              className="wire-block-flat min-h-11 min-w-11 px-2 font-display font-bold opacity-40"
+              className="min-h-11 min-w-11 rounded-full bg-surface-alt px-3 font-display font-bold text-ink-soft opacity-60"
             >
               FR
             </button>
@@ -104,73 +102,67 @@ export default function Home() {
         </div>
       </header>
 
-      {/* ── Ticker-statusstrook ──────────────────────────────────── */}
-      <div className="overflow-hidden border-b-3 border-wire-line bg-wire-ink py-2">
-        <p className="whitespace-nowrap font-display text-sm font-bold tracking-widest text-wire-surface">
-          {Array.from({ length: 4 })
-            .map(() => "OPEN VANDAAG 16:00–23:30 • BEL 014 / 41 40 47 • LEISTRAAT 84 LICHTAART")
-            .join(" • ")}
-        </p>
-      </div>
-
-      <main id="top" className="mx-auto max-w-lg px-4 pb-[calc(6rem+env(safe-area-inset-bottom))]">
-        {/* ── Hero: gestapelde woordblokken + sticker ─────────────── */}
-        <section className="relative pt-8 pb-10">
-          <p className="font-display text-sm font-bold tracking-[0.3em] text-wire-ink-soft">
-            ALIBABA KEBAB — LICHTAART
+      <main id="top" className="mx-auto max-w-lg px-4 pb-[calc(7rem+env(safe-area-inset-bottom))]">
+        {/* ── Statusstrook ─────────────────────────────────────────── */}
+        <div className="overflow-hidden rounded-full bg-secondary px-5 py-2.5">
+          <p className="whitespace-nowrap font-display text-sm font-bold tracking-widest text-on-secondary">
+            {Array.from({ length: 4 })
+              .map(() => "OPEN VANDAAG 16:00–23:30 • BEL 014 / 41 40 47 • LEISTRAAT 84 LICHTAART")
+              .join(" • ")}
           </p>
-          <h1 className="mt-3 font-display font-bold leading-none">
-            <span className="wire-block inline-block px-4 py-2 text-6xl">
-              PIZZA
-            </span>
-            <span className="wire-block mt-3 ml-8 inline-block bg-brand-yellow px-4 py-2 text-6xl">
-              PITA
-            </span>
-            <span className="wire-block mt-3 ml-2 inline-block bg-brand-primary px-4 py-2 text-6xl text-brand-on-primary">
-              GRILL
-            </span>
-          </h1>
+        </div>
 
-          {/* Sticker van de dag (dagslogica volgt in een latere fase) */}
-          <div className="absolute top-26 right-0 max-w-[45%] rotate-3">
-            <div className="wire-block-flat bg-brand-yellow px-3 py-2 text-center">
-              <p className="font-display text-xs font-bold tracking-widest">WOENSDAG</p>
-              <p className="font-display text-lg font-bold leading-tight">
+        {/* ── Hero-bento ───────────────────────────────────────────── */}
+        <section className="pt-4">
+          <div className="card relative p-6">
+            <p className="font-display text-xs font-bold tracking-[0.3em] text-ink-soft">
+              PIZZA · PITA · GRILL — LICHTAART
+            </p>
+            <h1 className="mt-1 font-logo text-6xl leading-tight text-primary">
+              Alibaba
+            </h1>
+
+            {/* Sticker van de dag (dagslogica volgt in een latere fase) */}
+            <div className="absolute top-6 right-6 rounded-2xl bg-primary px-3 py-2 text-center text-on-primary">
+              <p className="font-display text-[0.65rem] font-bold tracking-widest">
+                WOENSDAG
+              </p>
+              <p className="font-display text-base font-bold leading-tight">
                 PIZZADAG
               </p>
-              <p className="font-display text-lg font-bold tabular-nums">
+              <p className="font-display text-base font-bold tabular-nums">
                 € 12,00
               </p>
             </div>
+
+            {/* Hero-foto: signatuurgerecht */}
+            <div className="photo-slot relative mt-4 aspect-[16/9]">
+              {imgSrc("img/hero.png") ? (
+                <Image
+                  src="/img/hero.png"
+                  alt="Ali Baba Speciaal — grill schotel van het huis"
+                  fill
+                  priority
+                  sizes="(max-width: 32rem) 100vw, 32rem"
+                  className="object-contain p-2"
+                />
+              ) : (
+                <span className="absolute bottom-3 left-3 rounded-full bg-surface px-3 py-1 font-display text-xs font-bold tracking-widest">
+                  FOTO — SIGNATUUR SCHOTEL
+                </span>
+              )}
+            </div>
+
+            <p className="mt-4 max-w-xs text-lg text-ink-soft">
+              Verse pizza&apos;s, pitta, durum en schotels — om af te halen in
+              Lichtaart.
+            </p>
           </div>
 
-          <p className="mt-6 max-w-xs text-lg text-wire-ink-soft">
-            Verse pizza&apos;s, pitta, durum en schotels — om af te halen in
-            Lichtaart.
-          </p>
-
-          {/* Hero-foto: signatuurgerecht */}
-          <div className="wire-photo relative mt-6 aspect-[16/9]">
-            {imgSrc("img/hero.png") ? (
-              <Image
-                src="/img/hero.png"
-                alt="Ali Baba Speciaal — grill schotel van het huis"
-                fill
-                priority
-                sizes="(max-width: 32rem) 100vw, 32rem"
-                className="object-contain p-2"
-              />
-            ) : (
-              <span className="wire-block-flat absolute bottom-3 left-3 bg-wire-surface px-2 py-1 font-display text-xs font-bold tracking-widest">
-                FOTO — SIGNATUUR SCHOTEL
-              </span>
-            )}
-          </div>
-
-          <div className="mt-6 flex gap-4">
+          <div className="mt-3 grid grid-cols-2 gap-3">
             <a
               href="tel:+3214414047"
-              className="wire-block flex min-h-13 flex-1 items-center justify-center gap-2 bg-brand-primary px-4 font-display text-lg font-bold text-brand-on-primary"
+              className="card flex min-h-14 items-center justify-center gap-2 bg-primary font-display text-lg font-bold text-on-primary"
             >
               <svg
                 aria-hidden="true"
@@ -187,41 +179,25 @@ export default function Home() {
             </a>
             <a
               href="#menu"
-              className="wire-block flex min-h-13 flex-1 items-center justify-center bg-wire-surface px-4 font-display text-lg font-bold"
+              className="card flex min-h-14 items-center justify-center font-display text-lg font-bold"
             >
               MENU ↓
             </a>
           </div>
         </section>
 
-        {/* ── Menu: categorieën als kastickets ────────────────────── */}
-        <section id="menu" className="relative scroll-mt-20 pt-2">
-          <span
-            aria-hidden="true"
-            className="absolute top-24 -left-4 font-display text-sm font-bold tracking-[0.5em] text-wire-ink-soft [writing-mode:vertical-rl]"
-          >
-            HET MENU
-          </span>
-
-          <h2 className="font-display text-4xl font-bold">MENU</h2>
-          <p className="mt-1 text-wire-ink-soft">
-            {categories.length} categorieën, {" "}
+        {/* ── Menu: categorieën als bento-kaarten ─────────────────── */}
+        <section id="menu" className="scroll-mt-20 pt-10">
+          <h2 className="px-2 font-display text-3xl font-bold">Menu</h2>
+          <p className="mt-1 px-2 text-ink-soft">
+            {categories.length} categorieën,{" "}
             {categories.reduce((n, c) => n + c.items.length, 0)} gerechten
           </p>
 
-          <div className="mt-6 space-y-5 pl-2">
+          <div className="mt-4 space-y-3">
             {categories.map((cat, i) => (
-              <details
-                key={cat.id}
-                open={i === 0}
-                className={`group wire-block-flat wire-ticket-edge ${
-                  i % 2 === 0 ? "-rotate-[0.4deg]" : "rotate-[0.4deg]"
-                }`}
-              >
-                <summary className="flex min-h-16 cursor-pointer list-none items-center gap-3 px-4 py-3 [&::-webkit-details-marker]:hidden">
-                  <span className="font-display text-3xl font-bold tabular-nums text-wire-ink-soft">
-                    {String(i + 1).padStart(2, "0")}
-                  </span>
+              <details key={cat.id} open={i === 0} className="group card">
+                <summary className="flex min-h-16 cursor-pointer list-none items-center gap-4 p-4 [&::-webkit-details-marker]:hidden">
                   <Photo
                     rel={`img/cats/${cat.id}.png`}
                     alt=""
@@ -229,81 +205,83 @@ export default function Home() {
                     className="size-20"
                   />
                   <span className="min-w-0 flex-1">
-                    <span className="block font-display text-xl font-bold uppercase">
+                    <span className="block font-display text-xl font-bold">
                       {cat.name}
                     </span>
-                    <span className="block text-sm text-wire-ink-soft">
+                    <span className="block text-sm text-ink-soft">
                       {cat.items.length} items · vanaf €{" "}
                       <span className="tabular-nums">{eur(fromPrice(cat))}</span>
                     </span>
                   </span>
                   <span
                     aria-hidden="true"
-                    className="wire-block-flat flex size-11 items-center justify-center bg-wire-surface-alt font-display text-2xl font-bold"
+                    className="flex size-11 items-center justify-center rounded-full bg-surface-alt font-display text-2xl font-bold text-ink"
                   >
                     <span className="group-open:hidden">+</span>
                     <span className="hidden group-open:inline">−</span>
                   </span>
                 </summary>
 
-                <div className="border-t-3 border-wire-line px-4 pt-3 pb-8">
-                  {cat.priceModel === "klein/groot" && (
-                    <p className="mb-2 text-right font-display text-xs font-bold tracking-widest text-wire-ink-soft">
-                      KLEIN / GROOT
-                    </p>
-                  )}
-                  {cat.note && (
-                    <p className="wire-block-flat mb-3 bg-wire-surface-alt px-3 py-2 text-sm">
-                      {cat.note}
-                    </p>
-                  )}
-                  <ul className="space-y-3">
-                    {cat.items.map((item) => (
-                      <li key={item.name}>
-                        <div className="flex items-end gap-2">
-                          <span className="font-bold">{item.name}</span>
-                          <span aria-hidden="true" className="wire-leader" />
-                          <span className="font-display font-bold whitespace-nowrap tabular-nums">
-                            {item.price !== undefined
-                              ? eur(item.price)
-                              : `${eur(item.prices!.klein)} / ${eur(item.prices!.groot)}`}
-                          </span>
-                        </div>
-                        {item.ingredients.length > 0 && (
-                          <p className="text-sm text-wire-ink-soft">
-                            {item.ingredients.join(", ")}
-                          </p>
-                        )}
-                      </li>
-                    ))}
-                  </ul>
-                  {cat.extras && (
-                    <p className="mt-4 border-t-2 border-dotted border-wire-ink-soft pt-3 text-sm text-wire-ink-soft">
-                      <span className="font-bold text-wire-ink">
-                        Extra&apos;s (+€ {eur(cat.extras.price)}):
-                      </span>{" "}
-                      {cat.extras.options.join(", ")}
-                    </p>
-                  )}
+                <div className="px-5 pb-5">
+                  <div className="border-t border-ink/10 pt-4">
+                    {cat.priceModel === "klein/groot" && (
+                      <p className="mb-2 text-right font-display text-xs font-bold tracking-widest text-ink-soft">
+                        KLEIN / GROOT
+                      </p>
+                    )}
+                    {cat.note && (
+                      <p className="card-inset mb-3 px-4 py-2.5 text-sm">
+                        {cat.note}
+                      </p>
+                    )}
+                    <ul className="space-y-3">
+                      {cat.items.map((item) => (
+                        <li key={item.name}>
+                          <div className="flex items-end gap-2">
+                            <span className="font-bold">{item.name}</span>
+                            <span aria-hidden="true" className="leader" />
+                            <span className="font-display font-bold whitespace-nowrap tabular-nums">
+                              {item.price !== undefined
+                                ? eur(item.price)
+                                : `${eur(item.prices!.klein)} / ${eur(item.prices!.groot)}`}
+                            </span>
+                          </div>
+                          {item.ingredients.length > 0 && (
+                            <p className="text-sm text-ink-soft">
+                              {item.ingredients.join(", ")}
+                            </p>
+                          )}
+                        </li>
+                      ))}
+                    </ul>
+                    {cat.extras && (
+                      <p className="card-inset mt-4 px-4 py-2.5 text-sm text-ink-soft">
+                        <span className="font-bold text-ink">
+                          Extra&apos;s (+€ {eur(cat.extras.price)}):
+                        </span>{" "}
+                        {cat.extras.options.join(", ")}
+                      </p>
+                    )}
+                  </div>
                 </div>
               </details>
             ))}
           </div>
         </section>
 
-        {/* ── Weekacties: gedraaide stickers ──────────────────────── */}
-        <section className="pt-14">
-          <h2 className="font-display text-4xl font-bold">ELKE WEEK</h2>
-          <div className="mt-6 grid grid-cols-3 gap-3">
+        {/* ── Weekacties: bento-rij ───────────────────────────────── */}
+        <section className="pt-10">
+          <h2 className="px-2 font-display text-3xl font-bold">Elke week</h2>
+          <div className="mt-4 grid grid-cols-3 gap-3">
             {(menu.weeklyDeals as { day: string; name: string; price: number; note?: string }[]).map(
               (deal, i) => (
                 <div
                   key={deal.day}
-                  className={`wire-block px-2 py-4 text-center ${
-                    i === 1 ? "rotate-1 bg-brand-yellow" : "-rotate-1"
+                  className={`card px-2 py-4 text-center ${
+                    i === 1 ? "bg-primary text-on-primary" : ""
                   }`}
                 >
-                  <p className="font-display text-3xl font-bold">
+                  <p className="font-display text-2xl font-bold">
                     {DAY_LABELS[deal.day]}
                   </p>
                   <Photo
@@ -315,35 +293,39 @@ export default function Home() {
                   <p className="mt-2 text-xs font-bold tracking-wide uppercase">
                     {deal.name}
                   </p>
-                  <p className="mt-2 font-display text-xl font-bold tabular-nums">
+                  <p
+                    className={`mt-1 font-display text-lg font-bold tabular-nums ${
+                      i === 1 ? "" : "text-primary"
+                    }`}
+                  >
                     € {eur(deal.price)}
                   </p>
                 </div>
               ),
             )}
           </div>
-          <p className="mt-3 text-sm text-wire-ink-soft">
+          <p className="mt-3 px-2 text-sm text-ink-soft">
             Schoteldag: m.u.v. Schotel Lamskotelet en Lichtaartse Zondag
             Speciaal.
           </p>
         </section>
 
         {/* ── Openingsuren + adres + kaart ─────────────────────────── */}
-        <section className="pt-14">
-          <h2 className="font-display text-4xl font-bold">HIER &amp; NU</h2>
+        <section className="pt-10">
+          <h2 className="px-2 font-display text-3xl font-bold">Hier &amp; nu</h2>
 
-          <div className="wire-block-flat mt-6">
-            <p className="border-b-3 border-wire-line px-4 py-2 font-display text-sm font-bold tracking-widest">
+          <div className="card mt-4 overflow-hidden">
+            <p className="bg-secondary px-5 py-3 font-display text-sm font-bold tracking-widest text-on-secondary">
               OPENINGSUREN
             </p>
-            <ul>
+            <ul className="px-2 py-2">
               {Object.entries(hours)
                 .filter(([k]) => k !== "note")
                 .map(([day, time], i) => (
                   <li
                     key={day}
-                    className={`flex items-center justify-between px-4 py-2 ${
-                      i % 2 === 1 ? "bg-wire-surface-alt/50" : ""
+                    className={`flex items-center justify-between rounded-xl px-3 py-2 ${
+                      i % 2 === 1 ? "bg-surface-alt/60" : ""
                     }`}
                   >
                     <span className="capitalize">{day}</span>
@@ -353,24 +335,24 @@ export default function Home() {
                   </li>
                 ))}
             </ul>
-            <p className="border-t-3 border-wire-line bg-wire-surface-alt px-4 py-2 text-sm font-bold">
+            <p className="bg-surface-alt px-5 py-3 text-sm font-bold">
               {hours.note}
             </p>
           </div>
 
-          <div className="mt-5 grid grid-cols-2 gap-4">
+          <div className="mt-3 grid grid-cols-2 gap-3">
             {/* Kaart-placeholder (echte kaart + afstand volgen later) */}
-            <div className="wire-block-flat relative flex aspect-square items-center justify-center bg-[repeating-linear-gradient(45deg,transparent,transparent_10px,var(--wire-surface-alt)_10px,var(--wire-surface-alt)_12px)]">
-              <span className="wire-block-flat bg-wire-surface px-2 py-1 font-display text-xs font-bold tracking-widest">
+            <div className="card-inset relative flex aspect-square items-center justify-center">
+              <span className="rounded-full bg-surface px-3 py-1 font-display text-xs font-bold tracking-widest">
                 KAART
               </span>
             </div>
-            <div className="flex flex-col justify-between">
+            <div className="card flex flex-col justify-between p-4">
               <address className="not-italic">
                 <p className="font-display text-lg font-bold">Leistraat 84</p>
                 <p className="font-display text-lg font-bold">2460 Lichtaart</p>
               </address>
-              <p className="text-sm text-wire-ink-soft">
+              <p className="text-sm text-ink-soft">
                 <span className="font-display font-bold tabular-nums">···</span>{" "}
                 m van jou
                 <br />
@@ -378,7 +360,7 @@ export default function Home() {
               </p>
               <a
                 href="tel:+3214414047"
-                className="wire-block-flat inline-block px-3 py-2 text-center font-display font-bold tabular-nums"
+                className="rounded-full bg-surface-alt px-3 py-2.5 text-center font-display font-bold tabular-nums"
               >
                 014 / 41 40 47
               </a>
@@ -387,8 +369,8 @@ export default function Home() {
         </section>
 
         {/* ── Allergenen ──────────────────────────────────────────── */}
-        <section className="pt-10">
-          <p className="wire-block-flat bg-wire-surface-alt px-4 py-3 text-sm">
+        <section className="pt-8">
+          <p className="card-inset px-5 py-4 text-sm">
             <span className="font-bold">Allergenen:</span>{" "}
             {menu.restaurant.allergenInfo} Volledige allergenenlijst per
             gerecht volgt op deze pagina.
@@ -396,8 +378,8 @@ export default function Home() {
         </section>
 
         {/* ── Footer ──────────────────────────────────────────────── */}
-        <footer className="mt-14 border-t-3 border-wire-line pt-6 pb-4 text-sm text-wire-ink-soft">
-          <div className="flex gap-4">
+        <footer className="mt-12 pb-4 text-sm text-ink-soft">
+          <div className="flex gap-4 px-2">
             <span className="underline decoration-dotted">
               Privacy (volgt)
             </span>
@@ -405,22 +387,20 @@ export default function Home() {
               Cookies (volgt)
             </span>
           </div>
-          <p className="mt-3">
+          <p className="mt-3 px-2">
             © 2026 Alibaba Kebab — Pizza Pita Grill, Lichtaart
           </p>
         </footer>
       </main>
 
-      {/* ── Sticky bel-balk ────────────────────────────────────────── */}
-      <div className="fixed inset-x-0 bottom-0 z-40 border-t-3 border-wire-line bg-wire-surface pb-[env(safe-area-inset-bottom)]">
-        <div className="mx-auto max-w-lg px-4 py-3">
-          <a
-            href="tel:+3214414047"
-            className="wire-block-flat flex min-h-13 items-center justify-center gap-2 bg-brand-primary font-display text-lg font-bold text-brand-on-primary"
-          >
-            BEL &amp; BESTEL — 014 / 41 40 47
-          </a>
-        </div>
+      {/* ── Zwevende bel-knop ──────────────────────────────────────── */}
+      <div className="fixed inset-x-4 bottom-[calc(1rem+env(safe-area-inset-bottom))] z-40">
+        <a
+          href="tel:+3214414047"
+          className="mx-auto flex min-h-14 max-w-lg items-center justify-center gap-2 rounded-full bg-primary font-display text-lg font-bold text-on-primary shadow-[0_16px_40px_-12px_rgb(226_61_40_/_0.55)]"
+        >
+          BEL &amp; BESTEL — 014 / 41 40 47
+        </a>
       </div>
     </div>
   );
