@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Space_Grotesk, Karla, Lobster } from "next/font/google";
+import JsonLd from "@/components/json-ld";
 import "./globals.css";
 
 const spaceGrotesk = Space_Grotesk({
@@ -21,9 +22,21 @@ const lobster = Lobster({
 });
 
 export const metadata: Metadata = {
-  title: "Alibaba Kebab Lichtaart — Pizza Pita Grill",
+  metadataBase: new URL("https://alibaba-pizza.vercel.app"),
+  title: {
+    template: "%s — Alibaba Kebab Lichtaart",
+    default: "Alibaba Kebab Lichtaart — Pizza Pita Grill",
+  },
   description:
     "Alibaba Kebab in Lichtaart: pizza, pitta, durum, schotels en meer. Leistraat 84, 2460 Lichtaart. Bel 014 / 41 40 47.",
+  openGraph: {
+    type: "website",
+    siteName: "Alibaba Kebab Lichtaart",
+    images: ["/img/hero.jpg"],
+  },
+  twitter: {
+    card: "summary_large_image",
+  },
 };
 
 export default function RootLayout({
@@ -36,7 +49,10 @@ export default function RootLayout({
       lang="nl-BE"
       className={`${spaceGrotesk.variable} ${karla.variable} ${lobster.variable} h-full antialiased`}
     >
-      <body className="min-h-full font-sans">{children}</body>
+      <body className="min-h-full font-sans">
+        {children}
+        <JsonLd />
+      </body>
     </html>
   );
 }
