@@ -3,6 +3,7 @@ import { join } from "node:path";
 import Image from "next/image";
 import menu from "@/data/menu.json";
 import type { Dict, DayKey, Locale } from "@/lib/i18n";
+import { RESTAURANT } from "@/lib/geo";
 import { Distance } from "@/components/distance";
 
 // фото может ещё не быть сгенерировано — тогда остаётся тихая заливка
@@ -414,51 +415,23 @@ export default function Landing({ locale, dict }: { locale: Locale; dict: Dict }
 
           <div className="mt-3 grid grid-cols-2 gap-3">
             <div className="flex flex-col gap-2">
-              {/* Собственная стилизованная мини-карта (SVG) — без внешних тайлов и копирайтов;
-                  реальная навигация — кнопка Route → (Google Maps) */}
               <div className="card-inset relative aspect-square overflow-hidden rounded-[1.25rem]">
-                <svg
-                  viewBox="0 0 200 200"
-                  className="absolute inset-0 h-full w-full"
-                  role="img"
-                  aria-label={dict.mapLabel}
+                {/* iframe крупнее контейнера: обрезаем встроенную плашку атрибуции OSM,
+                    собственная подпись © — чипом ниже */}
+                <iframe
+                  src={`https://www.openstreetmap.org/export/embed.html?bbox=${(RESTAURANT.lon - 0.004).toFixed(6)},${(RESTAURANT.lat - 0.0025).toFixed(6)},${(RESTAURANT.lon + 0.004).toFixed(6)},${(RESTAURANT.lat + 0.0025).toFixed(6)}&layer=mapnik&marker=${RESTAURANT.lat},${RESTAURANT.lon}`}
+                  loading="lazy"
+                  title={dict.mapLabel}
+                  className="absolute -top-[25%] -left-[25%] h-[150%] w-[150%]"
+                />
+                <a
+                  href="https://www.openstreetmap.org/copyright"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="absolute right-1.5 bottom-1.5 rounded-full bg-surface/85 px-2 py-0.5 text-[0.6rem] text-ink-soft"
                 >
-                  <rect width="200" height="200" fill="var(--surface-alt)" />
-                  {/* зелень */}
-                  <circle cx="168" cy="38" r="34" fill="#DCE8D5" />
-                  <circle cx="22" cy="170" r="28" fill="#DCE8D5" />
-                  {/* улицы */}
-                  <g stroke="var(--surface)" strokeLinecap="round" fill="none">
-                    <path d="M-10 130 C 50 122, 150 118, 210 108" strokeWidth="16" />
-                    <path d="M78 -10 C 84 60, 92 140, 86 210" strokeWidth="12" />
-                    <path d="M-10 60 C 40 66, 120 70, 210 58" strokeWidth="8" />
-                    <path d="M140 -10 C 146 40, 160 90, 196 128" strokeWidth="7" />
-                    <path d="M20 210 C 40 170, 60 150, 100 124" strokeWidth="7" />
-                  </g>
-                  {/* название улицы */}
-                  <text
-                    x="100"
-                    y="146"
-                    fill="var(--ink-soft)"
-                    fontSize="9"
-                    fontFamily="var(--font-karla)"
-                    textAnchor="middle"
-                  >
-                    Leistraat
-                  </text>
-                  {/* маркер: Leistraat 84 */}
-                  <g transform="translate(100 96)">
-                    <ellipse cy="26" rx="7" ry="2.5" fill="rgb(28 25 23 / 0.15)" />
-                    <path
-                      d="M0 24 C -12 8, -14 2, -14 -6 a14 14 0 1 1 28 0 c 0 8, -2 14, -14 30 Z"
-                      fill="var(--primary)"
-                    />
-                    <circle cy="-6" r="5.5" fill="var(--surface)" />
-                  </g>
-                </svg>
-                <span className="absolute right-1.5 bottom-1.5 rounded-full bg-surface/85 px-2 py-0.5 font-display text-[0.6rem] font-bold text-ink-soft">
-                  Leistraat 84
-                </span>
+                  © OpenStreetMap
+                </a>
               </div>
               <a
                 href="https://maps.google.com/?q=Leistraat+84,+2460+Lichtaart"
