@@ -70,6 +70,13 @@ export default function Landing({ locale, dict }: { locale: Locale; dict: Dict }
 
   return (
     <div className="overflow-x-clip">
+      {locale !== "nl" && (
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `document.documentElement.lang=${JSON.stringify(locale)}`,
+          }}
+        />
+      )}
       {/* ── Sticky header: wordmark + taaltoggle ─────────────────── */}
       <header className="sticky top-0 z-40 bg-bg/90 backdrop-blur-sm">
         <div className="mx-auto flex max-w-lg items-center justify-between px-4 py-3">
@@ -153,7 +160,7 @@ export default function Landing({ locale, dict }: { locale: Locale; dict: Dict }
               {Array.from({ length: 3 })
                 .map(
                   () =>
-                    `${dict.ticker.openToday} 16:00–23:30 • ${dict.ticker.call} 014 / 41 40 47 • LEISTRAAT 84 LICHTAART`,
+                    `${dict.ticker.openToday} 16:00 • ${dict.ticker.call} 014 / 41 40 47 • LEISTRAAT 84 LICHTAART`,
                 )
                 .join(" • ")}{" "}
               •
@@ -208,7 +215,7 @@ export default function Landing({ locale, dict }: { locale: Locale; dict: Dict }
             <div className="relative mt-4 aspect-square overflow-hidden rounded-2xl">
               <Image
                 src="/img/hero.jpg"
-                alt="Schotels van het huis: kebab, kip, kofte, friet en verse salades met saus"
+                alt={dict.heroPhotoAlt}
                 fill
                 priority
                 sizes="(max-width: 32rem) 100vw, 32rem"
@@ -304,7 +311,7 @@ export default function Landing({ locale, dict }: { locale: Locale; dict: Dict }
                     )}
                     {cat.note && (
                       <p className="card-inset mb-3 px-4 py-2.5 text-sm">
-                        {cat.note}
+                        {dict.categoryNotes[cat.id] ?? cat.note}
                       </p>
                     )}
                     <ul className="space-y-3">

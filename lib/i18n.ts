@@ -54,6 +54,8 @@ export type Dict = {
   distanceError: string;
   distanceSuffixKm: string;
   distanceSuffixM: string;
+  heroPhotoAlt: string;
+  categoryNotes: Record<string, string>;
   phoneCtaPrefix: string;
   allergensLabel: string;
   allergensIntro: string;
@@ -67,7 +69,7 @@ export type Dict = {
 
 const nl: Dict = {
   languageLabel: "Taal",
-  ticker: { openToday: "OPEN VANDAAG", call: "BEL" },
+  ticker: { openToday: "OPEN VANDAAG VANAF", call: "BEL" },
   heroTag: "PIZZA · PITA · GRILL",
   heroDescription:
     "Verse pizza's, pitta, durum en schotels — om af te halen in Lichtaart.",
@@ -115,6 +117,11 @@ const nl: Dict = {
   distanceError: "Locatie niet beschikbaar",
   distanceSuffixKm: "km van jou",
   distanceSuffixM: "m van jou",
+  heroPhotoAlt: "Schotels van het huis: kebab, kip, kofte, friet en verse salades met saus",
+  categoryNotes: {
+    calzone: "Alle calzone € 15,00",
+    schotels: "Alle schotels worden geserveerd met groenten, friet of brood en saus naar keuze",
+  },
   phoneCtaPrefix: "BEL & BESTEL",
   allergensLabel: "Allergenen:",
   allergensIntro: "Voor allergenen kunt u zich steeds wenden tot onze medewerkers.",
@@ -144,7 +151,7 @@ const nl: Dict = {
 
 const en: Dict = {
   languageLabel: "Language",
-  ticker: { openToday: "OPEN TODAY", call: "CALL" },
+  ticker: { openToday: "OPEN TODAY FROM", call: "CALL" },
   heroTag: "PIZZA · PITA · GRILL",
   heroDescription:
     "Fresh pizzas, pitta, durum and platters — to pick up in Lichtaart.",
@@ -192,6 +199,11 @@ const en: Dict = {
   distanceError: "Location unavailable",
   distanceSuffixKm: "km from you",
   distanceSuffixM: "m from you",
+  heroPhotoAlt: "House platters: kebab, chicken, kofta, fries and fresh salads with sauce",
+  categoryNotes: {
+    calzone: "All calzones € 15,00",
+    schotels: "All platters are served with vegetables, fries or bread and a sauce of your choice",
+  },
   phoneCtaPrefix: "CALL & ORDER",
   allergensLabel: "Allergens:",
   allergensIntro: "For allergens, please ask our staff.",
@@ -221,7 +233,7 @@ const en: Dict = {
 
 const fr: Dict = {
   languageLabel: "Langue",
-  ticker: { openToday: "OUVERT AUJOURD'HUI", call: "APPELEZ" },
+  ticker: { openToday: "OUVERT AUJOURD'HUI DÈS", call: "APPELEZ" },
   heroTag: "PIZZA · PITA · GRILL",
   heroDescription:
     "Pizzas, pitta, durum et plats fraîchement préparés — à emporter à Lichtaart.",
@@ -269,6 +281,11 @@ const fr: Dict = {
   distanceError: "Position indisponible",
   distanceSuffixKm: "km de vous",
   distanceSuffixM: "m de vous",
+  heroPhotoAlt: "Assiettes de la maison : kebab, poulet, kofta, frites et salades fraîches avec sauce",
+  categoryNotes: {
+    calzone: "Toutes les calzones € 15,00",
+    schotels: "Toutes les assiettes sont servies avec légumes, frites ou pain et une sauce au choix",
+  },
   phoneCtaPrefix: "APPELEZ & COMMANDEZ",
   allergensLabel: "Allergènes :",
   allergensIntro: "Pour les allergènes, adressez-vous toujours à notre personnel.",
