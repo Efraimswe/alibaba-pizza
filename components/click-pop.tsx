@@ -10,6 +10,7 @@ export function ClickPop() {
     let ctx: AudioContext | null = null;
 
     const pop = () => {
+      if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
       try {
         ctx ??= new AudioContext();
         if (ctx.state === "suspended") void ctx.resume();

@@ -12,7 +12,7 @@
   --surface-alt: #f1eadd; /* песочная заливка-разделитель */
   --ink: #1c1917;
   --ink-soft: #6b6259;
-  --primary: #e23d28; /* красный с вывески Alibaba */
+  --primary: #d2371f; /* красный вывески, углублён до AA 4.5 для белого текста */
   --on-primary: #ffffff;
   --secondary: #1e3b31; /* тёмно-зелёный доски меню */
   --on-secondary: #f4efe6;
@@ -40,6 +40,11 @@ html {
 body {
   background: var(--bg);
   color: var(--ink);
+}
+
+:focus-visible {
+  outline: 3px solid var(--secondary);
+  outline-offset: 2px;
 }
 
 /* Глобальный выключатель движения */
@@ -110,6 +115,9 @@ body {
     display: flex;
     width: max-content;
     animation: marquee 30s linear infinite;
+  }
+  .marquee-track:hover {
+    animation-play-state: paused;
   }
   @keyframes marquee {
     to {

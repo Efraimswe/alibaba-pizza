@@ -121,7 +121,7 @@ export default function Landing({ locale, dict }: { locale: Locale; dict: Dict }
                   <a
                     key={lang.code}
                     href={lang.href}
-                    aria-pressed={active}
+                    aria-current={active ? "true" : undefined}
                     className={`press flex min-h-11 w-full cursor-pointer items-center justify-between rounded-xl px-3 font-display font-bold ${
                       active ? "bg-surface-alt" : "text-ink-soft"
                     }`}
@@ -148,8 +148,8 @@ export default function Landing({ locale, dict }: { locale: Locale; dict: Dict }
         </div>
       </header>
 
-      {/* ── Statusbanner: volle breedte, marquee ───────────────────── */}
-      <div className="overflow-hidden bg-secondary py-2.5">
+      {/* ── Statusbanner: marquee — декоративный дубликат (часы/тел/адрес есть ниже) */}
+      <div aria-hidden="true" className="overflow-hidden bg-secondary py-2.5">
         <div className="marquee-track">
           {[false, true].map((hidden) => (
             <p
@@ -529,7 +529,7 @@ export default function Landing({ locale, dict }: { locale: Locale; dict: Dict }
       <div className="fixed inset-x-4 bottom-[calc(1rem+env(safe-area-inset-bottom))] z-40">
         <a
           href="tel:+3214414047"
-          className="press mx-auto flex min-h-14 max-w-lg items-center justify-center gap-2 rounded-full bg-primary font-display text-lg font-bold text-on-primary shadow-[0_16px_40px_-12px_rgb(226_61_40_/_0.55)]"
+          className="press mx-auto flex min-h-14 max-w-lg items-center justify-center gap-2 rounded-full bg-primary font-display text-lg font-bold text-on-primary shadow-[0_16px_40px_-12px_rgb(210_55_31_/_0.55)]"
         >
           <svg
             aria-hidden="true"
