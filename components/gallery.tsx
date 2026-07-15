@@ -1,14 +1,19 @@
 "use client";
 
 import Image from "next/image";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
-// Карусель фото заведения: нативный scroll-snap (без либ), клик → лайтбокс
-// на нативном <dialog>. Тайлы кропятся object-cover, полный вид — object-contain.
+// Карусель фото заведения: авто-прокрутка по rAF на настоящем
+// scroll-контейнере — нативный свайп работает, автодвижение ставится на
+// паузу при взаимодействии и продолжается после 2.5s тишины. Бесконечность —
+// два комплекта тайлов + бесшовный wrap scrollLeft. Клик → лайтбокс <dialog>.
 const PHOTOS = [1, 2, 3, 4, 5, 6].map((n) => `/img/gallery/g${n}.jpg`);
+const SPEED = 0.6; // px за кадр (~36px/s)
+const RESUME_MS = 2500;
 
 export function Gallery({ altPrefix }: { altPrefix: string }) {
   const dialogRef = useRef<HTMLDialogElement>(null);
+  const scrollerRef = useRef<HTMLDivElement>(null);
   const [openIdx, setOpenIdx] = useState(0);
 
   const open = (i: number) => {
@@ -16,11 +21,65 @@ export function Gallery({ altPrefix }: { altPrefix: string }) {
     dialogRef.current?.showModal();
   };
 
+  useEffect(() => {
+    const el = scrollerRef.current;
+    if (!el) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+    let paused = false;
+    let resumeTimer: ReturnType<typeof setTimeout> | undefined;
+    let raf = 0;
+
+    const hold = () => {
+      paused = true;
+      clearTimeout(resumeTimer);
+    };
+    const release = () => {
+      clearTimeout(resumeTimer);
+      resumeTimer = setTimeout(() => {
+        paused = false;
+      }, RESUME_MS);
+    };
+
+    const tick = () => {
+      if (!paused && !document.hidden) {
+        el.scrollLeft += SPEED;
+        const half = el.scrollWidth / 2;
+        if (el.scrollLeft >= half) el.scrollLeft -= half;
+      }
+      raf = requestAnimationFrame(tick);
+    };
+    raf = requestAnimationFrame(tick);
+
+    el.addEventListener("pointerenter", hold);
+    el.addEventListener("pointerdown", hold);
+    el.addEventListener("touchstart", hold, { passive: true });
+    el.addEventListener("wheel", hold, { passive: true });
+    el.addEventListener("pointerleave", release);
+    el.addEventListener("pointerup", release);
+    el.addEventListener("touchend", release);
+
+    return () => {
+      cancelAnimationFrame(raf);
+      clearTimeout(resumeTimer);
+      el.removeEventListener("pointerenter", hold);
+      el.removeEventListener("pointerdown", hold);
+      el.removeEventListener("touchstart", hold);
+      el.removeEventListener("wheel", hold);
+      el.removeEventListener("pointerleave", release);
+      el.removeEventListener("pointerup", release);
+      el.removeEventListener("touchend", release);
+    };
+  }, []);
+
   return (
     <>
-      {/* бесконечный авто-скролл: два комплекта тайлов, transform-marquee */}
-      <div className="-mx-4 overflow-hidden px-4 pb-2">
-        <div className="gallery-track">
+      {/* бесконечный трек: два комплекта тайлов, wrap по scrollLeft */}
+      <div
+        ref={scrollerRef}
+        className="-mx-4 overflow-x-auto px-4 pb-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+      >
+        <div className="flex w-max">
           {[false, true].map((dup) =>
             PHOTOS.map((src, i) => (
               <button
