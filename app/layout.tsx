@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import { Space_Grotesk, Karla, Lobster } from "next/font/google";
+import { Analytics } from "@vercel/analytics/next";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import JsonLd from "@/components/json-ld";
 import { ClickPop } from "@/components/click-pop";
 import "./globals.css";
@@ -57,6 +59,8 @@ export default function RootLayout({
         {children}
         <JsonLd />
         <ClickPop />
+        <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   );
