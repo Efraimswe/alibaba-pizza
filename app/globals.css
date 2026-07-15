@@ -192,7 +192,7 @@ body {
     }
   }
 
-  /* карточка часов: короткая тряска влево-вправо ~1s, затишье, повтор */
+  /* карточка часов: тряска-ротейт ±20° ~1s, затишье, повтор */
   .shake-idle {
     animation: shake 5s ease-in-out infinite;
   }
@@ -200,25 +200,25 @@ body {
     0%,
     20%,
     100% {
-      transform: translateX(0);
+      transform: rotate(0deg);
     }
     2% {
-      transform: translateX(-6px);
+      transform: rotate(-20deg);
     }
     5% {
-      transform: translateX(6px);
+      transform: rotate(20deg);
     }
     8% {
-      transform: translateX(-5px);
+      transform: rotate(-14deg);
     }
     11% {
-      transform: translateX(5px);
+      transform: rotate(14deg);
     }
     14% {
-      transform: translateX(-3px);
+      transform: rotate(-7deg);
     }
     17% {
-      transform: translateX(3px);
+      transform: rotate(7deg);
     }
   }
 
