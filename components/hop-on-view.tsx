@@ -2,8 +2,8 @@
 
 import { useEffect } from "react";
 
-// Триггер «прыжка» карточек: класс .play вешается, когда [data-hop] секция
-// въезжает в экран, и снимается при выходе — анимация переигрывается.
+// Триггер «прыжка» карточек: класс .play вешается ОДИН раз, когда [data-hop]
+// секция впервые въезжает в экран; повторных проигрываний нет.
 export function HopOnView() {
   useEffect(() => {
     const els = document.querySelectorAll("[data-hop]");
@@ -11,7 +11,11 @@ export function HopOnView() {
     const io = new IntersectionObserver(
       (entries) => {
         for (const entry of entries) {
-          entry.target.classList.toggle("play", entry.isIntersecting);
+          if (entry.isIntersecting) {
+            // один раз: сыграли при первом появлении и больше не дёргаем
+            entry.target.classList.add("play");
+            io.unobserve(entry.target);
+          }
         }
       },
       { threshold: 0.4 },
