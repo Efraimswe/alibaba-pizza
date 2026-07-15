@@ -213,6 +213,10 @@ export default function Landing({ locale, dict }: { locale: Locale; dict: Dict }
               Alibaba
             </h1>
 
+            <p className="mt-3 max-w-xs text-lg text-ink-soft md:col-start-1 md:row-start-3 md:self-start">
+              {dict.heroDescription}
+            </p>
+
             {/* Hero-foto: schotels van het huis, volledig kader */}
             <div className="relative mt-4 aspect-[3/4] overflow-hidden rounded-2xl md:col-start-2 md:row-start-1 md:row-span-3 md:mt-0">
               <Image
@@ -224,10 +228,6 @@ export default function Landing({ locale, dict }: { locale: Locale; dict: Dict }
                 className="object-cover"
               />
             </div>
-
-            <p className="mt-4 max-w-xs text-lg text-ink-soft md:col-start-1 md:row-start-3 md:self-start">
-              {dict.heroDescription}
-            </p>
           </div>
 
           <div className="mt-3 grid grid-cols-2 gap-3 md:max-w-md">
