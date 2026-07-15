@@ -3,17 +3,20 @@
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 
-// Карусель фото заведения: авто-прокрутка по rAF на настоящем
-// scroll-контейнере — нативный свайп работает, автодвижение ставится на
-// паузу при взаимодействии и продолжается после 2.5s тишины. Бесконечность —
-// два комплекта тайлов + бесшовный wrap scrollLeft. Клик → лайтбокс <dialog>.
+// Карусель фото заведения. Движение — transform (компositor, масляно),
+// один источник истины `offset`: авто-дрейф по rAF + ручной drag через
+// Pointer Events. Бесконечность — два комплекта тайлов, offset по модулю
+// половины ширины. Работает только пока карусель видна. Клик → лайтбокс.
 const PHOTOS = [1, 2, 3, 4, 5, 6].map((n) => `/img/gallery/g${n}.jpg`);
-const SPEED = 0.6; // px за кадр (~36px/s)
-const RESUME_MS = 2500;
+const SPEED = 0.55; // px за кадр (~33px/s)
+const RESUME_MS = 2000;
+const CLICK_SLOP = 8; // px — больше = это был drag, не клик
 
 export function Gallery({ altPrefix }: { altPrefix: string }) {
   const dialogRef = useRef<HTMLDialogElement>(null);
-  const scrollerRef = useRef<HTMLDivElement>(null);
+  const viewportRef = useRef<HTMLDivElement>(null);
+  const trackRef = useRef<HTMLDivElement>(null);
+  const suppressClick = useRef(false);
   const [openIdx, setOpenIdx] = useState(0);
 
   const open = (i: number) => {
@@ -22,95 +25,106 @@ export function Gallery({ altPrefix }: { altPrefix: string }) {
   };
 
   useEffect(() => {
-    const el = scrollerRef.current;
-    if (!el) return;
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const viewport = viewportRef.current;
+    const track = trackRef.current;
+    if (!viewport || !track) return;
+    const autoAllowed = !window.matchMedia("(prefers-reduced-motion: reduce)")
+      .matches;
 
+    let offset = 0; // текущий сдвиг ленты, px
+    let half = 0; // ширина одного комплекта тайлов
     let paused = false;
-    let resumeTimer: ReturnType<typeof setTimeout> | undefined;
+    let dragging = false;
+    let dragStartX = 0;
+    let dragStartOffset = 0;
+    let visible = false;
     let raf = 0;
-    // scrollLeft округляется браузером до целых px — дробный инкремент
-    // «замерзает». Держим точную позицию во флоате.
-    let pos = el.scrollLeft;
+    let resumeTimer: ReturnType<typeof setTimeout> | undefined;
 
-    const hold = () => {
+    const ro = new ResizeObserver(() => {
+      half = track.scrollWidth / 2;
+    });
+    ro.observe(track);
+
+    const io = new IntersectionObserver(([entry]) => {
+      visible = entry.isIntersecting;
+    });
+    io.observe(viewport);
+
+    const apply = () => {
+      if (half > 0) {
+        // нормализуем в [0, half) — стык бесшовный в обе стороны
+        offset = ((offset % half) + half) % half;
+      }
+      track.style.transform = `translate3d(${-offset}px, 0, 0)`;
+    };
+
+    const tick = () => {
+      if (autoAllowed && visible && !paused && !dragging && !document.hidden) {
+        offset += SPEED;
+        apply();
+      }
+      raf = requestAnimationFrame(tick);
+    };
+    raf = requestAnimationFrame(tick);
+
+    const onPointerDown = (e: PointerEvent) => {
+      dragging = true;
       paused = true;
       clearTimeout(resumeTimer);
+      dragStartX = e.clientX;
+      dragStartOffset = offset;
+      suppressClick.current = false;
+      viewport.setPointerCapture(e.pointerId);
     };
-    const release = () => {
+    const onPointerMove = (e: PointerEvent) => {
+      if (!dragging) return;
+      const delta = e.clientX - dragStartX;
+      if (Math.abs(delta) > CLICK_SLOP) suppressClick.current = true;
+      offset = dragStartOffset - delta;
+      apply();
+    };
+    const endDrag = () => {
+      if (!dragging) return;
+      dragging = false;
       clearTimeout(resumeTimer);
       resumeTimer = setTimeout(() => {
         paused = false;
       }, RESUME_MS);
     };
 
-    // бесшовный стык в ОБЕ стороны — на событии scroll, работает и при
-    // ручном свайпе (автотик в этот момент на паузе)
-    // ТОЛЬКО для ручного режима: в авто-режиме стык перематывает сам tick,
-    // и обработчик на scroll не должен с ним драться (иначе на нулевой
-    // позиции они телепортируют друг друга каждый кадр — «заморозка»).
-    const wrap = () => {
-      if (!paused) return;
-      const half = el.scrollWidth / 2;
-      if (half <= 0) return;
-      if (el.scrollLeft >= half) {
-        el.scrollLeft -= half;
-      } else if (el.scrollLeft < 1) {
-        el.scrollLeft += half;
-      }
-      pos = el.scrollLeft;
-    };
-
-    // цикл живёт ТОЛЬКО пока карусель на экране — ноль фоновой нагрузки
-    let visible = false;
-    const io = new IntersectionObserver(([entry]) => {
-      visible = entry.isIntersecting;
-    });
-    io.observe(el);
-
-    const tick = () => {
-      if (visible && !paused && !document.hidden) {
-        pos += SPEED;
-        const half = el.scrollWidth / 2;
-        if (half > 0 && pos >= half) pos -= half;
-        el.scrollLeft = pos;
-      }
-      raf = requestAnimationFrame(tick);
-    };
-    raf = requestAnimationFrame(tick);
-    el.addEventListener("scroll", wrap, { passive: true });
-
-    el.addEventListener("pointerdown", hold);
-    el.addEventListener("touchstart", hold, { passive: true });
-    const wheelNudge = () => {
-      hold();
-      release();
-    };
-    el.addEventListener("wheel", wheelNudge, { passive: true });
-    el.addEventListener("pointerup", release);
-    el.addEventListener("touchend", release);
+    viewport.addEventListener("pointerdown", onPointerDown);
+    viewport.addEventListener("pointermove", onPointerMove);
+    viewport.addEventListener("pointerup", endDrag);
+    viewport.addEventListener("pointercancel", endDrag);
 
     return () => {
+      ro.disconnect();
       io.disconnect();
       cancelAnimationFrame(raf);
       clearTimeout(resumeTimer);
-      el.removeEventListener("scroll", wrap);
-      el.removeEventListener("pointerdown", hold);
-      el.removeEventListener("touchstart", hold);
-      el.removeEventListener("wheel", wheelNudge);
-      el.removeEventListener("pointerup", release);
-      el.removeEventListener("touchend", release);
+      viewport.removeEventListener("pointerdown", onPointerDown);
+      viewport.removeEventListener("pointermove", onPointerMove);
+      viewport.removeEventListener("pointerup", endDrag);
+      viewport.removeEventListener("pointercancel", endDrag);
     };
   }, []);
 
   return (
     <>
-      {/* бесконечный трек: два комплекта тайлов, wrap по scrollLeft */}
+      {/* viewport: overflow-hidden, вертикальный скролл страницы не трогаем */}
       <div
-        ref={scrollerRef}
-        className="-mx-4 overflow-x-auto px-4 pb-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+        ref={viewportRef}
+        className="-mx-4 overflow-hidden px-4 pb-2 [touch-action:pan-y]"
+        onClickCapture={(e) => {
+          if (suppressClick.current) {
+            e.preventDefault();
+            e.stopPropagation();
+            suppressClick.current = false;
+          }
+        }}
       >
-        <div className="flex w-max">
+        <div ref={trackRef} className="flex w-max will-change-transform">
           {[false, true].map((dup) =>
             PHOTOS.map((src, i) => (
               <button
@@ -120,7 +134,7 @@ export function Gallery({ altPrefix }: { altPrefix: string }) {
                 aria-label={`${altPrefix} ${i + 1}`}
                 aria-hidden={dup}
                 tabIndex={dup ? -1 : 0}
-                className="press relative mr-3 h-64 w-52 shrink-0 cursor-pointer overflow-hidden rounded-2xl bg-surface-alt"
+                className="press relative mr-3 h-64 w-52 shrink-0 cursor-grab overflow-hidden rounded-2xl bg-surface-alt active:cursor-grabbing"
               >
                 <Image
                   src={src}
@@ -128,7 +142,8 @@ export function Gallery({ altPrefix }: { altPrefix: string }) {
                   fill
                   loading="eager"
                   sizes="13rem"
-                  className="object-cover"
+                  className="pointer-events-none object-cover select-none"
+                  draggable={false}
                 />
               </button>
             )),
