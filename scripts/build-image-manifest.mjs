@@ -21,7 +21,7 @@ const CAT_PROMPT = {
   salades: "one fresh mixed salad bowl, top view",
   schotels: "one large turkish grill platter with doner meat, fries and vegetables, top view",
   bakjes: "one tray of golden belgian fries with mayonnaise",
-  dranken: "cold soda cans and ayran glass with condensation",
+  dranken: "three cold drink cans standing together: one silver-blue energy drink can, one red cola can, one orange soda can, condensation drops, side view",
   dessert: "one glass of classic tiramisu dessert with cocoa dusting",
 };
 
