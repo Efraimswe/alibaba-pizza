@@ -40,6 +40,7 @@ html {
 body {
   background: var(--bg);
   color: var(--ink);
+  -webkit-tap-highlight-color: transparent;
 }
 
 :focus-visible {

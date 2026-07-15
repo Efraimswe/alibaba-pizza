@@ -37,6 +37,9 @@ export function Gallery({ altPrefix }: { altPrefix: string }) {
     let dragging = false;
     let dragStartX = 0;
     let dragStartOffset = 0;
+    let lastX = 0;
+    let velocity = 0; // px за событие move
+    let flingV = 0; // инерция после отпускания
     let visible = false;
     let raf = 0;
     let resumeTimer: ReturnType<typeof setTimeout> | undefined;
@@ -60,9 +63,16 @@ export function Gallery({ altPrefix }: { altPrefix: string }) {
     };
 
     const tick = () => {
-      if (autoAllowed && visible && !paused && !dragging && !document.hidden) {
-        offset += SPEED;
-        apply();
+      if (!dragging && !document.hidden) {
+        if (Math.abs(flingV) > 0.1) {
+          // инерция: летит и плавно затухает
+          offset += flingV;
+          flingV *= 0.94;
+          apply();
+        } else if (autoAllowed && visible && !paused) {
+          offset += SPEED;
+          apply();
+        }
       }
       raf = requestAnimationFrame(tick);
     };
@@ -71,9 +81,12 @@ export function Gallery({ altPrefix }: { altPrefix: string }) {
     const onPointerDown = (e: PointerEvent) => {
       dragging = true;
       paused = true;
+      flingV = 0;
       clearTimeout(resumeTimer);
       dragStartX = e.clientX;
       dragStartOffset = offset;
+      lastX = e.clientX;
+      velocity = 0;
       suppressClick.current = false;
       viewport.setPointerCapture(e.pointerId);
     };
@@ -81,12 +94,16 @@ export function Gallery({ altPrefix }: { altPrefix: string }) {
       if (!dragging) return;
       const delta = e.clientX - dragStartX;
       if (Math.abs(delta) > CLICK_SLOP) suppressClick.current = true;
+      velocity = e.clientX - lastX;
+      lastX = e.clientX;
       offset = dragStartOffset - delta;
       apply();
     };
     const endDrag = () => {
       if (!dragging) return;
       dragging = false;
+      // отпустил на скорости → лента летит по инерции (кап ±45 px/кадр)
+      flingV = Math.max(-45, Math.min(45, -velocity));
       clearTimeout(resumeTimer);
       resumeTimer = setTimeout(() => {
         paused = false;
@@ -171,7 +188,7 @@ export function Gallery({ altPrefix }: { altPrefix: string }) {
             autoFocus
             onClick={() => dialogRef.current?.close()}
             aria-label="Sluiten"
-            className="press fixed top-4 right-4 flex size-11 cursor-pointer items-center justify-center rounded-full bg-surface font-display text-xl font-bold text-ink shadow-lg"
+            className="press fixed top-[max(1rem,env(safe-area-inset-top))] right-4 z-10 flex size-11 cursor-pointer items-center justify-center rounded-full bg-ink/90 font-display text-xl font-bold text-surface shadow-lg"
           >
             ×
           </button>
