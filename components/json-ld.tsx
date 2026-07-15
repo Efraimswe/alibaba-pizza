@@ -88,7 +88,7 @@ export default function JsonLd() {
     },
     telephone: "+3214414047",
     url: SITE_URL,
-    image: `${SITE_URL}/img/hero.jpg`,
+    image: `${SITE_URL}/img/hero-schotel.jpg`,
     priceRange: "€",
     // Geo приблизительно (центр Lichtaart) — уточнить точный geocode адреса Leistraat 84
     geo: {

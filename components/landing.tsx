@@ -216,7 +216,7 @@ export default function Landing({ locale, dict }: { locale: Locale; dict: Dict }
             {/* Hero-foto: schotels van het huis, volledig kader */}
             <div className="relative mt-4 aspect-[3/4] overflow-hidden rounded-2xl md:col-start-2 md:row-start-1 md:row-span-3 md:mt-0">
               <Image
-                src="/img/hero.jpg"
+                src="/img/hero-schotel.jpg"
                 alt={dict.heroPhotoAlt}
                 fill
                 priority

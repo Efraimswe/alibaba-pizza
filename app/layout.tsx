@@ -36,7 +36,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     siteName: "Alibaba Kebab Lichtaart",
-    images: ["/img/hero.jpg"],
+    images: ["/img/hero-schotel.jpg"],
   },
   twitter: {
     card: "summary_large_image",
