@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Space_Grotesk, Karla, Lobster } from "next/font/google";
 import JsonLd from "@/components/json-ld";
+import { ClickPop } from "@/components/click-pop";
 import "./globals.css";
 
 const spaceGrotesk = Space_Grotesk({
@@ -52,6 +53,7 @@ export default function RootLayout({
       <body className="min-h-full font-sans">
         {children}
         <JsonLd />
+        <ClickPop />
       </body>
     </html>
   );
