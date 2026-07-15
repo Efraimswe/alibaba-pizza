@@ -8,8 +8,14 @@ import { useEffect } from "react";
 // нативное мгновенное поведение.
 export function DetailsAnim() {
   useEffect(() => {
-    const DURATION = 280;
-    const EASING = "cubic-bezier(0.2, 0, 0, 1)";
+    // высокий контент (Pizza's ~3000px) за фиксированные 280ms визуально
+    // «телепортируется» — видимая верхушка вырастает за пару кадров.
+    // Поэтому: длительность растёт с высотой (с потолком), а высоким —
+    // изинг с плавным стартом.
+    const timing = (h: number) => ({
+      duration: Math.min(520, Math.max(280, h * 0.18)),
+      easing: h > 900 ? "cubic-bezier(0.4, 0, 0.2, 1)" : "cubic-bezier(0.2, 0, 0, 1)",
+    });
 
     const onClick = (e: MouseEvent) => {
       const summary = (e.target as Element | null)?.closest("summary");
@@ -39,7 +45,7 @@ export function DetailsAnim() {
         };
         const anim = content.animate(
           [from, { height: "0px", paddingTop: "0px", paddingBottom: "0px", opacity: 0 }],
-          { duration: DURATION, easing: EASING },
+          timing(content.offsetHeight),
         );
         anim.onfinish = () => {
           details.open = false;
@@ -56,7 +62,7 @@ export function DetailsAnim() {
         };
         const anim = content.animate(
           [{ height: "0px", paddingTop: "0px", paddingBottom: "0px", opacity: 0 }, to],
-          { duration: DURATION, easing: EASING },
+          timing(content.offsetHeight),
         );
         anim.onfinish = cleanup;
       }
