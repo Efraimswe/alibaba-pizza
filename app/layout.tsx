@@ -4,6 +4,7 @@ import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import JsonLd from "@/components/json-ld";
 import { ClickPop } from "@/components/click-pop";
+import { DetailsAnim } from "@/components/details-anim";
 import "./globals.css";
 
 const spaceGrotesk = Space_Grotesk({
@@ -59,6 +60,7 @@ export default function RootLayout({
         {children}
         <JsonLd />
         <ClickPop />
+        <DetailsAnim />
         <Analytics />
         <SpeedInsights />
       </body>
