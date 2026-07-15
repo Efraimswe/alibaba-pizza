@@ -366,12 +366,12 @@ export default function Landing({ locale, dict }: { locale: Locale; dict: Dict }
         <div className="lg:col-start-3 lg:self-start">
         <section className="pt-10 lg:pt-8">
           <h2 className="px-2 font-display text-3xl font-bold lg:text-2xl">{dict.weeklyHeading}</h2>
-          <div className="mt-4 grid grid-cols-3 gap-3 lg:grid-cols-1">
+          <div data-hop className="mt-4 grid grid-cols-3 gap-3 lg:grid-cols-1">
             {(menu.weeklyDeals as { day: string; name: string; price: number; note?: string }[]).map(
               (deal, i) => (
                 <div
                   key={deal.day}
-                  className={`card view-reveal px-2 py-4 text-center lg:flex lg:items-center lg:gap-3 lg:px-4 lg:py-3 lg:text-left ${
+                  className={`card px-2 py-4 text-center lg:flex lg:items-center lg:gap-3 lg:px-4 lg:py-3 lg:text-left ${
                     i === 1 ? "bg-primary text-on-primary" : ""
                   }`}
                 >

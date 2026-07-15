@@ -158,6 +158,40 @@ body {
     }
   }
 
+  /* прыжок карточек акций при въезде секции в экран:
+     вверх плавно → вниз резко → мини-отскок; порядок лево → право → середина */
+  [data-hop].play > :nth-child(1) {
+    animation: hop 600ms both;
+  }
+  [data-hop].play > :nth-child(3) {
+    animation: hop 600ms 200ms both;
+  }
+  [data-hop].play > :nth-child(2) {
+    animation: hop 600ms 400ms both;
+  }
+  @keyframes hop {
+    0% {
+      transform: translateY(0);
+      animation-timing-function: cubic-bezier(0.2, 0, 0.4, 1);
+    }
+    32% {
+      transform: translateY(-16px);
+      animation-timing-function: cubic-bezier(0.7, 0, 1, 1);
+    }
+    56% {
+      transform: translateY(0);
+      animation-timing-function: ease-out;
+    }
+    72% {
+      transform: translateY(-5px);
+      animation-timing-function: ease-in;
+    }
+    88%,
+    100% {
+      transform: translateY(0);
+    }
+  }
+
   /* сигнатурный момент: трубка изредка «звонит» */
   .ring-wiggle {
     animation: ring 5s ease-in-out infinite;
