@@ -256,7 +256,7 @@ export default function Landing({ locale, dict }: { locale: Locale; dict: Dict }
         </section>
 
         {/* ── Menu: categorieën als bento-kaarten ─────────────────── */}
-        <section id="menu" className="scroll-mt-20 pt-10 lg:col-span-2 lg:row-span-3 lg:pt-8">
+        <section id="menu" className="scroll-mt-20 pt-10 lg:col-span-2 lg:pt-8">
           <h2 className="px-2 font-display text-3xl font-bold">{dict.menuHeading}</h2>
           <p className="mt-1 px-2 text-ink-soft">
             {dict.menuSummary(
@@ -350,7 +350,8 @@ export default function Landing({ locale, dict }: { locale: Locale; dict: Dict }
         </section>
 
         {/* ── Weekacties: bento-rij ───────────────────────────────── */}
-        <section className="pt-10 lg:col-start-3 lg:pt-8">
+        <div className="lg:col-start-3 lg:self-start">
+        <section className="pt-10 lg:pt-8">
           <h2 className="px-2 font-display text-3xl font-bold lg:text-2xl">{dict.weeklyHeading}</h2>
           <div className="mt-4 grid grid-cols-3 gap-3 lg:grid-cols-1">
             {(menu.weeklyDeals as { day: string; name: string; price: number; note?: string }[]).map(
@@ -391,7 +392,7 @@ export default function Landing({ locale, dict }: { locale: Locale; dict: Dict }
         </section>
 
         {/* ── Openingsuren + adres + kaart ─────────────────────────── */}
-        <section className="pt-10 lg:col-start-3 lg:pt-6">
+        <section className="pt-10 lg:pt-6">
           <h2 className="px-2 font-display text-3xl font-bold lg:text-2xl">{dict.hereNowHeading}</h2>
 
           <div className="card view-reveal mt-4 overflow-hidden">
@@ -472,7 +473,7 @@ export default function Landing({ locale, dict }: { locale: Locale; dict: Dict }
         </section>
 
         {/* ── Allergenen ──────────────────────────────────────────── */}
-        <section className="pt-8 lg:col-start-3 lg:pt-6">
+        <section className="pt-8 lg:pt-6">
           <div className="card p-6">
             <h2 className="font-display text-lg font-bold">
               {dict.allergensHeading}
@@ -500,6 +501,7 @@ export default function Landing({ locale, dict }: { locale: Locale; dict: Dict }
             </p>
           </div>
         </section>
+        </div>
 
         {/* ── Footer ──────────────────────────────────────────────── */}
         <footer className="mt-12 pb-4 text-sm text-ink-soft lg:col-span-3">
