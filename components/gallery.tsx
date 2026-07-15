@@ -75,7 +75,11 @@ export function Gallery({ altPrefix }: { altPrefix: string }) {
 
     el.addEventListener("pointerdown", hold);
     el.addEventListener("touchstart", hold, { passive: true });
-    el.addEventListener("wheel", hold, { passive: true });
+    const wheelNudge = () => {
+      hold();
+      release();
+    };
+    el.addEventListener("wheel", wheelNudge, { passive: true });
     el.addEventListener("pointerup", release);
     el.addEventListener("touchend", release);
 
@@ -85,7 +89,7 @@ export function Gallery({ altPrefix }: { altPrefix: string }) {
       el.removeEventListener("scroll", wrap);
       el.removeEventListener("pointerdown", hold);
       el.removeEventListener("touchstart", hold);
-      el.removeEventListener("wheel", hold);
+      el.removeEventListener("wheel", wheelNudge);
       el.removeEventListener("pointerup", release);
       el.removeEventListener("touchend", release);
     };
@@ -114,7 +118,7 @@ export function Gallery({ altPrefix }: { altPrefix: string }) {
                   src={src}
                   alt={dup ? "" : `${altPrefix} ${i + 1}`}
                   fill
-                  loading="lazy"
+                  loading="eager"
                   sizes="13rem"
                   className="object-cover"
                 />
