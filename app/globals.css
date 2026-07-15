@@ -119,6 +119,16 @@ body {
   .marquee-track:hover {
     animation-play-state: paused;
   }
+
+  /* авто-карусель галереи: тот же marquee, медленнее; пауза на hover */
+  .gallery-track {
+    display: flex;
+    width: max-content;
+    animation: marquee 35s linear infinite;
+  }
+  .gallery-track:hover {
+    animation-play-state: paused;
+  }
   @keyframes marquee {
     to {
       transform: translateX(-50%);

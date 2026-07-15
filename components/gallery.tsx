@@ -18,25 +18,32 @@ export function Gallery({ altPrefix }: { altPrefix: string }) {
 
   return (
     <>
-      <div className="-mx-4 flex snap-x snap-mandatory gap-3 overflow-x-auto px-4 pb-2">
-        {PHOTOS.map((src, i) => (
-          <button
-            key={src}
-            type="button"
-            onClick={() => open(i)}
-            aria-label={`${altPrefix} ${i + 1}`}
-            className="press relative h-64 w-52 shrink-0 cursor-pointer snap-start overflow-hidden rounded-2xl bg-surface-alt"
-          >
-            <Image
-              src={src}
-              alt={`${altPrefix} ${i + 1}`}
-              fill
-              loading="lazy"
-              sizes="13rem"
-              className="object-cover"
-            />
-          </button>
-        ))}
+      {/* бесконечный авто-скролл: два комплекта тайлов, transform-marquee */}
+      <div className="-mx-4 overflow-hidden px-4 pb-2">
+        <div className="gallery-track">
+          {[false, true].map((dup) =>
+            PHOTOS.map((src, i) => (
+              <button
+                key={`${src}-${dup}`}
+                type="button"
+                onClick={() => open(i)}
+                aria-label={`${altPrefix} ${i + 1}`}
+                aria-hidden={dup}
+                tabIndex={dup ? -1 : 0}
+                className="press relative mr-3 h-64 w-52 shrink-0 cursor-pointer overflow-hidden rounded-2xl bg-surface-alt"
+              >
+                <Image
+                  src={src}
+                  alt={dup ? "" : `${altPrefix} ${i + 1}`}
+                  fill
+                  loading="lazy"
+                  sizes="13rem"
+                  className="object-cover"
+                />
+              </button>
+            )),
+          )}
+        </div>
       </div>
 
       <dialog
