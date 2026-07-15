@@ -89,6 +89,14 @@ body {
     тянет и слабые телефоны). Все выключаются prefers-reduced-motion выше.
   */
 
+  /* контролы не выделяются текстом при двойных/быстрых кликах
+     (контент — названия блюд, цены — остаётся копируемым) */
+  summary,
+  .press {
+    -webkit-user-select: none;
+    user-select: none;
+  }
+
   /* press-фидбек: лёгкое сжатие ≤120ms */
   .press {
     transition: transform 120ms cubic-bezier(0.2, 0, 0, 1);
