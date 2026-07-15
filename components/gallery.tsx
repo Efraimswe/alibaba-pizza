@@ -46,18 +46,19 @@ export function Gallery({ altPrefix }: { altPrefix: string }) {
 
     // бесшовный стык в ОБЕ стороны — на событии scroll, работает и при
     // ручном свайпе (автотик в этот момент на паузе)
+    // ТОЛЬКО для ручного режима: в авто-режиме стык перематывает сам tick,
+    // и обработчик на scroll не должен с ним драться (иначе на нулевой
+    // позиции они телепортируют друг друга каждый кадр — «заморозка»).
     const wrap = () => {
+      if (!paused) return;
       const half = el.scrollWidth / 2;
       if (half <= 0) return;
       if (el.scrollLeft >= half) {
         el.scrollLeft -= half;
-        pos = el.scrollLeft;
       } else if (el.scrollLeft < 1) {
         el.scrollLeft += half;
-        pos = el.scrollLeft;
-      } else if (paused) {
-        pos = el.scrollLeft;
       }
+      pos = el.scrollLeft;
     };
 
     const tick = () => {
