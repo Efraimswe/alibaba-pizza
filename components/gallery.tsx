@@ -59,7 +59,7 @@ export function Gallery({ altPrefix }: { altPrefix: string }) {
             autoFocus
             onClick={() => dialogRef.current?.close()}
             aria-label="Sluiten"
-            className="press absolute top-2 right-2 flex size-11 cursor-pointer items-center justify-center rounded-full bg-surface font-display text-xl font-bold text-ink"
+            className="press fixed top-4 right-4 flex size-11 cursor-pointer items-center justify-center rounded-full bg-surface font-display text-xl font-bold text-ink shadow-lg"
           >
             ×
           </button>
