@@ -5,6 +5,7 @@ import menu from "@/data/menu.json";
 import type { Dict, DayKey, Locale } from "@/lib/i18n";
 import { RESTAURANT } from "@/lib/geo";
 import { Distance } from "@/components/distance";
+import { Gallery } from "@/components/gallery";
 import { trCategory, trItem, trIngredients, trExtras } from "@/lib/menu-i18n";
 
 // фото может ещё не быть сгенерировано — тогда остаётся тихая заливка
@@ -352,6 +353,16 @@ export default function Landing({ locale, dict }: { locale: Locale; dict: Dict }
         </section>
 
         {/* ── Weekacties: bento-rij ───────────────────────────────── */}
+        {/* ── Galerij: sfeer van de zaak ──────────────────────────── */}
+        <section className="pt-10 lg:col-span-2 lg:pt-8">
+          <h2 className="px-2 font-display text-3xl font-bold">
+            {dict.galleryHeading}
+          </h2>
+          <div className="mt-4">
+            <Gallery altPrefix={dict.galleryAlt} />
+          </div>
+        </section>
+
         <div className="lg:col-start-3 lg:self-start">
         <section className="pt-10 lg:pt-8">
           <h2 className="px-2 font-display text-3xl font-bold lg:text-2xl">{dict.weeklyHeading}</h2>
