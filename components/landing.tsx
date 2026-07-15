@@ -5,6 +5,7 @@ import menu from "@/data/menu.json";
 import type { Dict, DayKey, Locale } from "@/lib/i18n";
 import { RESTAURANT } from "@/lib/geo";
 import { Distance } from "@/components/distance";
+import { trCategory, trItem, trIngredients, trExtras } from "@/lib/menu-i18n";
 
 // фото может ещё не быть сгенерировано — тогда остаётся тихая заливка
 const imgSrc = (rel: string) =>
@@ -29,6 +30,7 @@ function Photo({
           src={src}
           alt={alt}
           fill
+          loading="lazy"
           sizes={sizes}
           className="object-contain p-1"
         />
@@ -277,7 +279,7 @@ export default function Landing({ locale, dict }: { locale: Locale; dict: Dict }
                   />
                   <span className="min-w-0 flex-1">
                     <span className="block font-display text-xl font-bold">
-                      {cat.name}
+                      {trCategory(locale, cat.id, cat.name)}
                     </span>
                     <span className="block text-sm text-ink-soft">
                       {cat.items.length} {dict.itemsFromPrefix}{" "}
@@ -318,7 +320,7 @@ export default function Landing({ locale, dict }: { locale: Locale; dict: Dict }
                       {cat.items.map((item) => (
                         <li key={item.name}>
                           <div className="flex items-end gap-2">
-                            <span className="font-bold">{item.name}</span>
+                            <span className="font-bold">{trItem(locale, item.name)}</span>
                             <span aria-hidden="true" className="leader" />
                             <span className="font-display font-bold whitespace-nowrap tabular-nums">
                               {item.price !== undefined
@@ -328,7 +330,7 @@ export default function Landing({ locale, dict }: { locale: Locale; dict: Dict }
                           </div>
                           {item.ingredients.length > 0 && (
                             <p className="text-sm text-ink-soft">
-                              {item.ingredients.join(", ")}
+                              {trIngredients(locale, item.ingredients).join(", ")}
                             </p>
                           )}
                         </li>
@@ -339,7 +341,7 @@ export default function Landing({ locale, dict }: { locale: Locale; dict: Dict }
                         <span className="font-bold text-ink">
                           {dict.extrasLabel} (+€ {eur(cat.extras.price)}):
                         </span>{" "}
-                        {cat.extras.options.join(", ")}
+                        {trExtras(locale, cat.extras.options).join(", ")}
                       </p>
                     )}
                   </div>
@@ -386,8 +388,9 @@ export default function Landing({ locale, dict }: { locale: Locale; dict: Dict }
             )}
           </div>
           <p className="mt-3 px-2 text-sm text-ink-soft">
-            {dict.dealNameByDay.donderdag}: {dict.weeklyExceptWord} Schotel
-            Lamskotelet {dict.andWord} Lichtaartse Zondag Speciaal.
+            {dict.dealNameByDay.donderdag}: {dict.weeklyExceptWord}{" "}
+            {trItem(locale, "Schotel Lamskotelet")} {dict.andWord}{" "}
+            {trItem(locale, "Lichtaartse Zondag Speciaal")}.
           </p>
         </section>
 

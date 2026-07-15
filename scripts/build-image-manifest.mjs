@@ -4,18 +4,18 @@ import { readFileSync, writeFileSync, mkdirSync } from "node:fs";
 const menu = JSON.parse(readFileSync(new URL("../data/menu.json", import.meta.url), "utf8"));
 
 const STYLE =
-  "professional food photography, appetizing, studio lighting, centered, isolated on pure white background, no props, no text, no watermark";
+  "professional food photography, ultra appetizing, juicy, glistening, mouth-watering close-up, rich vibrant colors, studio lighting, centered, isolated on pure white background, no props, no text, no watermark";
 
 const entries = [];
 
 // Категории
 const CAT_PROMPT = {
-  pizzas: "one whole rustic wood-fired margherita pizza with melted cheese, top view",
+  pizzas: "one whole rustic wood-fired pizza with bubbling melted mozzarella and fresh basil, golden charred crust, top view",
   calzone: "one golden folded calzone pizza",
   lookbrood: "one baked garlic bread loaf with herbs, golden crust",
-  snacks: "one juicy cheeseburger, side view",
-  broodjes: "one turkish pita bread sandwich filled with doner kebab meat and vegetables, side view",
-  durum: "one grilled durum wrap cut in half showing doner filling",
+  snacks: "one big juicy flame-grilled cheeseburger, double melted cheddar dripping, glossy sesame brioche bun, fresh lettuce and tomato, side view",
+  broodjes: "one overstuffed turkish pita bread sandwich with doner kebab meat, crisp vegetables and garlic sauce dripping, side view",
+  durum: "one grilled durum wrap cut in half showing generous doner filling with fresh vegetables, char marks on tortilla",
   kapsalon: "one kapsalon in foil tray, fries topped with doner meat, melted cheese, salad, top view",
   lasagna: "one portion of homemade lasagna with melted cheese on a plate",
   salades: "one fresh mixed salad bowl, top view",
