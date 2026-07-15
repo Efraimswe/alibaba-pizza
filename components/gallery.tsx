@@ -29,6 +29,9 @@ export function Gallery({ altPrefix }: { altPrefix: string }) {
     let paused = false;
     let resumeTimer: ReturnType<typeof setTimeout> | undefined;
     let raf = 0;
+    // scrollLeft округляется браузером до целых px — дробный инкремент
+    // «замерзает». Держим точную позицию во флоате.
+    let pos = el.scrollLeft;
 
     const hold = () => {
       paused = true;
@@ -41,15 +44,33 @@ export function Gallery({ altPrefix }: { altPrefix: string }) {
       }, RESUME_MS);
     };
 
+    // бесшовный стык в ОБЕ стороны — на событии scroll, работает и при
+    // ручном свайпе (автотик в этот момент на паузе)
+    const wrap = () => {
+      const half = el.scrollWidth / 2;
+      if (half <= 0) return;
+      if (el.scrollLeft >= half) {
+        el.scrollLeft -= half;
+        pos = el.scrollLeft;
+      } else if (el.scrollLeft < 1) {
+        el.scrollLeft += half;
+        pos = el.scrollLeft;
+      } else if (paused) {
+        pos = el.scrollLeft;
+      }
+    };
+
     const tick = () => {
       if (!paused && !document.hidden) {
-        el.scrollLeft += SPEED;
+        pos += SPEED;
         const half = el.scrollWidth / 2;
-        if (el.scrollLeft >= half) el.scrollLeft -= half;
+        if (half > 0 && pos >= half) pos -= half;
+        el.scrollLeft = pos;
       }
       raf = requestAnimationFrame(tick);
     };
     raf = requestAnimationFrame(tick);
+    el.addEventListener("scroll", wrap, { passive: true });
 
     el.addEventListener("pointerenter", hold);
     el.addEventListener("pointerdown", hold);
@@ -62,6 +83,7 @@ export function Gallery({ altPrefix }: { altPrefix: string }) {
     return () => {
       cancelAnimationFrame(raf);
       clearTimeout(resumeTimer);
+      el.removeEventListener("scroll", wrap);
       el.removeEventListener("pointerenter", hold);
       el.removeEventListener("pointerdown", hold);
       el.removeEventListener("touchstart", hold);
