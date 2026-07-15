@@ -61,8 +61,15 @@ export function Gallery({ altPrefix }: { altPrefix: string }) {
       pos = el.scrollLeft;
     };
 
+    // цикл живёт ТОЛЬКО пока карусель на экране — ноль фоновой нагрузки
+    let visible = false;
+    const io = new IntersectionObserver(([entry]) => {
+      visible = entry.isIntersecting;
+    });
+    io.observe(el);
+
     const tick = () => {
-      if (!paused && !document.hidden) {
+      if (visible && !paused && !document.hidden) {
         pos += SPEED;
         const half = el.scrollWidth / 2;
         if (half > 0 && pos >= half) pos -= half;
@@ -84,6 +91,7 @@ export function Gallery({ altPrefix }: { altPrefix: string }) {
     el.addEventListener("touchend", release);
 
     return () => {
+      io.disconnect();
       cancelAnimationFrame(raf);
       clearTimeout(resumeTimer);
       el.removeEventListener("scroll", wrap);
