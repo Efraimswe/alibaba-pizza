@@ -504,6 +504,14 @@ export default function Landing({ locale, dict }: { locale: Locale; dict: Dict }
         </div>
 
         {/* ── Footer ──────────────────────────────────────────────── */}
+        {/* Локальный SEO-блок: регион видимым текстом */}
+        <section className="pt-10 lg:col-span-3">
+          <div className="card-inset px-5 py-4">
+            <h2 className="font-display text-base font-bold">{dict.regionHeading}</h2>
+            <p className="mt-1 text-sm text-ink-soft">{dict.regionText}</p>
+          </div>
+        </section>
+
         <footer className="mt-12 pb-4 text-sm text-ink-soft lg:col-span-3">
           <div className="flex gap-4 px-2">
             <a href="/privacy" className="underline decoration-dotted">

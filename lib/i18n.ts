@@ -55,6 +55,8 @@ export type Dict = {
   distanceSuffixKm: string;
   distanceSuffixM: string;
   heroPhotoAlt: string;
+  regionHeading: string;
+  regionText: string;
   categoryNotes: Record<string, string>;
   phoneCtaPrefix: string;
   allergensLabel: string;
@@ -118,6 +120,9 @@ const nl: Dict = {
   distanceSuffixKm: "km van jou",
   distanceSuffixM: "m van jou",
   heroPhotoAlt: "Schotels van het huis: kebab, kip, kofte, friet en verse salades met saus",
+  regionHeading: "Afhalen in Lichtaart, Kasterlee en Olen",
+  regionText:
+    "Alibaba Kebab is jouw pizzeria en kebabzaak in Lichtaart (Kasterlee). Bestel telefonisch en haal af — ook makkelijk bereikbaar vanuit Kasterlee, Olen, Tielen en Herentals. Verse pizza's, pitta, durum, kapsalon en schotels, elke dag vanaf 16:00.",
   categoryNotes: {
     calzone: "Alle calzone € 15,00",
     schotels: "Alle schotels worden geserveerd met groenten, friet of brood en saus naar keuze",
@@ -200,6 +205,9 @@ const en: Dict = {
   distanceSuffixKm: "km from you",
   distanceSuffixM: "m from you",
   heroPhotoAlt: "House platters: kebab, chicken, kofta, fries and fresh salads with sauce",
+  regionHeading: "Takeaway in Lichtaart, Kasterlee and Olen",
+  regionText:
+    "Alibaba Kebab is your pizzeria and kebab shop in Lichtaart (Kasterlee). Order by phone and pick up — easy to reach from Kasterlee, Olen, Tielen and Herentals. Fresh pizzas, pitta, durum, kapsalon and grill platters, every day from 4 pm.",
   categoryNotes: {
     calzone: "All calzones € 15,00",
     schotels: "All platters are served with vegetables, fries or bread and a sauce of your choice",
@@ -282,6 +290,9 @@ const fr: Dict = {
   distanceSuffixKm: "km de vous",
   distanceSuffixM: "m de vous",
   heroPhotoAlt: "Assiettes de la maison : kebab, poulet, kofta, frites et salades fraîches avec sauce",
+  regionHeading: "À emporter à Lichtaart, Kasterlee et Olen",
+  regionText:
+    "Alibaba Kebab est votre pizzeria et kebab à Lichtaart (Kasterlee). Commandez par téléphone et venez chercher — facilement accessible depuis Kasterlee, Olen, Tielen et Herentals. Pizzas fraîches, pitta, durum, kapsalon et assiettes grill, tous les jours dès 16h.",
   categoryNotes: {
     calzone: "Toutes les calzones € 15,00",
     schotels: "Toutes les assiettes sont servies avec légumes, frites ou pain et une sauce au choix",
