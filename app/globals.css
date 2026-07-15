@@ -195,6 +195,10 @@ body {
   /* карточка часов: тряска-ротейт ±20° ~1s, затишье, повтор */
   .shake-idle {
     animation: shake 5s ease-in-out infinite;
+    animation-play-state: paused;
+  }
+  .shake-idle.play {
+    animation-play-state: running;
   }
   @keyframes shake {
     0%,

@@ -21,7 +21,20 @@ export function HopOnView() {
       { threshold: 0.4 },
     );
     els.forEach((el) => io.observe(el));
-    return () => io.disconnect();
+
+    // [data-shake]: анимация бежит только пока элемент на экране
+    const shakeEls = document.querySelectorAll("[data-shake]");
+    const ioShake = new IntersectionObserver((entries) => {
+      for (const entry of entries) {
+        entry.target.classList.toggle("play", entry.isIntersecting);
+      }
+    });
+    shakeEls.forEach((el) => ioShake.observe(el));
+
+    return () => {
+      io.disconnect();
+      ioShake.disconnect();
+    };
   }, []);
 
   return null;

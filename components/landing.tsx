@@ -409,7 +409,7 @@ export default function Landing({ locale, dict }: { locale: Locale; dict: Dict }
         <section className="pt-10 lg:pt-6">
           <h2 className="px-2 font-display text-3xl font-bold lg:text-2xl">{dict.hereNowHeading}</h2>
 
-          <div className="card shake-idle mt-4 overflow-hidden">
+          <div data-shake className="card shake-idle mt-4 overflow-hidden">
             <p className="bg-secondary px-5 py-3 font-display text-sm font-bold tracking-widest text-on-secondary">
               {dict.openingHoursLabel}
             </p>
