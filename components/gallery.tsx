@@ -168,12 +168,11 @@ export function Gallery({ altPrefix }: { altPrefix: string }) {
         </div>
       </div>
 
+      {/* тап в любом месте закрывает (Esc — нативно) */}
       <dialog
         ref={dialogRef}
-        onClick={(e) => {
-          if (e.target === dialogRef.current) dialogRef.current?.close();
-        }}
-        className="m-auto bg-transparent p-0 backdrop:bg-ink/85"
+        onClick={() => dialogRef.current?.close()}
+        className="m-auto cursor-pointer bg-transparent p-0 backdrop:bg-ink/85"
       >
         <div className="relative h-[85svh] w-[min(94vw,64rem)]">
           <Image
@@ -183,15 +182,6 @@ export function Gallery({ altPrefix }: { altPrefix: string }) {
             sizes="94vw"
             className="object-contain"
           />
-          <button
-            type="button"
-            autoFocus
-            onClick={() => dialogRef.current?.close()}
-            aria-label="Sluiten"
-            className="press fixed top-[max(1rem,env(safe-area-inset-top))] right-4 z-10 flex size-11 cursor-pointer items-center justify-center rounded-full bg-ink/90 font-display text-xl font-bold text-surface shadow-lg"
-          >
-            ×
-          </button>
         </div>
       </dialog>
     </>
