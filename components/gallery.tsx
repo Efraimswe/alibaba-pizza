@@ -72,11 +72,9 @@ export function Gallery({ altPrefix }: { altPrefix: string }) {
     raf = requestAnimationFrame(tick);
     el.addEventListener("scroll", wrap, { passive: true });
 
-    el.addEventListener("pointerenter", hold);
     el.addEventListener("pointerdown", hold);
     el.addEventListener("touchstart", hold, { passive: true });
     el.addEventListener("wheel", hold, { passive: true });
-    el.addEventListener("pointerleave", release);
     el.addEventListener("pointerup", release);
     el.addEventListener("touchend", release);
 
@@ -84,11 +82,9 @@ export function Gallery({ altPrefix }: { altPrefix: string }) {
       cancelAnimationFrame(raf);
       clearTimeout(resumeTimer);
       el.removeEventListener("scroll", wrap);
-      el.removeEventListener("pointerenter", hold);
       el.removeEventListener("pointerdown", hold);
       el.removeEventListener("touchstart", hold);
       el.removeEventListener("wheel", hold);
-      el.removeEventListener("pointerleave", release);
       el.removeEventListener("pointerup", release);
       el.removeEventListener("touchend", release);
     };
