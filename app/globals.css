@@ -192,6 +192,36 @@ body {
     }
   }
 
+  /* карточка часов: короткая тряска влево-вправо ~1s, затишье, повтор */
+  .shake-idle {
+    animation: shake 5s ease-in-out infinite;
+  }
+  @keyframes shake {
+    0%,
+    20%,
+    100% {
+      transform: translateX(0);
+    }
+    2% {
+      transform: translateX(-6px);
+    }
+    5% {
+      transform: translateX(6px);
+    }
+    8% {
+      transform: translateX(-5px);
+    }
+    11% {
+      transform: translateX(5px);
+    }
+    14% {
+      transform: translateX(-3px);
+    }
+    17% {
+      transform: translateX(3px);
+    }
+  }
+
   /* сигнатурный момент: трубка изредка «звонит» */
   .ring-wiggle {
     animation: ring 5s ease-in-out infinite;
