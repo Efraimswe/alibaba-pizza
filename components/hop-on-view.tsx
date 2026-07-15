@@ -18,17 +18,20 @@ export function HopOnView() {
           }
         }
       },
-      { threshold: 0.4 },
+      { threshold: 0.5 },
     );
     els.forEach((el) => io.observe(el));
 
     // [data-shake]: анимация бежит только пока элемент на экране
     const shakeEls = document.querySelectorAll("[data-shake]");
-    const ioShake = new IntersectionObserver((entries) => {
-      for (const entry of entries) {
-        entry.target.classList.toggle("play", entry.isIntersecting);
-      }
-    });
+    const ioShake = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          entry.target.classList.toggle("play", entry.isIntersecting);
+        }
+      },
+      { threshold: 0.5 },
+    );
     shakeEls.forEach((el) => ioShake.observe(el));
 
     return () => {
