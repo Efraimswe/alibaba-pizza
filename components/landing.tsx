@@ -267,7 +267,7 @@ export default function Landing({ locale, dict }: { locale: Locale; dict: Dict }
 
           <div className="mt-4 space-y-3">
             {categories.map((cat, i) => (
-              <details key={cat.id} open={i === 0} className="group card view-reveal">
+              <details key={cat.id} className="group card view-reveal">
                 <summary className="flex min-h-16 cursor-pointer list-none items-center gap-4 rounded-3xl p-4 transition-colors duration-150 active:bg-surface-alt/60 [&::-webkit-details-marker]:hidden">
                   <Photo
                     rel={`img/cats/${cat.id}.png`}
