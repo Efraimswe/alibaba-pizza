@@ -58,6 +58,12 @@ export default function RootLayout({
       className={`${spaceGrotesk.variable} ${karla.variable} ${lobster.variable} h-full antialiased`}
     >
       <body className="min-h-full font-sans">
+        {/* рефреш всегда с верха страницы: не восстанавливать прошлый скролл */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `history.scrollRestoration='manual'`,
+          }}
+        />
         {children}
         <JsonLd />
         <ClickPop />
