@@ -1,14 +1,4 @@
 {
-  "app/layout.tsx": {
-    "mtime": 1784060686.3986976,
-    "ast_hash": "94c34ef68b3949a75807a0211ec2273c",
-    "semantic_hash": "94c34ef68b3949a75807a0211ec2273c"
-  },
-  "app/page.tsx": {
-    "mtime": 1784060686.3986976,
-    "ast_hash": "1e489b26bb597dc97f8d44954dd042da",
-    "semantic_hash": "1e489b26bb597dc97f8d44954dd042da"
-  },
   "eslint.config.mjs": {
     "mtime": 1784060686.3986976,
     "ast_hash": "dfa1f5f6a7037bf39dc510f30b180002",
@@ -20,9 +10,9 @@
     "semantic_hash": "9b77af189a21a7a64e4bd7a426f64176"
   },
   "package.json": {
-    "mtime": 1784060686.3986976,
-    "ast_hash": "53ff85105882887b08936e8b53c27f28",
-    "semantic_hash": "53ff85105882887b08936e8b53c27f28"
+    "mtime": 1784075651.4470801,
+    "ast_hash": "b68bd9e0af78ff3c5cf53c6cd7b43c20",
+    "semantic_hash": "b68bd9e0af78ff3c5cf53c6cd7b43c20"
   },
   "postcss.config.mjs": {
     "mtime": 1784060686.3986976,
@@ -68,5 +58,275 @@
     "mtime": 1784060686.3986976,
     "ast_hash": "a2760511c65806022ad20adf74370ff3",
     "semantic_hash": "a2760511c65806022ad20adf74370ff3"
+  },
+  "app/(en)/en/page.tsx": {
+    "mtime": 1784070117.6433032,
+    "ast_hash": "865cdf77dec9f59191d09e6e02b5b4af",
+    "semantic_hash": "865cdf77dec9f59191d09e6e02b5b4af"
+  },
+  "app/(en)/layout.tsx": {
+    "mtime": 1784219981.1488764,
+    "ast_hash": "193fe1183ef71c13563f065588e11ffc",
+    "semantic_hash": "193fe1183ef71c13563f065588e11ffc"
+  },
+  "app/(fr)/fr/page.tsx": {
+    "mtime": 1784070120.825259,
+    "ast_hash": "3801ee684119420a95310b416c75d8d5",
+    "semantic_hash": "3801ee684119420a95310b416c75d8d5"
+  },
+  "app/(fr)/layout.tsx": {
+    "mtime": 1784219982.568877,
+    "ast_hash": "35d71edf1d78e12420baff0803651d65",
+    "semantic_hash": "35d71edf1d78e12420baff0803651d65"
+  },
+  "app/(nl)/cookies/page.tsx": {
+    "mtime": 1784070143.4673455,
+    "ast_hash": "a81a9ce6e46a8d25a8b075963c91a45b",
+    "semantic_hash": "a81a9ce6e46a8d25a8b075963c91a45b"
+  },
+  "app/(nl)/layout.tsx": {
+    "mtime": 1784219979.3408754,
+    "ast_hash": "89f166cd726a9d8059bea757d11dd921",
+    "semantic_hash": "89f166cd726a9d8059bea757d11dd921"
+  },
+  "app/(nl)/page.tsx": {
+    "mtime": 1784070479.830651,
+    "ast_hash": "55d184aa9fc25c3982a8d083b26ee332",
+    "semantic_hash": "55d184aa9fc25c3982a8d083b26ee332"
+  },
+  "app/(nl)/privacy/page.tsx": {
+    "mtime": 1784071485.3230734,
+    "ast_hash": "774fab94dc285ba6a3156479ee015ab4",
+    "semantic_hash": "774fab94dc285ba6a3156479ee015ab4"
+  },
+  "app/robots.ts": {
+    "mtime": 1784070127.8177981,
+    "ast_hash": "e7aa52bb36cf1d5ac82b1fd8960cab62",
+    "semantic_hash": "e7aa52bb36cf1d5ac82b1fd8960cab62"
+  },
+  "app/site-layout.tsx": {
+    "mtime": 1784289607.7020535,
+    "ast_hash": "3fabf9be55298cbb3a65002bf65fafc1",
+    "semantic_hash": "3fabf9be55298cbb3a65002bf65fafc1"
+  },
+  "app/sitemap.ts": {
+    "mtime": 1784070126.617162,
+    "ast_hash": "e83716cf08c0f52ee9938edff194c307",
+    "semantic_hash": "e83716cf08c0f52ee9938edff194c307"
+  },
+  "components/click-pop.tsx": {
+    "mtime": 1784084724.1411939,
+    "ast_hash": "d056df12f3b886e9efbbeac58c8e263f",
+    "semantic_hash": "d056df12f3b886e9efbbeac58c8e263f"
+  },
+  "components/details-anim.tsx": {
+    "mtime": 1784085635.1454062,
+    "ast_hash": "d8f8307ee3551fcaec177cd311690281",
+    "semantic_hash": "d8f8307ee3551fcaec177cd311690281"
+  },
+  "components/distance.tsx": {
+    "mtime": 1784071485.3230734,
+    "ast_hash": "563b96c3e533eadac86e8bb2e4ef7c8d",
+    "semantic_hash": "563b96c3e533eadac86e8bb2e4ef7c8d"
+  },
+  "components/gallery.tsx": {
+    "mtime": 1784124718.2206736,
+    "ast_hash": "cba4c7eeb79a68592884b7483f9ac29a",
+    "semantic_hash": "cba4c7eeb79a68592884b7483f9ac29a"
+  },
+  "components/hop-on-view.tsx": {
+    "mtime": 1784124406.4770415,
+    "ast_hash": "dba748bdb1b73a76c2acea2b47052e0f",
+    "semantic_hash": "dba748bdb1b73a76c2acea2b47052e0f"
+  },
+  "components/json-ld.tsx": {
+    "mtime": 1784121021.8899598,
+    "ast_hash": "a9b00203f33d546a09892ae1954a31bd",
+    "semantic_hash": "a9b00203f33d546a09892ae1954a31bd"
+  },
+  "components/landing.tsx": {
+    "mtime": 1784330602.6879287,
+    "ast_hash": "66f66d3465d1d35d30a2026079c55132",
+    "semantic_hash": "66f66d3465d1d35d30a2026079c55132"
+  },
+  "data/menu.json": {
+    "mtime": 1784061677.262685,
+    "ast_hash": "2dea06d1845dc3d42bd0696d88dc326a",
+    "semantic_hash": "2dea06d1845dc3d42bd0696d88dc326a"
+  },
+  "lib/geo.ts": {
+    "mtime": 1784070139.6422684,
+    "ast_hash": "984b75b6848a7e46ef8825885dfe14a7",
+    "semantic_hash": "984b75b6848a7e46ef8825885dfe14a7"
+  },
+  "lib/i18n.ts": {
+    "mtime": 1784329184.500488,
+    "ast_hash": "f3b22f9cc55e8e842214a31430241cba",
+    "semantic_hash": "f3b22f9cc55e8e842214a31430241cba"
+  },
+  "lib/menu-i18n.ts": {
+    "mtime": 1784077135.7007053,
+    "ast_hash": "d328c59155f0b5f88fb4947903786b26",
+    "semantic_hash": "d328c59155f0b5f88fb4947903786b26"
+  },
+  "scripts/build-image-manifest.mjs": {
+    "mtime": 1784084331.1507192,
+    "ast_hash": "4fbe613391101430b646c8b841cc1907",
+    "semantic_hash": "4fbe613391101430b646c8b841cc1907"
+  },
+  "scripts/generate-images.py": {
+    "mtime": 1784065834.3450754,
+    "ast_hash": "820f0cbdeb51ecc08f7ae86462e2482b",
+    "semantic_hash": "820f0cbdeb51ecc08f7ae86462e2482b"
+  },
+  "scripts/image-manifest.json": {
+    "mtime": 1784084331.1897507,
+    "ast_hash": "b0a8058cfe385a4afcce839526af6b07",
+    "semantic_hash": "b0a8058cfe385a4afcce839526af6b07"
+  },
+  "design-foundation.md": {
+    "mtime": 1784224617.937286,
+    "ast_hash": "f21f6620c5a43f6afa39e3b6c20c0a0f",
+    "semantic_hash": "f21f6620c5a43f6afa39e3b6c20c0a0f"
+  },
+  "plan.md": {
+    "mtime": 1784069657.8910756,
+    "ast_hash": "a85da9d84b0680c4c976b2380871dc04",
+    "semantic_hash": "a85da9d84b0680c4c976b2380871dc04"
+  },
+  "public/llms.txt": {
+    "mtime": 1784070144.0792928,
+    "ast_hash": "0c887d02e08d5d778556525ced453301",
+    "semantic_hash": "0c887d02e08d5d778556525ced453301"
+  },
+  "uiux-audit-plan.md": {
+    "mtime": 1784219486.8169158,
+    "ast_hash": "b698e33b907beced42379311524fe88d",
+    "semantic_hash": "b698e33b907beced42379311524fe88d"
+  },
+  "app/icon.svg": {
+    "mtime": 1784074913.8729157,
+    "ast_hash": "e35d78507fd4db22910849b176f17bee",
+    "semantic_hash": "e35d78507fd4db22910849b176f17bee"
+  },
+  "public/img/cats/bakjes.png": {
+    "mtime": 1784077275.3168635,
+    "ast_hash": "6f6304c457d03b91da9a241e0664d40a",
+    "semantic_hash": "6f6304c457d03b91da9a241e0664d40a"
+  },
+  "public/img/cats/broodjes.png": {
+    "mtime": 1784077004.9422557,
+    "ast_hash": "ddd1b9505ee6950b80d0066199875d43",
+    "semantic_hash": "ddd1b9505ee6950b80d0066199875d43"
+  },
+  "public/img/cats/calzone.png": {
+    "mtime": 1784076870.382219,
+    "ast_hash": "b24a20f6cc938a71f525204b539a72e1",
+    "semantic_hash": "b24a20f6cc938a71f525204b539a72e1"
+  },
+  "public/img/cats/dessert.png": {
+    "mtime": 1784077365.0992854,
+    "ast_hash": "b812ad9126cf98e5a9f25659efd993e1",
+    "semantic_hash": "b812ad9126cf98e5a9f25659efd993e1"
+  },
+  "public/img/cats/dranken.png": {
+    "mtime": 1784084336.5833516,
+    "ast_hash": "ca9b40ac70c854abed050cdf8c7c7482",
+    "semantic_hash": "ca9b40ac70c854abed050cdf8c7c7482"
+  },
+  "public/img/cats/durum.png": {
+    "mtime": 1784077049.7130022,
+    "ast_hash": "c182ce9c7b86927d2d4322d48e806696",
+    "semantic_hash": "c182ce9c7b86927d2d4322d48e806696"
+  },
+  "public/img/cats/kapsalon.png": {
+    "mtime": 1784077095.332888,
+    "ast_hash": "328ee317943176087845de1f43d7134c",
+    "semantic_hash": "328ee317943176087845de1f43d7134c"
+  },
+  "public/img/cats/lasagna.png": {
+    "mtime": 1784077139.5092127,
+    "ast_hash": "2e9a3f9859d39a51289732265ca01156",
+    "semantic_hash": "2e9a3f9859d39a51289732265ca01156"
+  },
+  "public/img/cats/lookbrood.png": {
+    "mtime": 1784076914.7741175,
+    "ast_hash": "fb00df043bcebdaa7fa08b62b1dc3493",
+    "semantic_hash": "fb00df043bcebdaa7fa08b62b1dc3493"
+  },
+  "public/img/cats/pizzas.png": {
+    "mtime": 1784076828.029835,
+    "ast_hash": "adb08f97933f73d1ceb3b9f735920481",
+    "semantic_hash": "adb08f97933f73d1ceb3b9f735920481"
+  },
+  "public/img/cats/salades.png": {
+    "mtime": 1784077184.0124543,
+    "ast_hash": "5b225e98bf6920d330ffa26fabd0ce3a",
+    "semantic_hash": "5b225e98bf6920d330ffa26fabd0ce3a"
+  },
+  "public/img/cats/schotels.png": {
+    "mtime": 1784077231.8815858,
+    "ast_hash": "c521e70e969fee0555622bbeff7acdc0",
+    "semantic_hash": "c521e70e969fee0555622bbeff7acdc0"
+  },
+  "public/img/cats/snacks.png": {
+    "mtime": 1784076960.590507,
+    "ast_hash": "4ad10f5dec6767e38d19bfb939aa29cb",
+    "semantic_hash": "4ad10f5dec6767e38d19bfb939aa29cb"
+  },
+  "public/img/deals/dinsdag.png": {
+    "mtime": 1784077409.7811997,
+    "ast_hash": "a6586adff9dbb788978ba6cf51d0245e",
+    "semantic_hash": "a6586adff9dbb788978ba6cf51d0245e"
+  },
+  "public/img/deals/donderdag.png": {
+    "mtime": 1784077499.9222188,
+    "ast_hash": "4f53662969b16af43bedbea4020a6450",
+    "semantic_hash": "4f53662969b16af43bedbea4020a6450"
+  },
+  "public/img/deals/woensdag.png": {
+    "mtime": 1784077455.4838908,
+    "ast_hash": "8f8d19188437e167637285d93d65fba0",
+    "semantic_hash": "8f8d19188437e167637285d93d65fba0"
+  },
+  "public/img/gallery/g1.jpg": {
+    "mtime": 1784121251.609737,
+    "ast_hash": "9338567cef73d98e65a58d87dd60c7d6",
+    "semantic_hash": "9338567cef73d98e65a58d87dd60c7d6"
+  },
+  "public/img/gallery/g2.jpg": {
+    "mtime": 1784121251.661737,
+    "ast_hash": "92982be47a10f281d34497ced58d9a81",
+    "semantic_hash": "92982be47a10f281d34497ced58d9a81"
+  },
+  "public/img/gallery/g3.jpg": {
+    "mtime": 1784121251.7050703,
+    "ast_hash": "16d9f0978c74dd1dffeb980e915e4d6a",
+    "semantic_hash": "16d9f0978c74dd1dffeb980e915e4d6a"
+  },
+  "public/img/gallery/g4.jpg": {
+    "mtime": 1784121251.726737,
+    "ast_hash": "ea1cf33e0df462a28e37fa4fe4db6791",
+    "semantic_hash": "ea1cf33e0df462a28e37fa4fe4db6791"
+  },
+  "public/img/gallery/g5.jpg": {
+    "mtime": 1784121251.7484035,
+    "ast_hash": "a62cbcb6454cc484265f78a2e92f4a46",
+    "semantic_hash": "a62cbcb6454cc484265f78a2e92f4a46"
+  },
+  "public/img/gallery/g6.jpg": {
+    "mtime": 1784121251.7700703,
+    "ast_hash": "12b38e79d582415bc8bdb9d65c6d2f96",
+    "semantic_hash": "12b38e79d582415bc8bdb9d65c6d2f96"
+  },
+  "public/img/hero-platters-v2.png": {
+    "mtime": 1784223576.5891109,
+    "ast_hash": "9a0ee66b2f3cb1cc55439383617377b3",
+    "semantic_hash": "9a0ee66b2f3cb1cc55439383617377b3"
+  },
+  "public/img/hero-schotel.jpg": {
+    "mtime": 1784120896.3939962,
+    "ast_hash": "5950fbf6404b747f20dd95b25ffcf4fd",
+    "semantic_hash": "5950fbf6404b747f20dd95b25ffcf4fd"
   }
 }

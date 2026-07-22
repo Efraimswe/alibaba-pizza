@@ -27,22 +27,17 @@ export type DayKey =
 
 export type Dict = {
   languageLabel: string;
-  ticker: { openToday: string; call: string };
-  heroTag: string;
-  heroDescription: string;
   callNowCta: string;
+  arrangeOrderCta: string;
   menuCta: string;
   menuHeading: string;
-  menuSummary: (categories: number, dishes: number) => string;
-  itemsFromPrefix: string;
-  sizeLabel: string;
-  extrasLabel: string;
   weeklyHeading: string;
   dealNameByDay: Record<string, string>;
   weeklyExceptWord: string;
   andWord: string;
   hereNowHeading: string;
   openingHoursLabel: string;
+  openStatus: { openNow: string; opensAt: string };
   days: Record<DayKey, string>;
   dayAbbrev: Record<DayKey, string>;
   openHolidaysNote: string;
@@ -59,8 +54,6 @@ export type Dict = {
   galleryAlt: string;
   regionHeading: string;
   regionText: string;
-  categoryNotes: Record<string, string>;
-  phoneCtaPrefix: string;
   allergensLabel: string;
   allergensIntro: string;
   allergensNote: string;
@@ -73,17 +66,10 @@ export type Dict = {
 
 const nl: Dict = {
   languageLabel: "Taal",
-  ticker: { openToday: "OPEN VANDAAG VANAF", call: "BEL" },
-  heroTag: "PIZZA · PITA · GRILL",
-  heroDescription:
-    "Verse pizza's, pitta, durum en schotels — om af te halen in Lichtaart.",
-  callNowCta: "BEL NU",
+  callNowCta: "Bel",
+  arrangeOrderCta: "Bestelling afspreken",
   menuCta: "MENU ↓",
   menuHeading: "Menu",
-  menuSummary: (categories, dishes) => `${categories} categorieën, ${dishes} gerechten`,
-  itemsFromPrefix: "keuzes · vanaf €",
-  sizeLabel: "KLEIN / GROOT",
-  extrasLabel: "Extra's",
   weeklyHeading: "Elke week",
   dealNameByDay: {
     dinsdag: "Kapsalondag",
@@ -94,6 +80,7 @@ const nl: Dict = {
   andWord: "en",
   hereNowHeading: "Hier & nu",
   openingHoursLabel: "OPENINGSUREN",
+  openStatus: { openNow: "Nu open · sluit {t}", opensAt: "Opent om {t}" },
   days: {
     maandag: "maandag",
     dinsdag: "dinsdag",
@@ -122,16 +109,11 @@ const nl: Dict = {
   distanceSuffixKm: "km van jou",
   distanceSuffixM: "m van jou",
   heroPhotoAlt: "Schotels van het huis: kebab, kip, kofte, friet en verse salades met saus",
-  galleryHeading: "Binnenkijken",
+  galleryHeading: "Onze foto's",
   galleryAlt: "Foto van de zaak",
   regionHeading: "Afhalen in Lichtaart, Kasterlee en Olen",
   regionText:
     "Alibaba Kebab is jouw pizzeria en kebabzaak in Lichtaart (Kasterlee). Bestel telefonisch en haal af — ook makkelijk bereikbaar vanuit Kasterlee, Olen, Tielen en Herentals. Verse pizza's, pitta, durum, kapsalon en schotels, elke dag vanaf 16:00.",
-  categoryNotes: {
-    calzone: "Alle calzone € 15,00",
-    schotels: "Alle schotels worden geserveerd met groenten, friet of brood en saus naar keuze",
-  },
-  phoneCtaPrefix: "BEL & BESTEL",
   allergensLabel: "Allergenen:",
   allergensIntro: "Voor allergenen kunt u zich steeds wenden tot onze medewerkers.",
   allergensNote: "Volledige allergenenlijst per gerecht volgt op deze pagina.",
@@ -160,17 +142,10 @@ const nl: Dict = {
 
 const en: Dict = {
   languageLabel: "Language",
-  ticker: { openToday: "OPEN TODAY FROM", call: "CALL" },
-  heroTag: "PIZZA · PITA · GRILL",
-  heroDescription:
-    "Fresh pizzas, pitta, durum and platters — to pick up in Lichtaart.",
-  callNowCta: "CALL NOW",
+  callNowCta: "Call",
+  arrangeOrderCta: "Arrange your order",
   menuCta: "MENU ↓",
   menuHeading: "Menu",
-  menuSummary: (categories, dishes) => `${categories} categories, ${dishes} dishes`,
-  itemsFromPrefix: "items · from €",
-  sizeLabel: "SMALL / LARGE",
-  extrasLabel: "Extras",
   weeklyHeading: "Every week",
   dealNameByDay: {
     dinsdag: "Kapsalon day",
@@ -181,6 +156,7 @@ const en: Dict = {
   andWord: "and",
   hereNowHeading: "Here & now",
   openingHoursLabel: "OPENING HOURS",
+  openStatus: { openNow: "Open now · closes {t}", opensAt: "Opens at {t}" },
   days: {
     maandag: "Monday",
     dinsdag: "Tuesday",
@@ -209,16 +185,11 @@ const en: Dict = {
   distanceSuffixKm: "km from you",
   distanceSuffixM: "m from you",
   heroPhotoAlt: "House platters: kebab, chicken, kofta, fries and fresh salads with sauce",
-  galleryHeading: "Take a look inside",
+  galleryHeading: "Our photos",
   galleryAlt: "Photo of the restaurant",
   regionHeading: "Takeaway in Lichtaart, Kasterlee and Olen",
   regionText:
     "Alibaba Kebab is your pizzeria and kebab shop in Lichtaart (Kasterlee). Order by phone and pick up — easy to reach from Kasterlee, Olen, Tielen and Herentals. Fresh pizzas, pitta, durum, kapsalon and grill platters, every day from 4 pm.",
-  categoryNotes: {
-    calzone: "All calzones € 15,00",
-    schotels: "All platters are served with vegetables, fries or bread and a sauce of your choice",
-  },
-  phoneCtaPrefix: "CALL & ORDER",
   allergensLabel: "Allergens:",
   allergensIntro: "For allergens, please ask our staff.",
   allergensNote: "Full allergen list per dish is coming soon on this page.",
@@ -247,17 +218,10 @@ const en: Dict = {
 
 const fr: Dict = {
   languageLabel: "Langue",
-  ticker: { openToday: "OUVERT AUJOURD'HUI DÈS", call: "APPELEZ" },
-  heroTag: "PIZZA · PITA · GRILL",
-  heroDescription:
-    "Pizzas, pitta, durum et plats fraîchement préparés — à emporter à Lichtaart.",
-  callNowCta: "APPELEZ",
+  callNowCta: "Appelez",
+  arrangeOrderCta: "Convenir d'une commande",
   menuCta: "MENU ↓",
   menuHeading: "Menu",
-  menuSummary: (categories, dishes) => `${categories} catégories, ${dishes} plats`,
-  itemsFromPrefix: "articles · à partir de €",
-  sizeLabel: "PETIT / GRAND",
-  extrasLabel: "Suppléments",
   weeklyHeading: "Chaque semaine",
   dealNameByDay: {
     dinsdag: "Jour Kapsalon",
@@ -268,6 +232,7 @@ const fr: Dict = {
   andWord: "et",
   hereNowHeading: "Ici & maintenant",
   openingHoursLabel: "HEURES D'OUVERTURE",
+  openStatus: { openNow: "Ouvert · ferme à {t}", opensAt: "Ouvre à {t}" },
   days: {
     maandag: "lundi",
     dinsdag: "mardi",
@@ -296,16 +261,11 @@ const fr: Dict = {
   distanceSuffixKm: "km de vous",
   distanceSuffixM: "m de vous",
   heroPhotoAlt: "Assiettes de la maison : kebab, poulet, kofta, frites et salades fraîches avec sauce",
-  galleryHeading: "Un coup d'œil à l'intérieur",
+  galleryHeading: "Nos photos",
   galleryAlt: "Photo de l'établissement",
   regionHeading: "À emporter à Lichtaart, Kasterlee et Olen",
   regionText:
     "Alibaba Kebab est votre pizzeria et kebab à Lichtaart (Kasterlee). Commandez par téléphone et venez chercher — facilement accessible depuis Kasterlee, Olen, Tielen et Herentals. Pizzas fraîches, pitta, durum, kapsalon et assiettes grill, tous les jours dès 16h.",
-  categoryNotes: {
-    calzone: "Toutes les calzones € 15,00",
-    schotels: "Toutes les assiettes sont servies avec légumes, frites ou pain et une sauce au choix",
-  },
-  phoneCtaPrefix: "APPELEZ & COMMANDEZ",
   allergensLabel: "Allergènes :",
   allergensIntro: "Pour les allergènes, adressez-vous toujours à notre personnel.",
   allergensNote: "La liste complète des allergènes par plat arrivera bientôt sur cette page.",

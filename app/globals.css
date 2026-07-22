@@ -7,29 +7,35 @@
   Палитра: красный лого + тёмно-зелёный фирменной доски + тёплый белёсый.
 */
 :root {
-  --bg: #faf6ef; /* тёплый белёсый */
+  --bg: #ffffff; /* белый фон всего сайта */
+  --surface-gray: #f0f0f1; /* серый для второстепенных кнопок */
   --surface: #ffffff;
   --surface-alt: #f1eadd; /* песочная заливка-разделитель */
   --ink: #1c1917;
   --ink-soft: #6b6259;
-  --primary: #d2371f; /* красный вывески, углублён до AA 4.5 для белого текста */
+  --primary: #ea580c; /* яркий оранжевый — основной акцент */
+  --primary-deep: #b54708; /* затемнённый оранжевый для текста на белом */
   --on-primary: #ffffff;
+  --logo: #cd0416; /* алый вывески — только wordmark, не трогать при смене акцента */
   --secondary: #1e3b31; /* тёмно-зелёный доски меню */
   --on-secondary: #f4efe6;
 }
 
 @theme inline {
   --color-bg: var(--bg);
+  --color-surface-gray: var(--surface-gray);
   --color-surface: var(--surface);
   --color-surface-alt: var(--surface-alt);
   --color-ink: var(--ink);
   --color-ink-soft: var(--ink-soft);
   --color-primary: var(--primary);
+  --color-primary-deep: var(--primary-deep);
   --color-on-primary: var(--on-primary);
+  --color-logo: var(--logo);
   --color-secondary: var(--secondary);
   --color-on-secondary: var(--on-secondary);
-  --font-display: var(--font-space-grotesk);
-  --font-sans: var(--font-karla);
+  --font-display: var(--font-golos);
+  --font-sans: var(--font-golos);
   --font-logo: var(--font-lobster);
 }
 
@@ -60,6 +66,13 @@ body {
     animation: none !important;
     transition: none !important;
   }
+}
+
+/* wordmark как на физической вывеске: красный Pacifico с белой обводкой */
+@utility wordmark-sign {
+  -webkit-text-stroke: 0.085em #fff;
+  paint-order: stroke fill;
+  text-shadow: 0 0.03em 0.1em rgb(28 25 23 / 0.18);
 }
 
 @layer components {
@@ -109,22 +122,6 @@ body {
   }
   .press:active {
     transform: scale(0.97);
-  }
-
-  /* тикер: бесконечная бегущая строка (два одинаковых спана в треке) */
-  .marquee-track {
-    display: flex;
-    width: max-content;
-    animation: marquee 30s linear infinite;
-  }
-  .marquee-track:hover {
-    animation-play-state: paused;
-  }
-
-  @keyframes marquee {
-    to {
-      transform: translateX(-50%);
-    }
   }
 
   /* вход выпадающего меню: pop из триггера */
@@ -194,12 +191,10 @@ body {
   }
 
   /* карточка часов: тряска-ротейт ±5° ~1s, затишье, повтор */
-  .shake-idle {
-    animation: shake 5s ease-in-out infinite;
-    animation-play-state: paused;
-  }
+  /* без .play анимации нет; .play навешивается при входе в viewport и
+     снимается при выходе — снятие/возврат класса перезапускает единичный проигрыш */
   .shake-idle.play {
-    animation-play-state: running;
+    animation: shake 5s ease-in-out;
   }
   @keyframes shake {
     0%,
@@ -227,6 +222,50 @@ body {
     }
   }
 
+  /* статус-бейдж «Nu open · sluit …» / «Opent om …»: заполняется инлайн-скриптом,
+     без JS (нет data-state) остаётся скрытым */
+  [data-open-status] {
+    display: none;
+  }
+  [data-open-status][data-state] {
+    display: inline-flex;
+  }
+  [data-open-status]::before {
+    content: "";
+    width: 0.5rem;
+    height: 0.5rem;
+    border-radius: 9999px;
+  }
+  [data-open-status][data-state="open"] {
+    background: var(--secondary);
+    color: var(--on-secondary);
+  }
+  [data-open-status][data-state="open"]::before {
+    background: var(--on-secondary);
+  }
+  [data-open-status][data-state="closed"] {
+    background: var(--surface-alt);
+    color: var(--ink);
+  }
+  [data-open-status][data-state="closed"]::before {
+    background: var(--primary);
+  }
+
+  /* «сегодня» в таблице часов: единственный акцент — плашка primary/10 + точка + жирный */
+  [data-hours] li[data-today] {
+    background: color-mix(in srgb, var(--primary) 10%, transparent);
+    font-weight: 700;
+  }
+  [data-hours] li[data-today] > span:first-child::before {
+    content: "";
+    display: inline-block;
+    width: 0.5rem;
+    height: 0.5rem;
+    margin-right: 0.5rem;
+    border-radius: 9999px;
+    background: var(--primary);
+  }
+
   /* сигнатурный момент: трубка изредка «звонит» */
   .ring-wiggle {
     animation: ring 5s ease-in-out infinite;
@@ -250,5 +289,30 @@ body {
     98% {
       transform: rotate(3deg);
     }
+  }
+
+  /* плавающий bel-bar не дублирует hero-CTA: пока первая оранжевая кнопка на экране —
+     бар спрятан за нижней кромкой; ушла из виду — выплывает снизу (только transform/opacity,
+     compositor-friendly; .past-hero вешает IntersectionObserver из инлайн-скрипта) */
+  [data-callbar] {
+    opacity: 0;
+    transform: translateY(130%);
+    pointer-events: none;
+    transition:
+      opacity 250ms cubic-bezier(0.2, 0, 0, 1),
+      transform 250ms cubic-bezier(0.2, 0, 0, 1);
+  }
+  [data-callbar].past-hero {
+    opacity: 1;
+    transform: none;
+    pointer-events: auto;
+  }
+}
+
+/* print/скриншот-гард: scroll-reveal карточки не должны исчезать в печати/PDF */
+@media print {
+  .view-reveal {
+    opacity: 1 !important;
+    animation: none !important;
   }
 }

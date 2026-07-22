@@ -7,8 +7,11 @@ import { useEffect, useRef, useState } from "react";
 // один источник истины `offset`: авто-дрейф по rAF + ручной drag через
 // Pointer Events. Бесконечность — два комплекта тайлов, offset по модулю
 // половины ширины. Работает только пока карусель видна. Клик → лайтбокс.
-const PHOTOS = [1, 2, 3, 4, 5, 6].map((n) => `/img/gallery/g${n}.jpg`);
-const SPEED = 0.55; // px за кадр (~33px/s)
+const PHOTOS = [
+  ...[1, 2, 3, 4, 5, 6].map((n) => `/img/gallery/g${n}.jpg`),
+  ...[7, 8, 9, 10].map((n) => `/img/gallery/g${n}.png`),
+];
+const SPEED = 0.3; // px за кадр (~18px/s)
 const RESUME_MS = 2000;
 const CLICK_SLOP = 8; // px — больше = это был drag, не клик
 

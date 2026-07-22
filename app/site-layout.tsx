@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Space_Grotesk, Karla, Lobster } from "next/font/google";
+import { Golos_Text, Lobster } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import JsonLd from "@/components/json-ld";
@@ -8,16 +8,10 @@ import { DetailsAnim } from "@/components/details-anim";
 import { HopOnView } from "@/components/hop-on-view";
 import "./globals.css";
 
-const spaceGrotesk = Space_Grotesk({
-  variable: "--font-space-grotesk",
+const golos = Golos_Text({
+  variable: "--font-golos",
   subsets: ["latin"],
-  weight: ["500", "700"],
-});
-
-const karla = Karla({
-  variable: "--font-karla",
-  subsets: ["latin"],
-  weight: ["400", "500", "700"],
+  weight: ["400", "500", "600", "700"],
 });
 
 const lobster = Lobster({
@@ -26,7 +20,7 @@ const lobster = Lobster({
   weight: "400",
 });
 
-export const metadata: Metadata = {
+export const siteMetadata: Metadata = {
   metadataBase: new URL("https://alibaba-pizza.vercel.app"),
   title: {
     template: "%s — Alibaba Kebab Lichtaart",
@@ -47,17 +41,21 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
+// Gedeelde <html>/<body>-shell voor de drie root-layouts per taal:
+// SSR geeft zo meteen de juiste <html lang> per route (nl-BE / en / fr).
+export function SiteLayout({
+  lang,
   children,
 }: Readonly<{
+  lang: string;
   children: React.ReactNode;
 }>) {
   return (
     <html
-      lang="nl-BE"
-      className={`${spaceGrotesk.variable} ${karla.variable} ${lobster.variable} h-full antialiased`}
+      lang={lang}
+      className={`${golos.variable} ${lobster.variable} h-full antialiased`}
     >
-      <body className="min-h-full font-sans">
+      <body className="min-h-full overflow-x-clip font-sans">
         {/* рефреш всегда с верха страницы: не восстанавливать прошлый скролл */}
         <script
           dangerouslySetInnerHTML={{
