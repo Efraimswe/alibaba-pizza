@@ -1,36 +1,20 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import Image from "next/image";
-import menu from "@/data/menu.json";
 import type { Locale } from "@/lib/i18n";
+import type { Category } from "@/lib/menu";
 import { trCategory, trItem, trIngredients, trExtras } from "@/lib/menu-i18n";
-
-type Item = {
-  name: string;
-  ingredients: string[];
-  price?: number;
-  prices?: { klein: number; groot: number };
-};
-
-type Category = {
-  id: string;
-  name: string;
-  note?: string;
-  priceModel?: string;
-  items: Item[];
-  extras?: { price: number; options: string[] };
-};
 
 const eur = (n: number) => n.toFixed(2).replace(".", ",");
 
-const SAUZEN = menu.sauzen as string[];
 const EXTRAS_LABEL: Record<Locale, string> = { nl: "Extra's", en: "Extras", fr: "Suppléments" };
 const SAUZEN_LABEL: Record<Locale, string> = { nl: "Sauzen", en: "Sauces", fr: "Sauces" };
 
 const MENU_ITEM_LIMIT = 4;
 type MenuPagePart = { id: string; from: number; to: number; cont: boolean };
-const MENU_PAGES: MenuPagePart[][] = (() => {
+
+function buildMenuPages(categories: Category[]): MenuPagePart[][] {
   const pages: MenuPagePart[][] = [];
   let cur: MenuPagePart[] = [];
   let count = 0;
@@ -41,7 +25,7 @@ const MENU_PAGES: MenuPagePart[][] = (() => {
       count = 0;
     }
   };
-  for (const c of menu.categories as Category[]) {
+  for (const c of categories) {
     const n = c.items.length;
     if (n > MENU_ITEM_LIMIT) {
       flush();
@@ -62,17 +46,27 @@ const MENU_PAGES: MenuPagePart[][] = (() => {
   }
   flush();
   return pages;
-})();
+}
 
 // категории + финальная страница соусов
 type Page = { kind: "cat"; parts: MenuPagePart[] } | { kind: "sauzen" };
-const PAGES: Page[] = [
-  ...MENU_PAGES.map((parts) => ({ kind: "cat", parts }) as const),
-  { kind: "sauzen" as const },
-];
 
-export function MenuCarousel({ locale }: { locale: Locale }) {
-  const categories = menu.categories as Category[];
+export function MenuCarousel({
+  locale,
+  categories,
+  sauzen,
+}: {
+  locale: Locale;
+  categories: Category[];
+  sauzen: string[];
+}) {
+  const PAGES: Page[] = useMemo(
+    () => [
+      ...buildMenuPages(categories).map((parts) => ({ kind: "cat", parts }) as const),
+      { kind: "sauzen" as const },
+    ],
+    [categories],
+  );
   const scrollerRef = useRef<HTMLDivElement>(null);
   const [active, setActive] = useState(0);
 
@@ -97,16 +91,16 @@ export function MenuCarousel({ locale }: { locale: Locale }) {
 
   const activePage = PAGES[active];
   let headerLabel: string;
-  let headerId: string;
+  let headerImage: string;
   let headerCont = false;
   if (activePage.kind === "sauzen") {
     headerLabel = SAUZEN_LABEL[locale];
-    headerId = "sauzen";
+    headerImage = "/img/cats/sauzen.webp";
   } else {
     const firstPart = activePage.parts[0];
     const activeCat = categories.find((c) => c.id === firstPart.id)!;
     headerLabel = trCategory(locale, activeCat.id, activeCat.name);
-    headerId = activeCat.id;
+    headerImage = activeCat.image ?? `/img/cats/${activeCat.id}.webp`;
     headerCont = firstPart.cont;
   }
 
@@ -120,7 +114,7 @@ export function MenuCarousel({ locale }: { locale: Locale }) {
             {headerCont && <span className="text-ink-soft"> ·</span>}
           </h3>
           <Image
-            src={`/img/cats/${headerId}.webp`}
+            src={headerImage}
             alt=""
             width={256}
             height={256}
@@ -156,7 +150,7 @@ export function MenuCarousel({ locale }: { locale: Locale }) {
               {page.kind === "sauzen" ? (
                 <div>
                   <ul className="space-y-2">
-                    {SAUZEN.map((sauce) => (
+                    {sauzen.map((sauce) => (
                       <li key={sauce} className="font-bold capitalize">
                         {sauce}
                       </li>
@@ -174,7 +168,7 @@ export function MenuCarousel({ locale }: { locale: Locale }) {
                       {parti > 0 && (
                         <div className="flex items-center gap-2.5">
                           <Image
-                            src={`/img/cats/${cat.id}.webp`}
+                            src={cat.image ?? `/img/cats/${cat.id}.webp`}
                             alt=""
                             width={256}
                             height={256}

@@ -1,7 +1,7 @@
 import { existsSync } from "node:fs";
 import { join } from "node:path";
 import Image from "next/image";
-import menu from "@/data/menu.json";
+import { getMenu } from "@/lib/menu";
 import type { Dict, DayKey, Locale } from "@/lib/i18n";
 import { Gallery } from "@/components/gallery";
 import { trItem } from "@/lib/menu-i18n";
@@ -47,8 +47,9 @@ const LANGUAGES: { code: Locale; href: string; label: string }[] = [
   { code: "fr", href: "/fr", label: "Français" },
 ];
 
-export default function Landing({ locale, dict }: { locale: Locale; dict: Dict }) {
-  const hours = menu.openingHours as Record<string, string>;
+export default async function Landing({ locale, dict }: { locale: Locale; dict: Dict }) {
+  const menu = await getMenu();
+  const hours = menu.openingHours;
 
   return (
     <div className="overflow-x-clip">
@@ -259,7 +260,7 @@ export default function Landing({ locale, dict }: { locale: Locale; dict: Dict }
         <section id="menu" className="scroll-mt-20 pt-10 lg:col-span-2 lg:pt-8">
           <h2 className="px-2 font-display text-3xl font-bold">{dict.menuHeading}</h2>
 
-          <MenuCarousel locale={locale} />
+          <MenuCarousel locale={locale} categories={menu.categories} sauzen={menu.sauzen} />
         </section>
 
         {/* ── Openingsuren + adres + kaart — на lg sticky-колонка справа.
@@ -315,7 +316,7 @@ export default function Landing({ locale, dict }: { locale: Locale; dict: Dict }
             {dict.galleryHeading}
           </h2>
           <div className="mt-4">
-            <Gallery altPrefix={dict.galleryAlt} />
+            <Gallery photos={menu.gallery} altPrefix={dict.galleryAlt} />
           </div>
         </section>
 
@@ -323,7 +324,7 @@ export default function Landing({ locale, dict }: { locale: Locale; dict: Dict }
         <section className="pt-10 lg:col-span-2 lg:pt-8">
           <h2 className="px-2 font-display text-3xl font-bold">{dict.weeklyHeading}</h2>
           <div data-hop className="mt-4 grid grid-cols-3 gap-3">
-            {(menu.weeklyDeals as { day: string; name: string; price: number; note?: string }[]).map(
+            {menu.weeklyDeals.map(
               (deal, i) => (
                 <div
                   key={deal.day}

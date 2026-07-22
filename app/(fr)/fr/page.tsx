@@ -30,6 +30,8 @@ export const metadata: Metadata = {
   },
 };
 
+export const dynamic = "force-dynamic";
+
 export default function HomeFr() {
   return <Landing locale="fr" dict={dictionaries.fr} />;
 }
